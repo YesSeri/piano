@@ -1,15 +1,15 @@
 const soundDiv = document.querySelector('#sound-div')
-console.log(soundDiv)
 
 let audioC = document.querySelector('#audio-c');
 let audioE = document.querySelector('#audio-e');
 window.addEventListener("keydown", (e) => {
-    console.log(e)
     if (e.key === 'r') {
         playNote(audioC)
     }
-    if (e.key === 'p') {
-        playNote(audioE)
+})
+window.addEventListener("keyup", (e) => {
+    if (e.key === 'r') {
+        stopNote(audioC)
     }
 })
 function playNote(note) {
@@ -19,5 +19,16 @@ function playNote(note) {
     } else {
         note.currentTime = 0
         note.play();
+    }
+}
+
+function stopNote(note) {
+    aud_fade(note)
+}
+function aud_fade(myAudio) {
+    console.log(myAudio);
+    if (myAudio.volume > 0) {
+        myAudio.volume -= .2;
+        timer = setTimeout(aud_fade, 200);
     }
 }
