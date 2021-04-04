@@ -1,11 +1,27 @@
 #piano {
     display: flex;
     text-align: center;
+    width:100%;
+    max-width: 600px;
 }
 
-.piano-key-white {
+.piano-key:not(.sharp) {
     border: solid black 1px;
-    width: 50px;
-    height: 200px;
-
+    position:relative;
+    align-self: flex-end;
+    width: 12.5%;
+    height: 300px;
+}
+.piano-key.sharp {
+    color: white;
+    position:absolute;
+    left: 70%;
+    width:60%;
+    background-color: black;
+    height: 60%;
+    z-index: 3;
+}
+#c-sharp{
+}
+#d-sharp{
 }

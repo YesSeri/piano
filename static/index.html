@@ -27,13 +27,20 @@
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
   <div id='piano'>
-    <div id='c-div' class="piano-key-white">C</div>
-    <div id='d-div' class="piano-key-white">D</div>
-    <div id='e-div' class="piano-key-white">E</div>
+    <div id='c-div' class="piano-key">
+      <div id='c-sharp-div' class="piano-key sharp">C#</div>
+      C
+    </div>
+    <div id='d-div' class="piano-key">
+      <div id='d-sharp-div' class="piano-key sharp">D#</div>
+      D
+    </div>
+    <div id='e-div' class="piano-key">E</div>
   </div>
   <!-- <audio id="audio-c" src="audio/test-sine.wav" preload="auto"></audio> -->
   <audio id="audio-c" src="audio/1.C-low.ogg" preload="auto"></audio>
   <audio id="audio-d" src="audio/3.D.ogg" preload="auto"></audio>
+  <audio id="audio-sharp-d" src="audio/4.DSharp.ogg" preload="auto"></audio>
   <audio id="audio-e" src="audio/5.E.ogg" preload="auto"></audio>
   <!-- <source src="audio/1.C-low.ogg" type="audio/ogg"> -->
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>

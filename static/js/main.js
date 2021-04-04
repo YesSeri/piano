@@ -1,8 +1,10 @@
 let audioC = document.querySelector('#audio-c');
+let audioSharpD = document.querySelector('#audio-sharp-d');
 let audioD = document.querySelector('#audio-d');
 let audioE = document.querySelector('#audio-e');
 const divC = document.querySelector('#c-div')
 const divD = document.querySelector('#d-div')
+const divSharpD = document.querySelector('#d-sharp-div')
 const divE = document.querySelector('#e-div')
 
 class PianoKey {
@@ -19,6 +21,7 @@ class PianoKey {
     }
     initEventListeners() {
         this.div.addEventListener("mousedown", (e) => {
+            console.log(this.div.innerHTML);
             this.playNote()
         })
         this.div.addEventListener("mouseup", (e) => {
@@ -30,7 +33,7 @@ class PianoKey {
         clearTimeout(this.timer)
         this.audio.volume = 1
         this.audio.currentTime = 0
-        this.audio.play();
+        // this.audio.play();
     }
     stopNote() {
         this.audFade(this.audio)
@@ -46,8 +49,9 @@ class PianoKey {
 }
 const keyC = new PianoKey(divC, audioC, 's')
 const keyD = new PianoKey(divD, audioD, 'd')
+const keySharpD = new PianoKey(divSharpD, audioSharpD, 'e')
 const keyE = new PianoKey(divE, audioE, 'f')
-const pianoKeys = [keyC, keyD, keyE]
+const pianoKeys = [keyC, keyD, keySharpD, keyE]
 
 window.addEventListener("keydown", (e) => {
     // If you press one key, D for example while pressing F, if you release D, then F event will have repeat == false again. That is why we need the k.pressed variable.
