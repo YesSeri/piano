@@ -1,19 +1,34 @@
-const soundDiv = document.querySelector('#sound-div')
-
 let audioC = document.querySelector('#audio-c');
 let audioE = document.querySelector('#audio-e');
+const soundDiv = document.querySelector('#sound-div')
+let timers = [];
+audioC.loop = true
+
+soundDiv.addEventListener("mousedown", (e) => {
+    playNote(audioC)
+})
+soundDiv.addEventListener("mouseup", (e) => {
+    stopNote(audioC)
+})
+
 window.addEventListener("keydown", (e) => {
-    if (e.key === 'r') {
+    console.log(e.repeat);
+    if (e.key === 't' && !e.repeat) {
         playNote(audioC)
     }
 })
 window.addEventListener("keyup", (e) => {
-    if (e.key === 'r') {
+    if (e.key === 't') {
         stopNote(audioC)
     }
 })
 function playNote(note) {
+    console.log(timers);
+    timers.forEach(timer => {
+        clearTimeout(timer)
+    })
     note.play();
+    note.volume = 1
     if (note.paused) {
         note.play();
     } else {
@@ -26,9 +41,11 @@ function stopNote(note) {
     aud_fade(note)
 }
 function aud_fade(myAudio) {
-    console.log(myAudio);
-    if (myAudio.volume > 0) {
+    if (myAudio.volume > 0.3) {
         myAudio.volume -= .2;
-        timer = setTimeout(aud_fade, 200);
+        timers.push(setTimeout(() => aud_fade(myAudio), 20));
+    } else{
+        myAudio.pause()
+        myAudio.volume = 1
     }
 }
