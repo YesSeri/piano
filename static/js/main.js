@@ -1,51 +1,73 @@
 let audioC = document.querySelector('#audio-c');
+let audioD = document.querySelector('#audio-d');
 let audioE = document.querySelector('#audio-e');
-const soundDiv = document.querySelector('#sound-div')
-let timers = [];
-audioC.loop = true
+const divC = document.querySelector('#c-div')
+const divD = document.querySelector('#d-div')
+const divE = document.querySelector('#e-div')
 
-soundDiv.addEventListener("mousedown", (e) => {
-    playNote(audioC)
-})
-soundDiv.addEventListener("mouseup", (e) => {
-    stopNote(audioC)
-})
+class PianoKey {
+    constructor(div, audio, shortcut) {
+        this.div = div
+        this.audio = audio
+        this.timer = null
+        this.shortcut = shortcut
+        this.pressed = false
+        this.initEventListeners()
+    }
+    print() {
+        console.log(this.div, this.audio, this.timer)
+    }
+    initEventListeners() {
+        this.div.addEventListener("mousedown", (e) => {
+            this.playNote()
+        })
+        this.div.addEventListener("mouseup", (e) => {
+            this.stopNote()
+        })
+
+    }
+    playNote() {
+        clearTimeout(this.timer)
+        this.audio.volume = 1
+        this.audio.currentTime = 0
+        this.audio.play();
+    }
+    stopNote() {
+        this.audFade(this.audio)
+    }
+    audFade(audio) {
+        if (audio.volume > 0) {
+            const v = audio.volume - 0.05
+            const newVol = v >= 0 ? v : 0
+            audio.volume = newVol
+            this.timer = setTimeout(() => this.audFade(audio), 10)
+        }
+    }
+}
+const keyC = new PianoKey(divC, audioC, 's')
+const keyD = new PianoKey(divD, audioD, 'd')
+const keyE = new PianoKey(divE, audioE, 'f')
+const pianoKeys = [keyC, keyD, keyE]
 
 window.addEventListener("keydown", (e) => {
-    console.log(e.repeat);
-    if (e.key === 't' && !e.repeat) {
-        playNote(audioC)
+    // If you press one key, D for example while pressing F, if you release D, then F event will have repeat == false again. That is why we need the k.pressed variable.
+    if (e.repeat) {
+        return
+    }
+    for (k of pianoKeys) {
+        if (e.key === k.shortcut) {
+            if (k.pressed !== true) {
+                k.playNote()
+            }
+            k.pressed = true
+        }
     }
 })
 window.addEventListener("keyup", (e) => {
-    if (e.key === 't') {
-        stopNote(audioC)
+    for (k of pianoKeys) {
+        if (e.key === k.shortcut) {
+            k.pressed = false
+            k.stopNote()
+        }
     }
 })
-function playNote(note) {
-    console.log(timers);
-    timers.forEach(timer => {
-        clearTimeout(timer)
-    })
-    note.play();
-    note.volume = 1
-    if (note.paused) {
-        note.play();
-    } else {
-        note.currentTime = 0
-        note.play();
-    }
-}
-
-function stopNote(note) {
-    aud_fade(note)
-}
-function aud_fade(myAudio) {
-    if (myAudio.volume > 0.3) {
-        myAudio.volume -= .2;
-        timers.push(setTimeout(() => aud_fade(myAudio), 20));
-    } else{
-        myAudio.pause()
-        myAudio.volume = 1
-    }
-}
