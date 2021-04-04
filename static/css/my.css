@@ -1,0 +1,11 @@
+#piano {
+    display: flex;
+    text-align: center;
+}
+
+.piano-key-white {
+    border: solid black 1px;
+    width: 50px;
+    height: 200px;
+
+}
