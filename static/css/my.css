@@ -1,27 +1,37 @@
 #piano {
     display: flex;
     text-align: center;
-    width:100%;
+    width: 100%;
     max-width: 600px;
 }
 
 .piano-key:not(.sharp) {
     border: solid black 1px;
-    position:relative;
+    color: black;
+    background-color: white;
+    position: relative;
     align-self: flex-end;
     width: 12.5%;
     height: 300px;
+    transition: background-color 120ms linear;
 }
+
 .piano-key.sharp {
     color: white;
-    position:absolute;
-    left: 70%;
-    width:60%;
     background-color: black;
+    position: absolute;
+    left: 70%;
+    width: 60%;
     height: 60%;
     z-index: 3;
+    transition: background-color 120ms linear;
 }
-#c-sharp{
+
+.active:not(.sharp) {
+    background-color: #bbb;
+    transition: background-color 120ms linear;
 }
-#d-sharp{
+.active.sharp {
+    background-color: #444;
+    transition: background-color 120ms linear;
 }

@@ -27,21 +27,44 @@
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
   <div id='piano'>
-    <div id='c-div' class="piano-key">
-      <div id='c-sharp-div' class="piano-key sharp">C#</div>
+    <div id='key-c-low' class="piano-key" data-shortcut="a">
+      <div id='key-sharp-c' class="piano-key sharp" data-shortcut='w'>C#</div>
       C
     </div>
-    <div id='d-div' class="piano-key">
-      <div id='d-sharp-div' class="piano-key sharp">D#</div>
+    <div id='key-d' class="piano-key" data-shortcut='s'>
+      <div id='key-sharp-d' class="piano-key sharp" data-shortcut='e'>D#</div>
       D
     </div>
-    <div id='e-div' class="piano-key">E</div>
+    <div id='key-e' class="piano-key" data-shortcut='d'>E</div>
+    <div id='key-f' class="piano-key" data-shortcut='f'>
+      <div id='key-sharp-f' class="piano-key sharp" data-shortcut='t'>F#</div>
+      F
+    </div>
+    <div id='key-g' class="piano-key" data-shortcut='g'>
+      <div id='key-sharp-g' class="piano-key sharp" data-shortcut='y'>G#</div>
+      G
+    </div>
+    <div id='key-a' class="piano-key" data-shortcut='h'>
+      <div id='key-sharp-a' class="piano-key sharp" data-shortcut='u'>A#</div>
+      A
+    </div>
+    <div id='key-b' class="piano-key" data-shortcut='j'>B</div>
+    <div id='key-c-high' class="piano-key" data-shortcut='k'>C</div>
   </div>
   <!-- <audio id="audio-c" src="audio/test-sine.wav" preload="auto"></audio> -->
-  <audio id="audio-c" src="audio/1.C-low.ogg" preload="auto"></audio>
-  <audio id="audio-d" src="audio/3.D.ogg" preload="auto"></audio>
-  <audio id="audio-sharp-d" src="audio/4.DSharp.ogg" preload="auto"></audio>
-  <audio id="audio-e" src="audio/5.E.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-c-low" src="audio/1.C-low.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-sharp-c" src="audio/2.CSharp.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-d" src="audio/3.D.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-sharp-d" src="audio/4.DSharp.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-e" src="audio/5.E.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-f" src="audio/6.F.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-sharp-f" src="audio/7.FSharp.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-g" src="audio/8.G.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-sharp-g" src="audio/9.GSharp.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-a" src="audio/10.A.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-sharp-a" src="audio/11.ASharp.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-b" src="audio/12.B.ogg" preload="auto"></audio>
+  <audio class='key-sound' id="audio-c-high" src="audio/13.C-high.ogg" preload="auto"></audio>
   <!-- <source src="audio/1.C-low.ogg" type="audio/ogg"> -->
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
