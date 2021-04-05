@@ -1,7 +1,10 @@
+body{
+    text-align:center;
+}
 #piano {
+    margin:auto;
     display: flex;
     text-align: center;
-    width: 100%;
     max-width: 600px;
 }
 
