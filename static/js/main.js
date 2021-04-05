@@ -1,7 +1,8 @@
 "use strict";
+
+// The PianoKey class contains every relevant information and thing to create a piano key and play it.
 class PianoKey {
-    constructor(translation, shortcut, audio, div, sharp) {
-        this.translation = translation
+    constructor(shortcut, audio, div, sharp) {
         this.audio = audio
         this.div = div
         this.timer = null
@@ -12,6 +13,7 @@ class PianoKey {
     print() {
         console.log({ 'div': this.div.id }, { 'timer': this.timer }, { 'shortcut': this.shortcut }, { 'pressed': this.pressed }, { 'sharp': this.sharp })
     }
+    // Clears timeout to stop the fading out, and starts the sound from the beginning with max volume.
     playNote() {
         clearTimeout(this.timer)
         this.div.classList.add('active')
@@ -23,6 +25,9 @@ class PianoKey {
         this.div.classList.remove('active')
         this.audFade(this.audio)
     }
+    // This function calls itself recursively every 15ms, to fade out the sound, instead of just shutting it off immedieatly. The base case is, volume is 0 or less, and when reached the function returns nothing.
+    // It sounds very bad when the sound is not faded out. If the key gets pressed again while the recursive fading is in progress, 
+    // the playNote function starts with removing the next recursive call, by clearing the timeout.
     audFade(audio) {
         if (audio.volume > 0) {
             const v = audio.volume - 0.05
@@ -33,11 +38,14 @@ class PianoKey {
     }
 }
 
+// Creates two arrays which will be used to create pianoKey objects that we will use in our piano. 
 const audios = Array.from(document.getElementsByClassName('key-sound'));
 const pianoKeyDivs = Array.from(document.getElementsByClassName('piano-key'));
-// This is used to translate between id of key div and audio id
-let translations = {};
 
+// This is used to translate between id of key div and audio id. 
+// This is only used when creating a pianoKey, because both the audio and the corresponding div gets added to the pianoKey object, so it will always be easy to find the corresponding one after that.
+
+let translations = {};
 for (const keyDiv of pianoKeyDivs) {
     const splitter = str => str.split('-').slice(1).join('-')
     const splitKeyId = splitter(keyDiv.id)
@@ -52,38 +60,11 @@ for (const keyDiv of pianoKeyDivs) {
 
 const pianoKeys = pianoKeyDivs.map(div => {
     const aud = audios.find(el => el.id === translations[div.id])
-    const translation = { [div.id]: translations[div.id] }
-    console.log(div.dataset.shortcut);
-    return new PianoKey(translation, div.dataset.shortcut, aud, div, div.className.includes('sharp'))
-    // if (div.id === 'key-c-low') {
-    //     return createKey('a')
-    // } else if (div.id === 'key-sharp-c') {
-    //     return createKey('w')
-    // } else if (div.id === 'key-d') {
-    //     return createKey('s')
-    // } else if (div.id === 'key-sharp-d') {
-    //     return createKey('e')
-    // } else if (div.id === 'key-e') {
-    //     return createKey('d')
-    // } else if (div.id === 'key-f') {
-    //     return createKey('f')
-    // } else if (div.id === 'key-sharp-f') {
-    //     return createKey('t')
-    // } else if (div.id === 'key-g') {
-    //     return createKey('g')
-    // } else if (div.id === 'key-sharp-g') {
-    //     return createKey('y')
-    // } else if (div.id === 'key-a') {
-    //     return createKey('h')
-    // } else if (div.id === 'key-sharp-a') {
-    //     return createKey('u')
-    // } else if (div.id === 'key-b') {
-    //     return createKey('j')
-    // } else if (div.id === 'key-c-high') {
-    //     return createKey('k')
-    // }
+    return new PianoKey(div.dataset.shortcut, aud, div, div.className.includes('sharp'))
 })
 
+// When releasing mouse button we want to stop the last note played, not the one which the mouse is over when the button released. 
+// If you move mouse after pressing key you could release pointer over a new key. It should still be the played key that gets stopped. 
 let lastClicked;
 for (const pianoKey of pianoKeys) {
     const { div, sharp } = pianoKey
@@ -91,20 +72,22 @@ for (const pianoKey of pianoKeys) {
         div.addEventListener("mousedown", (e) => {
             const clickedKey = pianoKeys.find(el => el.div.id === e.target.id)
             clickedKey.playNote()
-            console.log('down');
+            lastClicked = clickedKey;
         })
-        div.addEventListener("mouseup", (e) => {
-            const clickedKey = pianoKeys.find(el => el.div.id === e.target.id)
-            clickedKey.stopNote()
-            console.log('up');
-        })
+
     }
 }
 
+window.addEventListener("mouseup", (e) => {
+    // lastClicked is undefined, if no piano note has yet been clicked.
+    if (!lastClicked) return
+    lastClicked.stopNote()
+})
+
 window.addEventListener("keydown", e => {
-    // If you press one key, D for example while pressing F, if you release D, then F event will have repeat == false again. That is why we need the k.pressed variable.
+    // If you press a key while holding down a different one the next event of the key that is hold down will have e.repeat = true. This is why we mus have a key.pressed variable.
     if (e.repeat) return
-    // This finds the key pressed and then you can run a function on that key. 
+    // This finds the key pressed and then you can run a function on that key. We also need to send along the event.
     findCorrectKey(key => {
         if (key.pressed !== true) key.playNote()
         key.pressed = true
@@ -118,11 +101,11 @@ window.addEventListener("keyup", e => {
     }, e)
 })
 
-// Finds the correct key in the pianoKeys array, and then you can run whatever function on that key.
+// Finds the correct key in the pianoKeys array, and then a function is run on that key.
 function findCorrectKey(keyFn, event) {
-    for (const key of pianoKeys) {
-        if (event.key === key.shortcut) {
-            keyFn(key)
+    for (const pianoKey of pianoKeys) {
+        if (event.key === pianoKey.shortcut) {
+            keyFn(pianoKey)
         }
     }
 }
