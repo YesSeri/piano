@@ -1,8 +1,9 @@
-body{
-    text-align:center;
+body {
+    text-align: center;
 }
+
 #piano {
-    margin:auto;
+    margin: auto;
     display: flex;
     text-align: center;
     max-width: 600px;
@@ -35,7 +36,12 @@ body{
     background-color: #bbb;
     transition: background-color 0ms linear;
 }
+
 .active.sharp {
     background-color: #444;
     transition: background-color 0ms linear;
+}
+
+#info {
+    margin: auto;
 }
