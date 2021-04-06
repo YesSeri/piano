@@ -1,5 +1,4 @@
 "use strict";
-
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
 class PianoKey {
     constructor(shortcut, audio, div, sharp) {
@@ -70,7 +69,7 @@ for (const pianoKey of pianoKeys) {
     const { div, sharp } = pianoKey
     if (!sharp) {
         div.addEventListener("mousedown", (e) => {
-            findKeyById((key) => {
+            findKeyById(key => {
                 key.playNote()
                 lastClicked = key;
             }, e)
@@ -92,25 +91,25 @@ window.addEventListener("DOMContentLoaded", e => {
     //pianoDiv.addEventListener("touchcancel", handleTouchCancel, false);
     //pianoDiv.addEventListener("touchmove", handleTouchMove, false);
 })
-function handleTouchStart(e){
+function handleTouchStart(e) {
     e.preventDefault();
-    findKeyById((key) => {
+    findKeyById(key => {
         key.playNote()
     }, e)
 }
-function handleTouchEnd(e){
+function handleTouchEnd(e) {
     e.preventDefault();
     findKeyById(key => {
         key.stopNote()
     }, e)
 }
-function handleTouchCancel(e){
+function handleTouchCancel(e) {
 }
-function handleTouchMove(e){
+function handleTouchMove(e) {
 }
 
 window.addEventListener("keydown", e => {
-    // If you press a key while holding down a different one the next event of the key that is hold down will have e.repeat = true. This is why we mus have a key.pressed variable.
+    // If you press a key while holding down a different one the next event of the key that is hold down will have e.repeat = true. This is why we must have a key.pressed variable.
     if (e.repeat) return
     // This finds the key pressed and then you can run a function on that key. We also need to send along the event.
     findKeyByShortcut(key => {
@@ -129,16 +128,18 @@ window.addEventListener("keyup", e => {
 // Finds the correct key in the pianoKeys array, and then a function is run on that key.
 function findKeyByShortcut(fn, event) {
     for (const key of pianoKeys) {
-        findKeyByCond(fn, event.key === key.shortcut, key)
+        if (event.key === key.shortcut) fn(key)
     }
 }
 
 function findKeyById(fn, event) {
     for (const key of pianoKeys) {
-        findKeyByCond(fn, event.target.id === key.div.id, key)
+        if (event.target.id === key.div.id) fn(key)
     }
 }
 
-const findKeyByCond = (fn, cond, key) => {
-    if (cond) fn(key)
-}
+const kbBtn = document.getElementById('keybindings-btn')
+const kbDiv = document.getElementById('keybindings-div')
+kbBtn.addEventListener('click', () => {
+    kbDiv.classList.toggle('hidden')
+})

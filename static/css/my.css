@@ -45,3 +45,21 @@ body {
 #info {
     margin: auto;
 }
+
+#keybindings-btn {
+    margin-bottom: 5px;
+}
+
+#keybindings-div>table {
+    font-family: monospace;
+    margin: auto;
+    border: solid 1px black;
+}
+
+#keybindings-div>table>tbody>tr:nth-child(1)>td {
+    border-left: solid 1px black;
+}
+
+#keybindings-div>table>tbody>tr:nth-child(2)>td {
+    border-left: solid 1px black;
+}
