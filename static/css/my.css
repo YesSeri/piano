@@ -6,6 +6,7 @@ body{
     display: flex;
     text-align: center;
     max-width: 600px;
+    user-select: none;
 }
 
 .piano-key:not(.sharp) {
@@ -32,9 +33,9 @@ body{
 
 .active:not(.sharp) {
     background-color: #bbb;
-    transition: background-color 120ms linear;
+    transition: background-color 60ms linear;
 }
 .active.sharp {
     background-color: #444;
-    transition: background-color 120ms linear;
+    transition: background-color 60ms linear;
 }

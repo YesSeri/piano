@@ -70,9 +70,10 @@ for (const pianoKey of pianoKeys) {
     const { div, sharp } = pianoKey
     if (!sharp) {
         div.addEventListener("mousedown", (e) => {
-            const clickedKey = pianoKeys.find(el => el.div.id === e.target.id)
-            clickedKey.playNote()
-            lastClicked = clickedKey;
+            findKeyById((key) => {
+                key.playNote()
+                lastClicked = key;
+            }, e)
         })
 
     }
@@ -84,28 +85,60 @@ window.addEventListener("mouseup", (e) => {
     lastClicked.stopNote()
 })
 
+window.addEventListener("DOMContentLoaded", e => {
+    const pianoDiv = document.getElementById('piano')
+    pianoDiv.addEventListener("touchstart", handleTouchStart, false);
+    pianoDiv.addEventListener("touchend", handleTouchEnd, false);
+    //pianoDiv.addEventListener("touchcancel", handleTouchCancel, false);
+    //pianoDiv.addEventListener("touchmove", handleTouchMove, false);
+})
+function handleTouchStart(e){
+    e.preventDefault();
+    findKeyById((key) => {
+        key.playNote()
+    }, e)
+}
+function handleTouchEnd(e){
+    e.preventDefault();
+    findKeyById(key => {
+        key.stopNote()
+    }, e)
+}
+function handleTouchCancel(e){
+}
+function handleTouchMove(e){
+}
+
 window.addEventListener("keydown", e => {
     // If you press a key while holding down a different one the next event of the key that is hold down will have e.repeat = true. This is why we mus have a key.pressed variable.
     if (e.repeat) return
     // This finds the key pressed and then you can run a function on that key. We also need to send along the event.
-    findCorrectKey(key => {
+    findKeyByShortcut(key => {
         if (key.pressed !== true) key.playNote()
         key.pressed = true
     }, e)
 })
 
 window.addEventListener("keyup", e => {
-    findCorrectKey(key => {
+    findKeyByShortcut(key => {
         key.stopNote()
         key.pressed = false
     }, e)
 })
 
 // Finds the correct key in the pianoKeys array, and then a function is run on that key.
-function findCorrectKey(keyFn, event) {
-    for (const pianoKey of pianoKeys) {
-        if (event.key === pianoKey.shortcut) {
-            keyFn(pianoKey)
-        }
+function findKeyByShortcut(fn, event) {
+    for (const key of pianoKeys) {
+        findKeyByCond(fn, event.key === key.shortcut, key)
     }
+}
+
+function findKeyById(fn, event) {
+    for (const key of pianoKeys) {
+        findKeyByCond(fn, event.target.id === key.div.id, key)
+    }
+}
+
+const findKeyByCond = (fn, cond, key) => {
+    if (cond) fn(key)
 }
