@@ -21,6 +21,9 @@ This piano can be played with the keyboard.
 | H    |     J      |
 | C    |     K      |
 
+
+It can also be played by clicking, both on the computer and on a tablet, or phone. 
+
 ## Getting Started
 
 Just `git clone https://github.com/YesSeri/piano` and use yarn start to run it. You need to have nodemon installed globally. 
