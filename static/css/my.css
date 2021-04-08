@@ -2,6 +2,16 @@ body {
     text-align: center;
 }
 
+button {
+    color: white;
+    background-color: #444;
+    padding: 5px 10px;
+}
+
+button:hover {
+    background-color: #111;
+}
+
 #piano {
     margin: auto;
     display: flex;
@@ -42,12 +52,12 @@ body {
     transition: background-color 0ms linear;
 }
 
-#info {
+#source-info {
     margin: auto;
 }
 
-#keybindings-btn {
-    margin-bottom: 5px;
+#instructions {
+    margin: 10px 0px;
 }
 
 #keybindings-div>table {
