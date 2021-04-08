@@ -33,44 +33,7 @@ button:hover {
 
 #piano {
     margin: auto;
-    display: flex;
-    text-align: center;
-    max-width: 600px;
-    user-select: none;
 }
-
-.piano-key:not(.sharp) {
-    border: solid black 1px;
-    color: black;
-    background-color: white;
-    position: relative;
-    align-self: flex-end;
-    width: 12.5%;
-    height: 300px;
-    transition: background-color 100ms linear;
-}
-
-.piano-key.sharp {
-    color: white;
-    background-color: black;
-    position: absolute;
-    left: 70%;
-    width: 60%;
-    height: 60%;
-    z-index: 3;
-    transition: background-color 100ms linear;
-}
-
-.active:not(.sharp) {
-    background-color: #bbb;
-    transition: background-color 0ms linear;
-}
-
-.active.sharp {
-    background-color: #444;
-    transition: background-color 0ms linear;
-}
-
 #source-info {
     margin: auto;
 }

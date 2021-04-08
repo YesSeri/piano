@@ -26,96 +26,74 @@
 
   <!-- Add your site or application content here -->
   <div id='container'>
-  <div id='title'>
-    <h1>Online Piano</h1>
-  </div>
-  <div id='piano'>
-    <div id='key-c-low' class="piano-key" data-shortcut="a">
-      <div id='key-sharp-c' class="piano-key sharp" data-shortcut='w'>C#</div>
-      C
+    <div id='title'>
+      <h1>Online Piano</h1>
     </div>
-    <div id='key-d' class="piano-key" data-shortcut='s'>
-      <div id='key-sharp-d' class="piano-key sharp" data-shortcut='e'>D#</div>
-      D
+    <div id='piano-container'>
+      <canvas id='piano'>
+      </canvas>
     </div>
-    <div id='key-e' class="piano-key" data-shortcut='d'>E</div>
-    <div id='key-f' class="piano-key" data-shortcut='f'>
-      <div id='key-sharp-f' class="piano-key sharp" data-shortcut='t'>F#</div>
-      F
-    </div>
-    <div id='key-g' class="piano-key" data-shortcut='g'>
-      <div id='key-sharp-g' class="piano-key sharp" data-shortcut='y'>G#</div>
-      G
-    </div>
-    <div id='key-a' class="piano-key" data-shortcut='h'>
-      <div id='key-sharp-a' class="piano-key sharp" data-shortcut='u'>A#</div>
-      A
-    </div>
-    <div id='key-b' class="piano-key" data-shortcut='j'>B</div>
-    <div id='key-c-high' class="piano-key" data-shortcut='k'>C</div>
-  </div>
-  <div>
-    <div id='instructions'>
-      <button id='keybindings-btn'>Instructions</button>
-      <div id='keybindings-div' class='hidden'>
-        <p>Use the keyboard or the mouse to play the piano. Press A to play C, W to play C#, and so on.</p>
-        <table>
-          <tr>
-            <th>Note</th>
-            <td>&ensp;C&ensp;</td>
-            <td>&ensp;C#</td>
-            <td>&ensp;D&ensp;</td>
-            <td>&ensp;D#</td>
-            <td>&ensp;E&ensp;</td>
-            <td>&ensp;F&ensp;</td>
-            <td>&ensp;F#</td>
-            <td>&ensp;G&ensp;</td>
-            <td>&ensp;G#</td>
-            <td>&ensp;A&ensp;</td>
-            <td>&ensp;A#</td>
-            <td>&ensp;H&ensp;</td>
-            <td>&ensp;C&ensp;</td>
-          </tr>
-          <tr>
-            <th>Keybinding</th>
-            <td>A</td>
-            <td>W</td>
-            <td>S</td>
-            <td>E</td>
-            <td>D</td>
-            <td>F</td>
-            <td>T</td>
-            <td>G</td>
-            <td>Y</td>
-            <td>H</td>
-            <td>U</td>
-            <td>J</td>
-            <td>K</td>
-          </tr>
-        </table>
+    <div>
+      <div id='instructions'>
+        <button id='keybindings-btn'>Instructions</button>
+        <div id='keybindings-div' class='hidden'>
+          <p>Use the keyboard or the mouse to play the piano. Press A to play C, W to play C#, and so on.</p>
+          <table>
+            <tr>
+              <th>Note</th>
+              <td>&ensp;C&ensp;</td>
+              <td>&ensp;C#</td>
+              <td>&ensp;D&ensp;</td>
+              <td>&ensp;D#</td>
+              <td>&ensp;E&ensp;</td>
+              <td>&ensp;F&ensp;</td>
+              <td>&ensp;F#</td>
+              <td>&ensp;G&ensp;</td>
+              <td>&ensp;G#</td>
+              <td>&ensp;A&ensp;</td>
+              <td>&ensp;A#</td>
+              <td>&ensp;H&ensp;</td>
+              <td>&ensp;C&ensp;</td>
+            </tr>
+            <tr>
+              <th>Keybinding</th>
+              <td>A</td>
+              <td>W</td>
+              <td>S</td>
+              <td>E</td>
+              <td>D</td>
+              <td>F</td>
+              <td>T</td>
+              <td>G</td>
+              <td>Y</td>
+              <td>H</td>
+              <td>U</td>
+              <td>J</td>
+              <td>K</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
+    <div id='info'>
+      <p>Look at the source code <a href='https://github.com/YesSeri/piano'>here</a>. Submit a pull request if you feel
+        you can! </p>
+    </div>
   </div>
-  <div id='info'>
-    <p>Look at the source code <a href='https://github.com/YesSeri/piano'>here</a>. Submit a pull request if you feel
-      you can! </p>
-  </div>
-</div>
   <!-- <audio id="audio-c" src="audio/test-sine.wav" preload="auto"></audio> -->
-  <audio class='key-sound' src="audio/1.c-low.ogg" id="audio-c-low" preload="auto"></audio>
-  <audio class='key-sound' src="audio/2.c-sharp.ogg" id="audio-sharp-c" preload="auto"></audio>
-  <audio class='key-sound' src="audio/3.d.ogg" id="audio-d" preload="auto"></audio>
-  <audio class='key-sound' src="audio/4.d-sharp.ogg" id="audio-sharp-d" preload="auto"></audio>
-  <audio class='key-sound' src="audio/5.e.ogg" id="audio-e" preload="auto"></audio>
-  <audio class='key-sound' src="audio/6.f.ogg" id="audio-f" preload="auto"></audio>
-  <audio class='key-sound' src="audio/7.f-sharp.ogg" id="audio-sharp-f" preload="auto"></audio>
-  <audio class='key-sound' src="audio/8.g.ogg" id="audio-g" preload="auto"></audio>
-  <audio class='key-sound' src="audio/9.g-sharp.ogg" id="audio-sharp-g" preload="auto"></audio>
-  <audio class='key-sound' src="audio/10.a.ogg" id="audio-a" preload="auto"></audio>
-  <audio class='key-sound' src="audio/11.a-sharp.ogg" id="audio-sharp-a" preload="auto"></audio>
-  <audio class='key-sound' src="audio/12.b.ogg" id="audio-b" preload="auto"></audio>
-  <audio class='key-sound' src="audio/13.c-high.ogg" id="audio-c-high" preload="auto"></audio>
-  <!-- <source src="audio/1.C-low.ogg" type="audio/ogg"> -->
+  <audio class='key-sound' src="audio/1.c-low.ogg" id="audio-c-low" data-shortcut='a' preload="auto"></audio>
+  <audio class='key-sound sharp' src="audio/2.c-sharp.ogg" id="audio-sharp-c" data-shortcut='w' preload="auto"></audio>
+  <audio class='key-sound' src="audio/3.d.ogg" id="audio-d" data-shortcut='s' preload="auto"></audio>
+  <audio class='key-sound sharp' src="audio/4.d-sharp.ogg" id="audio-sharp-d" data-shortcut='e' preload="auto"></audio>
+  <audio class='key-sound' src="audio/5.e.ogg" id="audio-e" data-shortcut='d' preload="auto"></audio>
+  <audio class='key-sound' src="audio/6.f.ogg" id="audio-f" data-shortcut='f' preload="auto"></audio>
+  <audio class='key-sound sharp' src="audio/7.f-sharp.ogg" id="audio-sharp-f" data-shortcut='t' preload="auto"></audio>
+  <audio class='key-sound' src="audio/8.g.ogg" id="audio-g" data-shortcut='g' preload="auto"></audio>
+  <audio class='key-sound sharp' src="audio/9.g-sharp.ogg" id="audio-sharp-g" data-shortcut='y' preload="auto"></audio>
+  <audio class='key-sound' src="audio/10.a.ogg" id="audio-a" data-shortcut='h' preload="auto"></audio>
+  <audio class='key-sound sharp' src="audio/11.a-sharp.ogg" id="audio-sharp-a" data-shortcut='u' preload="auto"></audio>
+  <audio class='key-sound' src="audio/12.b.ogg" id="audio-b" data-shortcut='j' preload="auto"></audio>
+  <audio class='key-sound' src="audio/13.c-high.ogg" id="audio-c-high" data-shortcut='k' preload="auto"></audio>
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
