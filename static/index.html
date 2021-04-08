@@ -25,7 +25,10 @@
 <body>
 
   <!-- Add your site or application content here -->
-  <h1>Online Piano</h1>
+  <div id='container'>
+  <div id='title'>
+    <h1>Online Piano</h1>
+  </div>
   <div id='piano'>
     <div id='key-c-low' class="piano-key" data-shortcut="a">
       <div id='key-sharp-c' class="piano-key sharp" data-shortcut='w'>C#</div>
@@ -53,7 +56,7 @@
   </div>
   <div>
     <div id='instructions'>
-      <button id='keybindings-btn'>Keybindings</button>
+      <button id='keybindings-btn'>Instructions</button>
       <div id='keybindings-div' class='hidden'>
         <p>Use the keyboard or the mouse to play the piano. Press A to play C, W to play C#, and so on.</p>
         <table>
@@ -94,8 +97,10 @@
     </div>
   </div>
   <div id='info'>
-    <a href='https://github.com/YesSeri/piano'>Github</a>
+    <p>Look at the source code <a href='https://github.com/YesSeri/piano'>here</a>. Submit a pull request if you feel
+      you can! </p>
   </div>
+</div>
   <!-- <audio id="audio-c" src="audio/test-sine.wav" preload="auto"></audio> -->
   <audio class='key-sound' src="audio/1.c-low.ogg" id="audio-c-low" preload="auto"></audio>
   <audio class='key-sound' src="audio/2.c-sharp.ogg" id="audio-sharp-c" preload="auto"></audio>
