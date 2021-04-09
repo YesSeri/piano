@@ -13,77 +13,97 @@ testBtn.addEventListener('mousedown', () => {
 testBtn.addEventListener('mouseup', () => {
     console.log('rel')
 })
+const sampler = new Tone.Sampler({
+    urls: {
+        C2: "C2.ogg",
+        "D#2": "Ds2.ogg",
+        "F#2": "Fs2.ogg",
+        A2: "A2.ogg",
+        C3: "C3.ogg",
+    },
+    release: 1,
+    baseUrl: "http://localhost:3000/audio/"
+}).toDestination();
 class PianoKey {
-    static sampler = new Tone.Sampler({
-        urls: {
-            C2: "C2.ogg",
-            "D#2": "Ds2.ogg",
-            "F#2": "Fs2.ogg",
-            A2: "A2.ogg",
-            C3: "C3.ogg",
-        },
-        release: 1,
-        baseUrl: "http://localhost:3000/audio/"
-    }).toDestination();
-    constructor(note, shortcut) {
+    constructor(note, shortcut, polygon=null) {
+        this.pressed = false
         this.note = note
         this.shortcut = shortcut
+        this.polygon = polygon
     }
     print() {
         // console.log({ 'timer': this.timer }, { 'shortcut': this.shortcut }, { 'pressed': this.pressed }, { 'sharp': this.sharp })
     }
     // Clears timeout to stop the fading out, and starts the sound from the beginning with max volume.
     playNote() {
-        PianoKey.sampler.triggerAttack(this.note)
+        this.pressed = true;
+        this.polygon.classList.add('active')
+        sampler.triggerAttack(this.note)
     }
     stopNote() {
-        PianoKey.sampler.triggerRelease(this.note)
+        this.pressed = false;
+        this.polygon.classList.remove('active')
+        sampler.triggerRelease(this.note)
     }
 }
 
 // Creates two arrays which will be used to create pianoKey objects that we will use in our piano. 
 
-// This is used to translate between id of key div and audio id. 
-// This is only used when creating a pianoKey, because both the audio and the corresponding div gets added to the pianoKey object, so it will always be easy to find the corresponding one after that.
 const pianoKeys = [
-    new PianoKey('C2', "a"),
-    new PianoKey("C#2", "w"),
-    new PianoKey('D2', "s"),
-    new PianoKey("D#2", "e"),
-    new PianoKey('E2', "d"),
-    new PianoKey('F2', "f"),
-    new PianoKey("F#2", "t"),
-    new PianoKey('G2', "g"),
-    new PianoKey("G#2", "y"),
-    new PianoKey('A2', "h"),
-    new PianoKey("A#2", "u"),
-    new PianoKey('B2', "j"),
-    new PianoKey('C3', "k"),
+    new PianoKey('C2', "a", document.getElementById('c2')),
+    new PianoKey('D2', "s", document.getElementById('d2')),
+    new PianoKey('E2', "d", document.getElementById('e2')),
+    new PianoKey('F2', "f", document.getElementById('f2')),
+    new PianoKey('G2', "g", document.getElementById('g2')),
+    new PianoKey('A2', "h", document.getElementById('a2')),
+    new PianoKey('B2', "j", document.getElementById('b2')),
+    new PianoKey('C3', "k", document.getElementById('c3')),
+    new PianoKey("C#2", "w", document.getElementById('cs2')),
+    new PianoKey("D#2", "e" ,document.getElementById('ds2')),
+    new PianoKey("F#2", "t" ,document.getElementById('fs2')),
+    new PianoKey("G#2", "y" ,document.getElementById('gs2')),
+    new PianoKey("A#2", "u" ,document.getElementById('as2')),
 ]
 
 document.addEventListener('keydown', (e) => {
-    if (e.repeat === true) {
-        return
-    }
-    pianoKeys.forEach(k => {
+    if (e.repeat === true) return
+    for (const k of pianoKeys) {
         if (e.key === k.shortcut) {
-            console.log(k);
+            console.log(e);
+            if (k.pressed) return
             k.playNote()
+            return
         }
-    })
-
+    }
 })
 document.addEventListener('keyup', (e) => {
-    pianoKeys.forEach(k => {
+    for (const k of pianoKeys) {
         if (e.key === k.shortcut) {
             k.stopNote()
+            return
         }
-    })
+    }
 })
 
-
-// When releasing mouse button we want to stop the last note played, not the one which the mouse is over when the button released. 
-// If you move mouse after pressing key you could release pointer over a new key. It should still be the played key that gets stopped. 
+let lastClicked = null;
+const pianoPolygons = document.getElementsByClassName('piano-key')
+for (const polygon of pianoPolygons) {
+    let matchingKey;
+    for (const key of pianoKeys) {
+        if (polygon.dataset.note === key.note) {
+            matchingKey = key
+        }
+    }
+    polygon.addEventListener('mousedown', (e) => {
+        matchingKey.playNote();
+        lastClicked = matchingKey
+    })
+    polygon.addEventListener('mouseup', (e) => {
+        if (lastClicked !== null) {
+            lastClicked.stopNote()
+        }
+    })
+}
 
 
 const kbBtn = document.getElementById('keybindings-btn')

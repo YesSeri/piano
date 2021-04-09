@@ -30,8 +30,23 @@
       <button id="test-btn">TEST</button>
     </div>
     <div id='piano-container'>
-      <canvas id='piano'>
-      </canvas>
+      <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Example of a polygon with the default fill -->
+        <polygon class='white-key piano-key' id="c2" data-note='C2' points="0,0 0,120 40,120 40,0 " />
+        <polygon class='white-key piano-key' id="d2" data-note='D2' points="40,0 40,120 80,120 80,0 "/>
+        <polygon class='white-key piano-key' id="e2" data-note='E2' points="80,0 80,120 120,120 120,0 " />
+        <polygon class='white-key piano-key' id="f2" data-note='F2' points="120,0 120,120 160,120 160,0 "/>
+        <polygon class='white-key piano-key' id="g2"data-note='G2' points="160,0 160,120 200,120 200,0 " />
+        <polygon class='white-key piano-key' id="a2"data-note='A2' points="200,0 200,120 240,120 240,0 "/>
+        <polygon class='white-key piano-key' id="b2"data-note='B2' points="240,0 240,120 280,120 280,0 " />
+        <polygon class='white-key piano-key' id="c3"data-note='C3' points="280,0 280,120 320,120 320,0 "/>
+        <polygon class='black-key piano-key' id="cs2"data-note='C#2' points="24,0 24,70 56,70 56,0 " />
+        <polygon class='black-key piano-key' id="ds2"data-note='D#2' points="64,0 64,70 96,70 96,0 " />
+        <polygon class='black-key piano-key' id="fs2"data-note='F#2' points="144,0 144,70 176,70 176,0 " />
+        <polygon class='black-key piano-key' id="gs2"data-note='G#2' points="184,0 184,70 216,70 216,0 " />
+        <polygon class='black-key piano-key' id="as2"data-note='A#2' points="224,0 224,70 256,70 256,0 " />
+        <!-- Example of the same polygon shape with stroke and no fill -->
+      </svg>
     </div>
     <div>
       <div id='instructions'>
