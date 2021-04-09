@@ -36,6 +36,7 @@ class PianoKey {
     }
     // Clears timeout to stop the fading out, and starts the sound from the beginning with max volume.
     playNote() {
+        console.log(this);
         this.pressed = true;
         this.polygon.classList.add('active')
         sampler.triggerAttack(this.note)
@@ -50,35 +51,35 @@ class PianoKey {
 // Creates two arrays which will be used to create pianoKey objects that we will use in our piano. 
 
 const pianoKeys = [
-    new PianoKey('C2', "a", document.getElementById('c2')),
-    new PianoKey('D2', "s", document.getElementById('d2')),
-    new PianoKey('E2', "d", document.getElementById('e2')),
-    new PianoKey('F2', "f", document.getElementById('f2')),
-    new PianoKey('G2', "g", document.getElementById('g2')),
-    new PianoKey('A2', "h", document.getElementById('a2')),
-    new PianoKey('B2', "j", document.getElementById('b2')),
-    new PianoKey('C3', "k", document.getElementById('c3')),
-    new PianoKey("C#2", "w", document.getElementById('cs2')),
-    new PianoKey("D#2", "e" ,document.getElementById('ds2')),
-    new PianoKey("F#2", "t" ,document.getElementById('fs2')),
-    new PianoKey("G#2", "y" ,document.getElementById('gs2')),
-    new PianoKey("A#2", "u" ,document.getElementById('as2')),
+    new PianoKey('C2', "a", document.querySelector('.c2')),
+    new PianoKey('D2', "s", document.querySelector('.d2')),
+    new PianoKey('E2', "d", document.querySelector('.e2')),
+    new PianoKey('F2', "f", document.querySelector('.f2')),
+    new PianoKey('G2', "g", document.querySelector('.g2')),
+    new PianoKey('A2', "h", document.querySelector('.a2')),
+    new PianoKey('B2', "j", document.querySelector('.b2')),
+    new PianoKey('C3', "k", document.querySelector('.c3')),
+    new PianoKey("C#2", "w", document.querySelector('.cs2')),
+    new PianoKey("D#2", "e" ,document.querySelector('.ds2')),
+    new PianoKey("F#2", "t" ,document.querySelector('.fs2')),
+    new PianoKey("G#2", "y" ,document.querySelector('.gs2')),
+    new PianoKey("A#2", "u" ,document.querySelector('.as2')),
 ]
+console.log(pianoKeys);
 
-document.addEventListener('keydown', (e) => {
-    if (e.repeat === true) return
+document.addEventListener('keydown', (evt) => {
+    if (evt.repeat === true) return
     for (const k of pianoKeys) {
-        if (e.key === k.shortcut) {
-            console.log(e);
+        if (evt.key === k.shortcut) {
             if (k.pressed) return
             k.playNote()
             return
         }
     }
 })
-document.addEventListener('keyup', (e) => {
+document.addEventListener('keyup', (evt) => {
     for (const k of pianoKeys) {
-        if (e.key === k.shortcut) {
+        if (evt.key === k.shortcut) {
             k.stopNote()
             return
         }
@@ -94,11 +95,11 @@ for (const polygon of pianoPolygons) {
             matchingKey = key
         }
     }
-    polygon.addEventListener('mousedown', (e) => {
+    polygon.addEventListener('mousedown', () => {
         matchingKey.playNote();
         lastClicked = matchingKey
     })
-    polygon.addEventListener('mouseup', (e) => {
+    polygon.addEventListener('mouseup', () => {
         if (lastClicked !== null) {
             lastClicked.stopNote()
         }
