@@ -44,7 +44,7 @@ svg{
     z-index:-1;
 }
 .black-key{
-    stroke:white;
+    stroke:black;
     fill:black;
     z-index:1;
 }
