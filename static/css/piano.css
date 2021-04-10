@@ -1,0 +1,54 @@
+#piano {
+    margin: auto;
+}
+
+svg {
+    width: 640px;
+    height: 240px;
+}
+
+.white-key {
+    stroke: black;
+    fill: white;
+    z-index: -1;
+}
+
+.black-key {
+    stroke: black;
+    fill: black;
+    z-index: 1;
+}
+
+.white-key:hover {
+    fill: rgb(110, 219, 110);
+}
+
+.white-key.active {
+    fill: #bbb;
+}
+
+.black-key:hover, .black-key.active {
+    fill: #333;
+}
+
+#source-info {
+    margin: auto;
+}
+
+#instructions {
+    margin: 10px 0px;
+}
+
+#keybindings-div>table {
+    font-family: monospace;
+    margin: auto;
+    border: solid 1px black;
+}
+
+#keybindings-div>table>tbody>tr:nth-child(1)>td {
+    border-left: solid 1px black;
+}
+
+#keybindings-div>table>tbody>tr:nth-child(2)>td {
+    border-left: solid 1px black;
+}
