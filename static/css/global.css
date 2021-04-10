@@ -1,4 +1,5 @@
 html, body {
+  touch-action: manipulation;
   height: 100%;
   text-align: center;
 }
