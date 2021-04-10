@@ -5,7 +5,7 @@ html, body {
 
 #container {
     width: 60%;
-    margin:auto;
+    margin: auto;
     border-left: solid 1px black;
     border-right: solid 1px black;
     border-bottom: solid 1px black;
@@ -34,26 +34,36 @@ button:hover {
 #piano {
     margin: auto;
 }
-svg{
-    width:640px;
-    height:240px;
+
+svg {
+    width: 640px;
+    height: 240px;
 }
-.white-key{
-    stroke:black;
-    fill:white;
-    z-index:-1;
+
+.white-key {
+    stroke: black;
+    fill: white;
+    z-index: -1;
 }
-.black-key{
-    stroke:black;
-    fill:black;
-    z-index:1;
+
+.black-key {
+    stroke: black;
+    fill: black;
+    z-index: 1;
 }
-.white-key:hover, .white-key.active{
-    fill:#ddd;
+
+.white-key:hover {
+    fill: rgb(110, 219, 110);
 }
-.black-key:hover, .black-key.active{
-    fill:#444;
+
+.white-key.active {
+    fill: #bbb;
 }
+
+.black-key:hover, .black-key.active {
+    fill: #333;
+}
+
 #source-info {
     margin: auto;
 }
@@ -75,6 +85,7 @@ svg{
 #keybindings-div>table>tbody>tr:nth-child(2)>td {
     border-left: solid 1px black;
 }
+
 @media only screen and (max-width: 1440px) {
     /* For mobile phones: */
     #container {

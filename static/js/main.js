@@ -19,18 +19,17 @@ const sampler = new Tone.Sampler({
     baseUrl: ""
 }).toDestination();
 class PianoKey {
-    constructor(note, shortcut, polygon = null) {
-        this.pressed = false
+    constructor(note, shortcut, polygon) {
         this.note = note
         this.shortcut = shortcut
         this.polygon = polygon
+        this.pressed = false
     }
     print() {
-        // console.log({ 'timer': this.timer }, { 'shortcut': this.shortcut }, { 'pressed': this.pressed }, { 'sharp': this.sharp })
+        console.log({ 'note': this.note }, { 'shortcut': this.shortcut }, { 'polygon': this.polygon }, { 'pressed': this.pressed })
     }
     // Clears timeout to stop the fading out, and starts the sound from the beginning with max volume.
     playNote() {
-        console.log(this);
         this.pressed = true;
         this.polygon.classList.add('active')
         sampler.triggerAttack(this.note)
@@ -98,7 +97,6 @@ for (const polygon of pianoPolygons) {
         }
     })
 }
-
 
 const kbBtn = document.getElementById('keybindings-btn')
 const kbDiv = document.getElementById('keybindings-div')
