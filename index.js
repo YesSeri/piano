@@ -1,7 +1,12 @@
 const express = require('express');
-const path = require('path');
+const compression = require('compression');
+
 const app = express();
+
+const path = require('path');
 const PORT = process.env.PORT || 3000;
+
+app.use(compression());
 
 app.use('/audio', express.static(path.join(__dirname, 'static', 'audio')));
 app.use('/', express.static(path.join(__dirname, 'static', 'dist')))
