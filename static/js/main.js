@@ -81,13 +81,17 @@ document.addEventListener('keyup', (evt) => {
 let lastClicked = null;
 const pianoPolygons = document.getElementsByClassName('piano-key')
 for (const polygon of pianoPolygons) {
-    let matchingKey;
-    for (const key of pianoKeys) {
-        if (polygon.dataset.note === key.note) {
-            matchingKey = key
+    const matchingKey = findMatchingKey(polygon)
+    polygon.addEventListener("touchstart", () => {
+        matchingKey.playNote();
+        lastClicked = matchingKey
+    }, false);
+    polygon.addEventListener("touchend", () => {
+        if (lastClicked !== null) {
+            lastClicked.stopNote()
         }
-    }
-    polygon.addEventListener('mousedown', () => {
+    }, false);
+    polygon.addEventListener('mousedown', (evt) => {
         matchingKey.playNote();
         lastClicked = matchingKey
     })
@@ -97,9 +101,26 @@ for (const polygon of pianoPolygons) {
         }
     })
 }
+function findMatchingKey(polygon) {
+    for (const key of pianoKeys) {
+        if (polygon.dataset.note === key.note) {
+            return key
+        }
+    }
+}
+// function startup() {
+//     const piano = document.getElementById("canvas");
+//     el.addEventListener("touchend", handleEnd, false);
+//     el.addEventListener("touchcancel", handleCancel, false);
+//     el.addEventListener("touchmove", handleMove, false);
+// }
+
+// document.addEventListener("DOMContentLoaded", startup);
 
 const kbBtn = document.getElementById('keybindings-btn')
 const kbDiv = document.getElementById('keybindings-div')
+
 kbBtn.addEventListener('click', () => {
+    kbBtn.classList.toggle('clicked')
     kbDiv.classList.toggle('hidden')
 })

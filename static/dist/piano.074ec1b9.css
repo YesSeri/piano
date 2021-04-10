@@ -1,2 +1,0 @@
-#piano{margin:auto}svg{width:640px;height:240px}.white-key{stroke:#000;fill:#fff;z-index:-1}.black-key{stroke:#000;fill:#000;z-index:1}.white-key:hover{fill:#6edb6e}.white-key.active{fill:#bbb}.black-key.active,.black-key:hover{fill:#333}#source-info{margin:auto}#instructions{margin:10px 0}#keybindings-div>table{font-family:monospace;margin:auto;border:1px solid #000}#keybindings-div>table>tbody>tr:first-child>td,#keybindings-div>table>tbody>tr:nth-child(2)>td{border-left:1px solid #000}
-/*# sourceMappingURL=/piano.074ec1b9.css.map */

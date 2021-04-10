@@ -23,15 +23,15 @@
 </head>
 
 <body>
-
   <!-- Add your site or application content here -->
   <div id='container'>
     <div id='title'>
       <h1>Online Piano</h1>
     </div>
-    <div id='piano-container'>
-      <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
-        <!-- Example of a polygon with the default fill -->
+
+    <!-- Oncontextmenu is used so that the piano can't be right-clicked. -->
+    <div id='piano-container' oncontextmenu="return false;">
+      <svg id='piano-svg' viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
         <polygon class='white-key piano-key c2' data-note='C2' points="0,0 0,120 40,120 40,0 " />
         <polygon class='white-key piano-key d2' data-note='D2' points="40,0 40,120 80,120 80,0 " />
         <polygon class='white-key piano-key e2' data-note='E2' points="80,0 80,120 120,120 120,0 " />
@@ -45,9 +45,9 @@
         <polygon class='black-key piano-key fs2' data-note='F#2' points="144,0 144,70 176,70 176,0 " />
         <polygon class='black-key piano-key gs2' data-note='G#2' points="184,0 184,70 216,70 216,0 " />
         <polygon class='black-key piano-key as2' data-note='A#2' points="224,0 224,70 256,70 256,0 " />
-        <!-- Example of the same polygon sh th stroke and no fill -->
       </svg>
     </div>
+
     <div>
       <div id='instructions'>
         <button id='keybindings-btn'>Instructions</button>
@@ -57,16 +57,16 @@
             <tr>
               <th>Note</th>
               <td>&ensp;C&ensp;</td>
-              <td>&ensp;C#</td>
+              <td>&ensp;C&sharp;</td>
               <td>&ensp;D&ensp;</td>
-              <td>&ensp;D#</td>
+              <td>&ensp;D&sharp;</td>
               <td>&ensp;E&ensp;</td>
               <td>&ensp;F&ensp;</td>
-              <td>&ensp;F#</td>
+              <td>&ensp;F&sharp;</td>
               <td>&ensp;G&ensp;</td>
-              <td>&ensp;G#</td>
+              <td>&ensp;G&sharp;</td>
               <td>&ensp;A&ensp;</td>
-              <td>&ensp;A#</td>
+              <td>&ensp;A&sharp;</td>
               <td>&ensp;H&ensp;</td>
               <td>&ensp;C&ensp;</td>
             </tr>

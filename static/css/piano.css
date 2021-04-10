@@ -1,34 +1,46 @@
-#piano {
+#piano-container {
     margin: auto;
+    user-select: none;
 }
 
-svg {
-    width: 640px;
-    height: 240px;
+#piano-svg {
+    width: 100%;
+    max-width: 800px;
 }
 
 .white-key {
+    transition: fill 100ms linear;
     stroke: black;
     fill: white;
     z-index: -1;
 }
 
 .black-key {
+    transition: fill 100ms ease-out;
     stroke: black;
     fill: black;
-    z-index: 1;
 }
 
 .white-key:hover {
-    fill: rgb(110, 219, 110);
+    transition: fill 100ms ease-out;
+    fill: #ccc;
 }
 
 .white-key.active {
-    fill: #bbb;
+    transition: fill 100ms ease-out;
+    fill: #aaa;
 }
 
-.black-key:hover, .black-key.active {
+.black-key:hover {
+    transition: fill 100ms ease-out;
+    stroke: #333;
     fill: #333;
+}
+
+.black-key.active {
+    transition: fill 100ms ease-out;
+    stroke: #444;
+    fill: #444;
 }
 
 #source-info {
@@ -39,7 +51,11 @@ svg {
     margin: 10px 0px;
 }
 
-#keybindings-div>table {
+table, th, td {
+    margin:auto;
+  border: 1px solid black;
+}
+/* #keybindings-div>table {
     font-family: monospace;
     margin: auto;
     border: solid 1px black;
@@ -51,4 +67,4 @@ svg {
 
 #keybindings-div>table>tbody>tr:nth-child(2)>td {
     border-left: solid 1px black;
-}
+} */
