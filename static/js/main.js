@@ -2,20 +2,24 @@
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
 
 import * as Tone from 'tone'
-
+const c2 = require('../audio/C2.ogg');
+const ds2 = require('../audio/Ds2.ogg');
+const fs2 = require('../audio/Fs2.ogg');
+const a2 = require('../audio/A2.ogg');
+const c3 = require('../audio/C3.ogg');
 const sampler = new Tone.Sampler({
     urls: {
-        C2: "C2.ogg",
-        "D#2": "Ds2.ogg",
-        "F#2": "Fs2.ogg",
-        A2: "A2.ogg",
-        C3: "C3.ogg",
+        C2: c2,
+        "D#2": ds2,
+        "F#2": fs2,
+        A2: a2,
+        C3: c3,
     },
     release: 1,
-    baseUrl: "http://localhost:3000/audio/"
+    baseUrl: ""
 }).toDestination();
 class PianoKey {
-    constructor(note, shortcut, polygon=null) {
+    constructor(note, shortcut, polygon = null) {
         this.pressed = false
         this.note = note
         this.shortcut = shortcut
@@ -50,10 +54,10 @@ const pianoKeys = [
     new PianoKey('B2', "j", document.querySelector('.b2')),
     new PianoKey('C3', "k", document.querySelector('.c3')),
     new PianoKey("C#2", "w", document.querySelector('.cs2')),
-    new PianoKey("D#2", "e" ,document.querySelector('.ds2')),
-    new PianoKey("F#2", "t" ,document.querySelector('.fs2')),
-    new PianoKey("G#2", "y" ,document.querySelector('.gs2')),
-    new PianoKey("A#2", "u" ,document.querySelector('.as2')),
+    new PianoKey("D#2", "e", document.querySelector('.ds2')),
+    new PianoKey("F#2", "t", document.querySelector('.fs2')),
+    new PianoKey("G#2", "y", document.querySelector('.gs2')),
+    new PianoKey("A#2", "u", document.querySelector('.as2')),
 ]
 
 document.addEventListener('keydown', (evt) => {
