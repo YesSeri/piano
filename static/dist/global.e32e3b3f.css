@@ -1,0 +1,2 @@
+body,html{height:100%;text-align:center}#container{width:60%;margin:auto;border-left:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000}#title{background-color:#ffbaba;padding:5px;margin:20px 0}#title>h1{margin:0}button{color:#fff;background-color:#444;padding:5px 10px}button:hover{background-color:#111}@media only screen and (max-width:1440px){#container{width:80%}}@media only screen and (max-width:768px){#container{width:100%}}
+/*# sourceMappingURL=/global.e32e3b3f.css.map */
