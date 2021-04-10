@@ -17,11 +17,6 @@ This piano can be played with the keyboard or with the mouse.
   </tr>
 </table>
 <br>
-<style>
-  table>tbody>tr>td {
-      border-left: solid 2px white;
-  }
-</style>
 
 ## Future plans
 
