@@ -2,17 +2,7 @@
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
 
 import * as Tone from 'tone'
-const testBtn = document.getElementById('test-btn')
-const osc = new Tone.Oscillator(440, "sine").toDestination()
 
-testBtn.addEventListener('mousedown', () => {
-    sampler.triggerAttack(note)
-    console.log('click')
-})
-
-testBtn.addEventListener('mouseup', () => {
-    console.log('rel')
-})
 const sampler = new Tone.Sampler({
     urls: {
         C2: "C2.ogg",
@@ -65,7 +55,6 @@ const pianoKeys = [
     new PianoKey("G#2", "y" ,document.querySelector('.gs2')),
     new PianoKey("A#2", "u" ,document.querySelector('.as2')),
 ]
-console.log(pianoKeys);
 
 document.addEventListener('keydown', (evt) => {
     if (evt.repeat === true) return
