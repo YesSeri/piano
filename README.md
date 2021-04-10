@@ -2,6 +2,8 @@
 
 This is an online piano. I made it for practice purposes, but I might integrate it later into [operadocs](operadocs.com).
 
+You can see the piano [here](https://online-piano.herokuapp.com/)
+
 ## Description
 
 This piano can be played with the keyboard or with the mouse.
@@ -20,7 +22,9 @@ This piano can be played with the keyboard or with the mouse.
 
 ## Future plans
 
-I want to make the keyboard more responsive. I can do this by drawing it to a canvas instead of using divs. I also need to improve the sounds. I can do that with the toneJS library, so that the sound is syntheziesed live instead of using real audio files. This repo might also help. 
+- [ ] Make site prettier
+- [ ] Create touch support
+- [ ] Buy a domain
 
 ## Getting Started
 
@@ -28,9 +32,11 @@ Just `git clone https://github.com/YesSeri/piano` and use yarn start to run it.
 
 Run `parcel index.html` in the static folder, and `yarn start` in the main folder. Now you can go to `localhost:3000` and see live updates.
 
+Install parcel with `npm install -g parcel`.
+
 For production run `parcel build index.html` in the static folder.
 
-## Dependencies
+## Technologies
 
 * [NodeJS](https://nodejs.org/)
 * [Express](https://expressjs.com/)
