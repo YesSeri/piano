@@ -82,24 +82,30 @@ let lastClicked = null;
 const pianoPolygons = document.getElementsByClassName('piano-key')
 for (const polygon of pianoPolygons) {
     const matchingKey = findMatchingKey(polygon)
-    polygon.addEventListener("touchstart", () => {
-        matchingKey.playNote();
-        lastClicked = matchingKey
-    }, false);
-    polygon.addEventListener("touchend", () => {
-        if (lastClicked !== null) {
-            lastClicked.stopNote()
+    polygon.addEventListener("touchstart", (evt) => {
+        if (evt.cancelable) {
+            evt.preventDefault();
         }
+        evt.stopPropagation();
+        matchingKey.playNote();
+    }, false);
+    // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
+    polygon.addEventListener("touchend", (evt) => {
+        if (evt.cancelable) {
+            evt.preventDefault();
+        }
+        evt.stopPropagation();
+        matchingKey.stopNote();
     }, false);
     polygon.addEventListener('mousedown', (evt) => {
         matchingKey.playNote();
         lastClicked = matchingKey
-    })
+    }, false)
     polygon.addEventListener('mouseup', () => {
         if (lastClicked !== null) {
             lastClicked.stopNote()
         }
-    })
+    }, false)
 }
 function findMatchingKey(polygon) {
     for (const key of pianoKeys) {

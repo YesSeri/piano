@@ -52,19 +52,6 @@
 }
 
 table, th, td {
-    margin:auto;
-  border: 1px solid black;
-}
-/* #keybindings-div>table {
-    font-family: monospace;
     margin: auto;
-    border: solid 1px black;
+    border: 1px solid black;
 }
-
-#keybindings-div>table>tbody>tr:nth-child(1)>td {
-    border-left: solid 1px black;
-}
-
-#keybindings-div>table>tbody>tr:nth-child(2)>td {
-    border-left: solid 1px black;
-} */
