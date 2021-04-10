@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel build static/index.html -d static/dist && nodemon index.js"
+    "start": "parcel build static/index.html -d static/dist && nodemon index.js",
+    "heroku-postbuild": "parcel build static/index.html"
   },
   "license": "MIT",
   "dependencies": {
