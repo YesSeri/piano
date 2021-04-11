@@ -82,21 +82,21 @@ let lastClicked = null;
 const pianoPolygons = document.getElementsByClassName('piano-key')
 for (const polygon of pianoPolygons) {
     const matchingKey = findMatchingKey(polygon)
-    polygon.addEventListener("touchstart", (evt) => {
-        if (evt.cancelable) {
-            evt.preventDefault();
-        }
-        evt.stopPropagation();
-        matchingKey.playNote();
-    });
-    // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
-    polygon.addEventListener("touchend", (evt) => {
-        if (evt.cancelable) {
-            evt.preventDefault();
-        }
-        evt.stopPropagation();
-        matchingKey.stopNote();
-    });
+    // polygon.addEventListener("touchstart", (evt) => {
+    //     if (evt.cancelable) {
+    //         evt.preventDefault();
+    //     }
+    //     evt.stopPropagation();
+    //     matchingKey.playNote();
+    // });
+    // // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
+    // polygon.addEventListener("touchend", (evt) => {
+    //     if (evt.cancelable) {
+    //         evt.preventDefault();
+    //     }
+    //     evt.stopPropagation();
+    //     matchingKey.stopNote();
+    // });
     polygon.addEventListener('mousedown', (evt) => {
         if (evt.cancelable) {
             evt.preventDefault();
@@ -105,7 +105,7 @@ for (const polygon of pianoPolygons) {
         matchingKey.playNote();
         lastClicked = matchingKey
     })
-    polygon.addEventListener('mouseup', () => {
+    polygon.addEventListener('mouseup', (evt) => {
         if (evt.cancelable) {
             evt.preventDefault();
         }
