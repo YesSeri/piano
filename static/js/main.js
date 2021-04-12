@@ -1,8 +1,6 @@
 "use strict";
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
-import Sampler from "tone/build/esm/instrument/Sampler.js";;
-console.log(tone);
-
+// The awesome library tone.js is imported in index.html script.
 const c2 = require('../assets/audio/C2.ogg');
 const ds2 = require('../assets/audio/Ds2.ogg');
 const fs2 = require('../assets/audio/Fs2.ogg');
