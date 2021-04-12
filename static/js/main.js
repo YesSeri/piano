@@ -1,12 +1,14 @@
 "use strict";
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
+import Sampler from "tone/build/esm/instrument/Sampler.js";;
+console.log(tone);
 
 const c2 = require('../assets/audio/C2.ogg');
 const ds2 = require('../assets/audio/Ds2.ogg');
 const fs2 = require('../assets/audio/Fs2.ogg');
 const a2 = require('../assets/audio/A2.ogg');
 const c3 = require('../assets/audio/C3.ogg');
-const sampler = new Tone.Sampler({
+const sampler = new Sampler({
     urls: {
         "C2": c2,
         "D#2": ds2,
@@ -99,19 +101,10 @@ function startEventListeners() {
             matchingKey.stopNote();
         });
         rects.addEventListener('mousedown', (evt) => {
-            if (evt.cancelable) {
-                evt.preventDefault();
-            }
-            evt.stopPropagation();
             matchingKey.playNote();
             lastClicked = matchingKey
         })
         rects.addEventListener('mouseup', (evt) => {
-            if (evt.cancelable) {
-                evt.preventDefault();
-            }
-            evt.stopPropagation();
-
             if (lastClicked !== null) {
                 lastClicked.stopNote()
             }
