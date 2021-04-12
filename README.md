@@ -24,7 +24,8 @@ This piano can be played with the keyboard or with the mouse.
 
 - [ ] Make site prettier
 - [ ] Create touch support
-- [ ] Make piano size responsive
+    - [x] Has been improved, but is not perfect yet.
+- [x] Make piano size responsive
 - [ ] Buy a domain
 
 ## Getting Started
