@@ -209,99 +209,114 @@ var PianoKey = /*#__PURE__*/function () {
 
 
 var pianoKeys = [new PianoKey('C2', "a", document.querySelector('.c2')), new PianoKey('D2', "s", document.querySelector('.d2')), new PianoKey('E2', "d", document.querySelector('.e2')), new PianoKey('F2', "f", document.querySelector('.f2')), new PianoKey('G2', "g", document.querySelector('.g2')), new PianoKey('A2', "h", document.querySelector('.a2')), new PianoKey('B2', "j", document.querySelector('.b2')), new PianoKey('C3', "k", document.querySelector('.c3')), new PianoKey("C#2", "w", document.querySelector('.cs2')), new PianoKey("D#2", "e", document.querySelector('.ds2')), new PianoKey("F#2", "t", document.querySelector('.fs2')), new PianoKey("G#2", "y", document.querySelector('.gs2')), new PianoKey("A#2", "u", document.querySelector('.as2'))];
-document.addEventListener('keydown', function (evt) {
-  if (evt.repeat === true) return;
+window.addEventListener("load", startEventListeners);
 
-  var _iterator = _createForOfIteratorHelper(pianoKeys),
-      _step;
+function startEventListeners() {
+  document.addEventListener('keydown', function (evt) {
+    if (evt.repeat === true) return;
+
+    var _iterator = _createForOfIteratorHelper(pianoKeys),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var k = _step.value;
+
+        if (evt.key === k.shortcut) {
+          if (k.pressed) return;
+          k.playNote();
+          return;
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  });
+  document.addEventListener('keyup', function (evt) {
+    var _iterator2 = _createForOfIteratorHelper(pianoKeys),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var k = _step2.value;
+
+        if (evt.key === k.shortcut) {
+          k.stopNote();
+          return;
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  });
+  var lastClicked = null;
+  var pianoPolygons = document.getElementsByClassName('piano-key');
+
+  var _iterator3 = _createForOfIteratorHelper(pianoPolygons),
+      _step3;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var k = _step.value;
+    var _loop = function _loop() {
+      var polygon = _step3.value;
+      var matchingKey = findMatchingKey(polygon);
+      polygon.addEventListener("touchstart", function (evt) {
+        if (evt.cancelable) {
+          evt.preventDefault();
+        }
 
-      if (evt.key === k.shortcut) {
-        if (k.pressed) return;
-        k.playNote();
-        return;
-      }
+        evt.stopPropagation();
+        matchingKey.playNote();
+      }); // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
+
+      polygon.addEventListener("touchend", function (evt) {
+        if (evt.cancelable) {
+          evt.preventDefault();
+        }
+
+        evt.stopPropagation();
+        matchingKey.stopNote();
+      });
+      polygon.addEventListener('mousedown', function (evt) {
+        if (evt.cancelable) {
+          evt.preventDefault();
+        }
+
+        evt.stopPropagation();
+        matchingKey.playNote();
+        lastClicked = matchingKey;
+      });
+      polygon.addEventListener('mouseup', function (evt) {
+        if (evt.cancelable) {
+          evt.preventDefault();
+        }
+
+        evt.stopPropagation();
+
+        if (lastClicked !== null) {
+          lastClicked.stopNote();
+        }
+      });
+    };
+
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      _loop();
     }
   } catch (err) {
-    _iterator.e(err);
+    _iterator3.e(err);
   } finally {
-    _iterator.f();
+    _iterator3.f();
   }
-});
-document.addEventListener('keyup', function (evt) {
-  var _iterator2 = _createForOfIteratorHelper(pianoKeys),
-      _step2;
 
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var k = _step2.value;
-
-      if (evt.key === k.shortcut) {
-        k.stopNote();
-        return;
-      }
-    }
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
-  }
-});
-var lastClicked = null;
-var pianoPolygons = document.getElementsByClassName('piano-key');
-
-var _iterator3 = _createForOfIteratorHelper(pianoPolygons),
-    _step3;
-
-try {
-  var _loop = function _loop() {
-    var polygon = _step3.value;
-    var matchingKey = findMatchingKey(polygon);
-    polygon.addEventListener("touchstart", function (evt) {
-      if (evt.cancelable) {
-        evt.preventDefault();
-      }
-
-      evt.stopPropagation();
-      matchingKey.playNote();
-    }); // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
-
-    polygon.addEventListener("touchend", function (evt) {
-      if (evt.cancelable) {
-        evt.preventDefault();
-      }
-
-      evt.stopPropagation();
-      matchingKey.stopNote();
-    }); // polygon.addEventListener('mousedown', (evt) => {
-    //     if (evt.cancelable) {
-    //         evt.preventDefault();
-    //     }
-    //     evt.stopPropagation();
-    //     matchingKey.playNote();
-    //     lastClicked = matchingKey
-    // })
-    // polygon.addEventListener('mouseup', (evt) => {
-    //     if (evt.cancelable) {
-    //         evt.preventDefault();
-    //     }
-    //     evt.stopPropagation();
-    //     if (lastClicked !== null) {
-    //         lastClicked.stopNote()
-    //     }
-    // })
-  };
-
-  for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-    _loop();
-  }
-} catch (err) {
-  _iterator3.e(err);
-} finally {
-  _iterator3.f();
+  setTimeout(function () {
+    var pianoContainer = document.getElementById('piano-container');
+    var loadingDiv = document.getElementById('loading-div');
+    loadingDiv.classList.add('hidden');
+    pianoContainer.classList.remove('piano-hidden');
+  }, 500);
 }
 
 function findMatchingKey(polygon) {
@@ -364,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61042" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61474" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

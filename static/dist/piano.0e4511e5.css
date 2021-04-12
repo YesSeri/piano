@@ -1,6 +1,9 @@
 #piano-container {
+    transition: visibility 0s, opacity 0.5s linear;
+    visibility: visible;
     margin: auto;
     user-select: none;
+    opacity: 1;
 }
 
 #piano-svg {
@@ -21,20 +24,9 @@
     fill: black;
 }
 
-.white-key:hover {
-    /* transition: fill 100ms ease-out; */
-    fill: #ccc;
-}
-
 .white-key.active {
     /* transition: fill 100ms ease-out; */
     fill: #aaa;
-}
-
-.black-key:hover {
-    /* transition: fill 100ms ease-out; */
-    stroke: #333;
-    fill: #333;
 }
 
 .black-key.active {
@@ -46,7 +38,8 @@
 #source-info {
     margin: auto;
 }
-#keybindings-div{
+
+#keybindings-div {
     margin-top: 10px;
 }
 
@@ -54,10 +47,27 @@
     margin: 10px 0px;
 }
 
-
 table, th, td {
     margin: auto;
     border: 1px solid black;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .black-key:hover {
+        /* transition: fill 100ms ease-out; */
+        stroke: #333;
+        fill: #333;
+    }
+    .white-key:hover {
+        /* transition: fill 100ms ease-out; */
+        fill: #ccc;
+    }
+}
+
+#piano-container.piano-hidden {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
 }
 
 /*# sourceMappingURL=/piano.0e4511e5.css.map */
