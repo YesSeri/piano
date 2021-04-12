@@ -1,12 +1,11 @@
 "use strict";
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
 
-import * as Tone from 'tone'
-const c2 = require('../audio/C2.ogg');
-const ds2 = require('../audio/Ds2.ogg');
-const fs2 = require('../audio/Fs2.ogg');
-const a2 = require('../audio/A2.ogg');
-const c3 = require('../audio/C3.ogg');
+const c2 = require('../assets/audio/C2.ogg');
+const ds2 = require('../assets/audio/Ds2.ogg');
+const fs2 = require('../assets/audio/Fs2.ogg');
+const a2 = require('../assets/audio/A2.ogg');
+const c3 = require('../assets/audio/C3.ogg');
 const sampler = new Tone.Sampler({
     urls: {
         C2: c2,
@@ -97,24 +96,24 @@ for (const polygon of pianoPolygons) {
         evt.stopPropagation();
         matchingKey.stopNote();
     });
-    polygon.addEventListener('mousedown', (evt) => {
-        if (evt.cancelable) {
-            evt.preventDefault();
-        }
-        evt.stopPropagation();
-        matchingKey.playNote();
-        lastClicked = matchingKey
-    })
-    polygon.addEventListener('mouseup', (evt) => {
-        if (evt.cancelable) {
-            evt.preventDefault();
-        }
-        evt.stopPropagation();
+    // polygon.addEventListener('mousedown', (evt) => {
+    //     if (evt.cancelable) {
+    //         evt.preventDefault();
+    //     }
+    //     evt.stopPropagation();
+    //     matchingKey.playNote();
+    //     lastClicked = matchingKey
+    // })
+    // polygon.addEventListener('mouseup', (evt) => {
+    //     if (evt.cancelable) {
+    //         evt.preventDefault();
+    //     }
+    //     evt.stopPropagation();
 
-        if (lastClicked !== null) {
-            lastClicked.stopNote()
-        }
-    })
+    //     if (lastClicked !== null) {
+    //         lastClicked.stopNote()
+    //     }
+    // })
 }
 function findMatchingKey(polygon) {
     for (const key of pianoKeys) {
