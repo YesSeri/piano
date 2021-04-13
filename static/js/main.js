@@ -6,7 +6,7 @@ const ds2 = require('../assets/audio/Ds2.ogg');
 const fs2 = require('../assets/audio/Fs2.ogg');
 const a2 = require('../assets/audio/A2.ogg');
 const c3 = require('../assets/audio/C3.ogg');
-const sampler = new Sampler({
+const sampler = new Tone.Sampler({
     urls: {
         "C2": c2,
         "D#2": ds2,
