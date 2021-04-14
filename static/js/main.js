@@ -143,10 +143,11 @@ function startEventListeners() {
 
 }
 window.addEventListener("orientationchange", updateFullscreenStylesheet);
+const cssName = '#piano-svg.fullscreen-res'
 function updateFullscreenStylesheet() {
     const sheet = document.getElementById('fs-stylesheet')
     if (sheet === null) return
-    sheet.innerHTML = `#piano-svg.fullscreen-res {
+    sheet.innerHTML = `${cssName} {
         max-width: none;
         width: ${screen.width}px;
         height: ${screen.height}px;
@@ -156,7 +157,7 @@ function createFullscreenStylesheet() {
     const sheet = document.createElement('style')
     sheet.id = 'fs-stylesheet'
     sheet.innerHTML = `
-#piano-svg.fullscreen-res {
+${cssName} {
     max-width: none;
     width: ${screen.width}px;
     height: ${screen.height}px;
