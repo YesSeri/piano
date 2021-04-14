@@ -6,6 +6,7 @@ const ds2 = require('../assets/audio/Ds2.ogg');
 const fs2 = require('../assets/audio/Fs2.ogg');
 const a2 = require('../assets/audio/A2.ogg');
 const c3 = require('../assets/audio/C3.ogg');
+
 const sampler = new Tone.Sampler({
     urls: {
         "C2": c2,
@@ -27,7 +28,6 @@ class PianoKey {
     print() {
         console.log({ 'note': this.note }, { 'shortcut': this.shortcut }, { 'rects': this.rects }, { 'pressed': this.pressed })
     }
-    // Clears timeout to stop the fading out, and starts the sound from the beginning with max volume.
     playNote() {
         this.pressed = true;
         this.rects.classList.add('active')
@@ -39,8 +39,6 @@ class PianoKey {
         sampler.triggerRelease(this.note)
     }
 }
-
-// Creates two arrays which will be used to create pianoKey objects that we will use in our piano. 
 
 const pianoKeys = [
     new PianoKey('C2', "a", document.querySelector('.c2')),
@@ -57,6 +55,7 @@ const pianoKeys = [
     new PianoKey("G#2", "y", document.querySelector('.gs2')),
     new PianoKey("A#2", "u", document.querySelector('.as2')),
 ]
+// I wait with initiating eventlisterners until everything is loaded, including the sound library ToneJS. 
 window.addEventListener("load", startEventListeners);
 function startEventListeners() {
     document.addEventListener('keydown', (evt) => {
@@ -89,7 +88,7 @@ function startEventListeners() {
             evt.stopPropagation();
             matchingKey.playNote();
         });
-        // This solution is not perfect. If I slide my finger outside the piano container the sound will stop but the 
+        // This solution is not perfect. I can't slid my finger along the keyboard to play a lot of notes.
         rects.addEventListener("touchend", (evt) => {
             if (evt.cancelable) {
                 evt.preventDefault();
@@ -107,6 +106,7 @@ function startEventListeners() {
             }
         })
     }
+    // I only want to show a fullscreen button if the user is using a mobile device. There is no need for it on a computer.
     const fsBtn = document.createElement("BUTTON")
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         const innerContainer = document.getElementById('inner-container')
@@ -116,6 +116,7 @@ function startEventListeners() {
     } else {
         console.log("Fullscreen has not been added, because you are not using a mobile device.");
     }
+    // Requests fullscreen when clicked. Several versions for compatibilit reasons. 
     fsBtn.addEventListener('click', () => {
         const pianoContainer = document.getElementById('piano-container')
         if (pianoContainer.requestFullscreen) {
@@ -130,8 +131,10 @@ function startEventListeners() {
         const svg = document.getElementById('piano-svg')
         if (svg.classList.contains('fullscreen-res')) {
             svg.classList.remove('fullscreen-res')
+            isFullscreen = false;
         } else {
             svg.classList.add('fullscreen-res')
+            isFullscreen = true;
         }
     }, false);
     setTimeout(() => {
@@ -142,27 +145,30 @@ function startEventListeners() {
     }, 300)
 
 }
+
+
 window.addEventListener("orientationchange", updateFullscreenStylesheet);
-const cssName = '#piano-svg.fullscreen-res'
 function updateFullscreenStylesheet() {
     const sheet = document.getElementById('fs-stylesheet')
+    const { width, height } = screen
     if (sheet === null) return
-    sheet.innerHTML = `${cssName} {
-        max-width: none;
-        width: ${screen.width}px;
-        height: ${screen.height}px;
-    }`;
+    // When it is fullscreen the rotation somehow registers the height and width of what it was before the rotation, at least on a galaxy s20, so I need to send it switched.
+    sheet.innerHTML = isFullscreen ? getSheetInnerHTML(height, width) : getSheetInnerHTML(width, height)
 }
+// This css sheet is created here beacuse I need to assign it values from depending on how big the screen is.
 function createFullscreenStylesheet() {
     const sheet = document.createElement('style')
     sheet.id = 'fs-stylesheet'
-    sheet.innerHTML = `
-${cssName} {
-    max-width: none;
-    width: ${screen.width}px;
-    height: ${screen.height}px;
-}`;
+    sheet.innerHTML = getSheetInnerHTML(screen.width, screen.height)
     return sheet;
+}
+function getSheetInnerHTML(width, height) {
+    return `
+#piano-svg.fullscreen-res {
+    max-width: none;
+    width: ${width}px;
+    height: ${height}px;
+}`
 }
 
 document.body.appendChild(createFullscreenStylesheet());
@@ -174,18 +180,11 @@ function findMatchingKey(rects) {
         }
     }
 }
-// function startup() {
-//     const piano = document.getElementById("canvas");
-//     el.addEventListener("touchend", handleEnd, false);
-//     el.addEventListener("touchcancel", handleCancel, false);
-//     el.addEventListener("touchmove", handleMove, false);
-// }
-
-// document.addEventListener("DOMContentLoaded", startup);
 
 const kbBtn = document.getElementById('keybindings-btn')
 const kbDiv = document.getElementById('keybindings-div')
 
+// This toggles the visibility of the keybindings.
 kbBtn.addEventListener('click', () => {
     kbBtn.classList.toggle('clicked')
     kbDiv.classList.toggle('hidden')
