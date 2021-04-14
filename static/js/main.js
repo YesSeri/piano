@@ -148,12 +148,16 @@ function startEventListeners() {
 
 
 window.addEventListener("orientationchange", updateFullscreenStylesheet);
+let isFullscreen = false;
 function updateFullscreenStylesheet() {
-    const sheet = document.getElementById('fs-stylesheet')
-    const { width, height } = screen
-    if (sheet === null) return
     // When it is fullscreen the rotation somehow registers the height and width of what it was before the rotation, at least on a galaxy s20, so I need to send it switched.
-    sheet.innerHTML = isFullscreen ? getSheetInnerHTML(height, width) : getSheetInnerHTML(width, height)
+    // Instead of sending it switched, I wait a little while to make sure that the width and height has time to update. 
+    setTimeout(() => {
+        const sheet = document.getElementById('fs-stylesheet')
+        const { width, height } = screen
+        if (sheet === null) return
+        sheet.innerHTML = getSheetInnerHTML(width, height)
+    }, 100)
 }
 // This css sheet is created here beacuse I need to assign it values from depending on how big the screen is.
 function createFullscreenStylesheet() {
