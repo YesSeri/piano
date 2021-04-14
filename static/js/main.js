@@ -59,7 +59,6 @@ const pianoKeys = [
 ]
 window.addEventListener("load", startEventListeners);
 function startEventListeners() {
-
     document.addEventListener('keydown', (evt) => {
         if (evt.repeat === true) return
         for (const k of pianoKeys) {
@@ -117,15 +116,42 @@ function startEventListeners() {
             }
         })
     }
-
+    const fsBtn = document.createElement("BUTTON")
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        const innerContainer = document.getElementById('inner-container')
+        fsBtn.innerText = "Fullscreen"
+        innerContainer.appendChild(fsBtn)
+        console.log("Fullscreen button added, because you are using a mobile device.");
+    } else {
+        console.log("Fullscreen has not been added, because you are not using a mobile device.");
+    }
+    fsBtn.addEventListener('click', () => {
+        const pianoContainer = document.getElementById('piano-container')
+        if (pianoContainer.requestFullscreen) {
+            pianoContainer.requestFullscreen();
+        } else if (pianoContainer.webkitRequestFullscreen) { /* Safari */
+            pianoContainer.webkitRequestFullscreen();
+        } else if (pianoContainer.msRequestFullscreen) { /* IE11 */
+            pianoContainer.msRequestFullscreen();
+        }
+    })
+    document.addEventListener('fullscreenchange', () => {
+        const { classList } = document.getElementById('piano-svg')
+        if (classList.contains('fullscreen-svg')) {
+            classList.remove('fullscreen-svg')
+        } else {
+            classList.add('fullscreen-svg')
+        }
+    }, false);
     setTimeout(() => {
         const pianoContainer = document.getElementById('piano-container')
         const loadingDiv = document.getElementById('loading-div')
         loadingDiv.classList.add('hidden')
         pianoContainer.classList.remove('piano-hidden')
-    }, 500)
+    }, 300)
 
 }
+
 
 
 

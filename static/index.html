@@ -31,10 +31,10 @@
     </div>
 
     <!-- Oncontextmenu is used so that the piano can't be right-clicked. -->
-    <div>
+    <div id='inner-container'>
       <div class="loader" id='loading-div'>Loading...</div>
       <div id='piano-container' class='piano-hidden' oncontextmenu="return false;">
-        <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.783 33.867">
+        <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.783 33.867" preserveAspectRatio="none">
           <g stroke-width="0.265">
             <path class='white-key piano-key c2' data-note='C2'
               d="M11.642 1.058v31.75H2.117a1.056 1.056 0 01-1.059-1.058V1.058h10.584z" />
@@ -113,18 +113,13 @@
   </div>
   <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
   <script src="js/main.js"></script>
-  <script>
-    // if (typeof tone === "undefined") {
-    //   console.log(tone);
-    // }
-  </script>
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID.
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
   </script>
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script> -->
 </body>
 
 </html>
