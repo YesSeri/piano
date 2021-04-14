@@ -41,7 +41,7 @@ table, th, td {
     border: 1px solid black;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
     .black-key:hover {
         transition: fill 100ms ease-out;
         stroke: #333;
