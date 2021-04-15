@@ -41,19 +41,19 @@ class PianoKey {
 }
 
 const pianoKeys = [
-    new PianoKey('C2', "a", document.querySelector('.c2')),
-    new PianoKey('D2', "s", document.querySelector('.d2')),
-    new PianoKey('E2', "d", document.querySelector('.e2')),
-    new PianoKey('F2', "f", document.querySelector('.f2')),
-    new PianoKey('G2', "g", document.querySelector('.g2')),
-    new PianoKey('A2', "h", document.querySelector('.a2')),
-    new PianoKey('B2', "j", document.querySelector('.b2')),
-    new PianoKey('C3', "k", document.querySelector('.c3')),
-    new PianoKey("C#2", "w", document.querySelector('.cs2')),
-    new PianoKey("D#2", "e", document.querySelector('.ds2')),
-    new PianoKey("F#2", "t", document.querySelector('.fs2')),
-    new PianoKey("G#2", "y", document.querySelector('.gs2')),
-    new PianoKey("A#2", "u", document.querySelector('.as2')),
+    new PianoKey('C2', "a", document.getElementById('c2')),
+    new PianoKey('D2', "s", document.getElementById('d2')),
+    new PianoKey('E2', "d", document.getElementById('e2')),
+    new PianoKey('F2', "f", document.getElementById('f2')),
+    new PianoKey('G2', "g", document.getElementById('g2')),
+    new PianoKey('A2', "h", document.getElementById('a2')),
+    new PianoKey('B2', "j", document.getElementById('b2')),
+    new PianoKey('C3', "k", document.getElementById('c3')),
+    new PianoKey("C#2", "w", document.getElementById('cs2')),
+    new PianoKey("D#2", "e", document.getElementById('ds2')),
+    new PianoKey("F#2", "t", document.getElementById('fs2')),
+    new PianoKey("G#2", "y", document.getElementById('gs2')),
+    new PianoKey("A#2", "u", document.getElementById('as2')),
 ]
 // I wait with initiating eventlisterners until everything is loaded, including the sound library ToneJS. 
 window.addEventListener("load", startEventListeners);
