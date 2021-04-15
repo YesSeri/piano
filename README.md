@@ -38,6 +38,10 @@ Install parcel with `npm install -g parcel`.
 
 For production run `parcel build index.html` in the static folder.
 
+## Important remarks
+
+To build for github pages we need to use `parcel build index.html --public-url https://yesseri.github.io/piano/`. If we don't all the css will look at `url/style.css` instead of `url/piano/style.css`.
+
 ## Technologies
 
 * [NodeJS](https://nodejs.org/)
