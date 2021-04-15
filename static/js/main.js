@@ -127,15 +127,10 @@ function startEventListeners() {
             pianoContainer.msRequestFullscreen();
         }
     })
+    // Runs when entering or exiting fullscreen
     document.addEventListener('fullscreenchange', () => {
-        const svg = document.getElementById('piano-svg')
-        if (svg.classList.contains('fullscreen-res')) {
-            svg.classList.remove('fullscreen-res')
-            isFullscreen = false;
-        } else {
-            svg.classList.add('fullscreen-res')
-            isFullscreen = true;
-        }
+        const { classList } = document.getElementById('piano-svg')
+        classList.contains('fs-screen-piano') ? classList.remove('fs-screen-piano') : classList.add('fs-screen-piano')
     }, false);
     setTimeout(() => {
         const pianoContainer = document.getElementById('piano-container')
@@ -145,37 +140,6 @@ function startEventListeners() {
     }, 300)
 
 }
-
-
-window.addEventListener("orientationchange", updateFullscreenStylesheet);
-let isFullscreen = false;
-function updateFullscreenStylesheet() {
-    // When it is fullscreen the rotation somehow registers the height and width of what it was before the rotation, at least on a galaxy s20, so I need to send it switched.
-    // Instead of sending it switched, I wait a little while to make sure that the width and height has time to update. 
-    setTimeout(() => {
-        const sheet = document.getElementById('fs-stylesheet')
-        const { width, height } = screen
-        if (sheet === null) return
-        sheet.innerHTML = getSheetInnerHTML(width, height)
-    }, 100)
-}
-// This css sheet is created here beacuse I need to assign it values from depending on how big the screen is.
-function createFullscreenStylesheet() {
-    const sheet = document.createElement('style')
-    sheet.id = 'fs-stylesheet'
-    sheet.innerHTML = getSheetInnerHTML(screen.width, screen.height)
-    return sheet;
-}
-function getSheetInnerHTML(width, height) {
-    return `
-#piano-svg.fullscreen-res {
-    max-width: none;
-    width: ${width}px;
-    height: ${height}px;
-}`
-}
-
-document.body.appendChild(createFullscreenStylesheet());
 
 function findMatchingKey(rects) {
     for (const key of pianoKeys) {
