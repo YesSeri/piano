@@ -1,76 +1,78 @@
 #piano-container {
-    transition: visibility 0s, opacity 0.5s linear;
-    visibility: visible;
-    margin: auto;
-    user-select: none;
-    opacity: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+  visibility: visible;
+  margin: auto;
+  user-select: none;
+  opacity: 1;
+}
+#piano-container.piano-hidden {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
 }
 
 #piano-svg {
-    width: 100%;
-    max-width: 700px;
+  width: 100%;
+  max-width: 700px;
+}
+#piano-svg.fs-screen-piano {
+  width: 100%;
+  height: 100%;
+  max-width: none;
 }
 
 .white-key {
-    transition: fill 100ms linear;
-    stroke: black;
-    fill: white;
-    z-index: -1;
+  transition: fill 100ms linear;
+  stroke: black;
+  fill: white;
+  z-index: -1;
+}
+.white-key.active {
+  transition: fill 100ms ease-out;
+  fill: #aaa;
 }
 
 .black-key {
-    transition: fill 100ms ease-out;
-    stroke: black;
-    fill: black;
+  transition: fill 100ms ease-out;
+  stroke: black;
+  fill: black;
+}
+.black-key.active {
+  transition: fill 100ms ease-out;
+  stroke: #444;
+  fill: #444;
 }
 
 #source-info {
-    margin: auto;
+  margin: auto;
 }
 
 #keybindings-div {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #instructions {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
 
-table, th, td {
-    margin: auto;
-    border: 1px solid black;
-}
-#piano-svg.fs-screen-piano{
-    width: 100%;
-    height: 100%;
-    max-width: none;
+table,
+th,
+td {
+  margin: auto;
+  border: 1px solid black;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .black-key:hover {
-        transition: fill 100ms ease-out;
-        stroke: #333;
-        fill: #333;
-    }
-    .white-key:hover {
-        transition: fill 100ms ease-out;
-        fill: #ccc;
-    }
-}
-
-#piano-container.piano-hidden {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.white-key.active {
+  .black-key:hover {
     transition: fill 100ms ease-out;
-    fill: #aaa;
+    stroke: #333;
+    fill: #333;
+  }
+
+  .white-key:hover {
+    transition: fill 100ms ease-out;
+    fill: #ccc;
+  }
 }
 
-.black-key.active {
-    transition: fill 100ms ease-out;
-    stroke: #444;
-    fill: #444;
-}
+/*# sourceMappingURL=piano.css.map */

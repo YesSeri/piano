@@ -141,6 +141,7 @@ function startEventListeners() {
 
 }
 
+// Helper function used when adding eventlisteners.
 function findMatchingKey(rects) {
     for (const key of pianoKeys) {
         if (rects.dataset.note === key.note) {
