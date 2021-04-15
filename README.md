@@ -23,8 +23,10 @@ This piano can be played with the keyboard or with the mouse.
 ## Future plans
 
 - [ ] Make site prettier
-- [ ] Create touch support
+- [x] Create touch support
     - [x] Has been improved, but is not perfect yet.
+    - [x] Android support
+    - [ ] iPhone support
 - [x] Make piano size responsive
 - [ ] Buy a domain
 
@@ -40,7 +42,7 @@ For production run `parcel build index.html` in the static folder.
 
 ## Important remarks
 
-To build for github pages we need to use `parcel build index.html --public-url https://yesseri.github.io/piano/`. If we don't all the css will look at `url/style.css` instead of `url/piano/style.css`.
+To build for github pages we need to use `parcel build index.html --public-url https://yesseri.github.io/piano/`. If we don't all the css will look at `url/style.css` instead of `url/piano/style.css`. To push only the dist folder to the branch gh-pages use `git subtree push --prefix static/dist/ origin gh-pages`
 
 ## Technologies
 
