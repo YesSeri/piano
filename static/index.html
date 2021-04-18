@@ -37,9 +37,11 @@
     <!-- Oncontextmenu is used so that the piano can't be right-clicked. -->
     <div id='inner-container'>
 
-      <!-- <div class="" id='clicker'>Click screen to load piano.</div>
-      <div class="loader hidden" id='loading-div'>Loading...</div> -->
+      <!-- <div class="loader hidden" id='loading-div'>Loading...</div> -->
       <div id='piano-container' class='' oncontextmenu="return false;">
+        <div id='activate-piano-overlay'>
+          <span>Click to load piano</span>
+        </div>
         <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
           <g stroke-width=".265">
             <path id='c2' class='white-key piano-key' data-note='C2'
@@ -64,6 +66,30 @@
               d="M67.998.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.587 0-1.059-.44-1.059-.988V.265z" />
           </g>
         </svg>
+        <!-- <svg id='big-piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.529 32.279">
+          <g fill="#fff" stroke="#000" stroke-width=".265">
+            <path d="M10.848.265v31.75H1.323c-.794 0-1.058-.265-1.058-1.059V.265z" />
+            <path d="M10.848.265h10.583v31.75H10.848z" />
+            <path d="M21.431.265h10.583v31.75H21.431z" />
+            <path d="M32.015.265h10.583v31.75H32.015z" />
+            <path d="M42.598.265h10.583v31.75H42.598z" />
+            <path d="M53.181.265h10.583v31.75H53.181z" />
+            <path d="M63.765.265h10.583v31.75H63.765z" />
+            <path d="M74.348.265h10.583v31.75H74.348z" />
+            <path d="M84.931.265h10.583v31.75H84.931z" />
+            <path d="M95.515.265h10.583v31.75H95.515z" />
+            <path d="M106.098.265h10.583v31.75h-10.583z" />
+            <path d="M116.681.265v31.75h9.525c.794 0 1.059-.265 1.059-1.059V.265z" />
+          </g>
+          <path d="M15.081.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+          <path d="M25.665.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+          <path d="M46.831.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+          <path d="M57.415.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+          <path d="M67.998.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.587 0-1.059-.44-1.059-.988V.265z" />
+          <path d="M89.165.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+          <path d="M99.748.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.587 0-1.059-.44-1.059-.988V.265z" />
+          <path d="M120.915.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+        </svg> -->
       </div>
     </div>
     <div>

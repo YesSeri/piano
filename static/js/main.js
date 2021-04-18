@@ -1,66 +1,63 @@
 "use strict";
+
 // The PianoKey class contains every relevant information and thing to create a piano key and play it.
 // The awesome library tone.js is imported in index.html script.
-const c2 = require('../assets/audio/C2.ogg');
-const ds2 = require('../assets/audio/Ds2.ogg');
-const fs2 = require('../assets/audio/Fs2.ogg');
-const a2 = require('../assets/audio/A2.ogg');
-const c3 = require('../assets/audio/C3.ogg');
+const { c4, ds4, fs4, a4, c5 } = require('../assets/audio/');
+class PianoKey {
+    constructor(note, shortcut, rects) {
+        this.note = note
+        this.shortcut = shortcut
+        this.rects = rects
+        this.pressed = false
+    }
+    print() {
+        console.log({ 'note': this.note }, { 'shortcut': this.shortcut }, { 'rects': this.rects }, { 'pressed': this.pressed })
+    }
+    playNote(sampler) {
+        this.pressed = true;
+        this.rects.classList.add('active')
+        sampler.triggerAttack(this.note)
+    }
+    stopNote(sampler) {
+        this.pressed = false;
+        this.rects.classList.remove('active')
+        sampler.triggerRelease(this.note)
+    }
+}
 
-document.addEventListener('click', () => {
+const pianoKeys = [
+    new PianoKey('C2', "a", document.getElementById('c2')),
+    new PianoKey('D2', "s", document.getElementById('d2')),
+    new PianoKey('E2', "d", document.getElementById('e2')),
+    new PianoKey('F2', "f", document.getElementById('f2')),
+    new PianoKey('G2', "g", document.getElementById('g2')),
+    new PianoKey('A2', "h", document.getElementById('a2')),
+    new PianoKey('B2', "j", document.getElementById('b2')),
+    new PianoKey('C3', "k", document.getElementById('c3')),
+    new PianoKey("C#2", "w", document.getElementById('cs2')),
+    new PianoKey("D#2", "e", document.getElementById('ds2')),
+    new PianoKey("F#2", "t", document.getElementById('fs2')),
+    new PianoKey("G#2", "y", document.getElementById('gs2')),
+    new PianoKey("A#2", "u", document.getElementById('as2')),
+]
+
+const overlay = document.getElementById('activate-piano-overlay')
+overlay.addEventListener('click', () => {
+    overlay.remove();
     const script = document.createElement('script');
-
     script.onload = () => {
-        //do stuff with the script
-
         const sampler = new Tone.Sampler({
             urls: {
-                "C2": c2,
-                "D#2": ds2,
-                "F#2": fs2,
-                "A2": a2,
-                "C3": c3,
+                "C2": c4,
+                "D#2": ds4,
+                "F#2": fs4,
+                "A2": a4,
+                "C3": c5,
             },
             release: 1,
             baseUrl: ""
         }).toDestination();
-        class PianoKey {
-            constructor(note, shortcut, rects) {
-                this.note = note
-                this.shortcut = shortcut
-                this.rects = rects
-                this.pressed = false
-            }
-            print() {
-                console.log({ 'note': this.note }, { 'shortcut': this.shortcut }, { 'rects': this.rects }, { 'pressed': this.pressed })
-            }
-            playNote() {
-                this.pressed = true;
-                this.rects.classList.add('active')
-                sampler.triggerAttack(this.note)
-            }
-            stopNote() {
-                this.pressed = false;
-                this.rects.classList.remove('active')
-                sampler.triggerRelease(this.note)
-            }
-        }
 
-        const pianoKeys = [
-            new PianoKey('C2', "a", document.getElementById('c2')),
-            new PianoKey('D2', "s", document.getElementById('d2')),
-            new PianoKey('E2', "d", document.getElementById('e2')),
-            new PianoKey('F2', "f", document.getElementById('f2')),
-            new PianoKey('G2', "g", document.getElementById('g2')),
-            new PianoKey('A2', "h", document.getElementById('a2')),
-            new PianoKey('B2', "j", document.getElementById('b2')),
-            new PianoKey('C3', "k", document.getElementById('c3')),
-            new PianoKey("C#2", "w", document.getElementById('cs2')),
-            new PianoKey("D#2", "e", document.getElementById('ds2')),
-            new PianoKey("F#2", "t", document.getElementById('fs2')),
-            new PianoKey("G#2", "y", document.getElementById('gs2')),
-            new PianoKey("A#2", "u", document.getElementById('as2')),
-        ]
         // I wait with initiating eventlisterners until everything is loaded, including the sound library ToneJS. 
         startEventListeners();
         function startEventListeners() {
@@ -69,7 +66,7 @@ document.addEventListener('click', () => {
                 for (const k of pianoKeys) {
                     if (evt.key === k.shortcut) {
                         if (k.pressed) return
-                        k.playNote()
+                        k.playNote(sampler)
                         return
                     }
                 }
@@ -77,7 +74,7 @@ document.addEventListener('click', () => {
             document.addEventListener('keyup', (evt) => {
                 for (const k of pianoKeys) {
                     if (evt.key === k.shortcut) {
-                        k.stopNote()
+                        k.stopNote(sampler)
                         return
                     }
                 }
@@ -92,7 +89,7 @@ document.addEventListener('click', () => {
                         evt.preventDefault();
                     }
                     evt.stopPropagation();
-                    matchingKey.playNote();
+                    matchingKey.playNote(sampler);
                 });
                 // This solution is not perfect. I can't slid my finger along the keyboard to play a lot of notes.
                 rects.addEventListener("touchend", (evt) => {
@@ -100,15 +97,15 @@ document.addEventListener('click', () => {
                         evt.preventDefault();
                     }
                     evt.stopPropagation();
-                    matchingKey.stopNote();
+                    matchingKey.stopNote(sampler);
                 });
                 rects.addEventListener('mousedown', (evt) => {
-                    matchingKey.playNote();
+                    matchingKey.playNote(sampler);
                     lastClicked = matchingKey
                 })
                 rects.addEventListener('mouseup', (evt) => {
                     if (lastClicked !== null) {
-                        lastClicked.stopNote()
+                        lastClicked.stopNote(sampler)
                     }
                 })
             }
@@ -138,13 +135,6 @@ document.addEventListener('click', () => {
                 const { classList } = document.getElementById('piano-svg')
                 classList.contains('fs-screen-piano') ? classList.remove('fs-screen-piano') : classList.add('fs-screen-piano')
             }, false);
-            // setTimeout(() => {
-                // const pianoContainer = document.getElementById('piano-container')
-                // const loadingDiv = document.getElementById('loading-div')
-                // loadingDiv.classList.add('hidden')
-                // pianoContainer.classList.remove('piano-hidden')
-            // }, 300)
-
         }
 
         // Helper function used when adding eventlisteners.
