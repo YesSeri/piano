@@ -2,7 +2,6 @@ import React from 'react'
 import { ReactComponent as GrandPiano } from '../assets/grand-piano.svg'
 
 const Header = () => {
-    console.log(GrandPiano);
     return (
         <div className="header__bg">
             <div className="header">
@@ -12,7 +11,7 @@ const Header = () => {
                     Use the piano with keyboard, touch or mouse.</p>
                 </div>
                 <div className="header__paneRight">
-                    <GrandPiano fill='white'></GrandPiano>
+                    <GrandPiano></GrandPiano>
                 </div>
             </div>
         </div >
