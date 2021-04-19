@@ -38,6 +38,10 @@
   border-radius: 20px;
 }
 
+#button-div > button {
+  margin: 5px;
+}
+
 #piano-svg {
   width: 100%;
   max-width: 700px;
@@ -51,6 +55,7 @@
   transition: fill 100ms linear;
   stroke: #000;
   fill: #fff;
+  stroke-width: 0.265;
 }
 @media (hover: hover) and (pointer: fine) {
   .white-key:hover {
@@ -69,6 +74,7 @@
   transition: fill 100ms linear;
   stroke: #000;
   fill: #000;
+  stroke-width: 0.265;
 }
 @media (hover: hover) and (pointer: fine) {
   .black-key:hover {

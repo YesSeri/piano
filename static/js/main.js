@@ -81,7 +81,7 @@ overlay.addEventListener('click', () => {
             })
 
             let lastClicked = null;
-            const pianoRects = document.getElementsByClassName('piano-key')
+            const pianoRects = document.querySelectorAll('#piano-svg > .piano-key')
             for (const rects of pianoRects) {
                 const matchingKey = findMatchingKey(rects)
                 rects.addEventListener("touchstart", (evt) => {

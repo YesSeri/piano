@@ -304,7 +304,7 @@ overlay.addEventListener('click', function () {
         }
       });
       var lastClicked = null;
-      var pianoRects = document.getElementsByClassName('piano-key');
+      var pianoRects = document.querySelectorAll('#piano-svg > .piano-key');
 
       var _iterator3 = _createForOfIteratorHelper(pianoRects),
           _step3;
@@ -445,7 +445,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56453" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52140" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

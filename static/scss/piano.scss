@@ -38,6 +38,9 @@
     }
 }
 
+#button-div > button{
+    margin: 5px;
+}
 #piano-svg {
     width: 100%;
     max-width: 700px;
@@ -51,6 +54,7 @@
     transition: $fill-animation;
     stroke: $stroke;
     fill: $fill;
+    stroke-width: 0.265;
 
     &:hover {
         @media (hover: hover) and (pointer: fine) {
