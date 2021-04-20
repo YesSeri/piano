@@ -2,11 +2,12 @@ import './scss/my.scss'
 import React, { useState } from 'react'
 import Header from './component/Header.js'
 import Title from './component/Title.js'
+import Overlay from './component/Overlay.js'
 const PianoContainer = React.lazy(() => import('./component/piano/PianoContainer'));
 
 function App() {
   const [isClicked, setIsClicked] = useState(false);
-  const handleClick = (evt) => {
+  const handleClick = () => {
     setIsClicked(true);
   }
   return (
@@ -18,7 +19,7 @@ function App() {
           <PianoContainer />
         </React.Suspense>
         :
-        <button onClick={(evt) => handleClick()}>Load Piano</button>
+        <Overlay onClick={handleClick}>Load Piano</Overlay>
       }
     </div>
   );

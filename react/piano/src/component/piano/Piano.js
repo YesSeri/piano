@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 const translation = {
   'C2': 'a',
   'D2': 's',
@@ -15,23 +15,46 @@ const translation = {
   'A#2': 'u',
 }
 const Piano = ({ sampler }) => {
-  const [keysPressed, setKeysPressed] = useState(new Set())
+  const refKeys = useRef(new Set());
+  const refClicked = useRef('');
+
+  useEffect(() => {
+    // I need to use a ref, because the keys in the keyhandlers is closured over and always refers to the initial value of keys. The prevKeys however always refer to the previous value.
+    const handleKeyDown = (e) => {
+      if (refKeys.current.has(e.key)) return
+      refKeys.current = new Set([...refKeys.current, e.key])
+      for (const key in translation) {
+        if (translation[key] === e.key) {
+          sampler.triggerAttack(key)
+        }
+      }
+    }
+    const handleKeyUp = (e) => {
+      const currentSet = new Set([...refKeys.current].filter(k => k !== e.key))
+      refKeys.current = currentSet;
+      for (const key in translation) {
+        if (translation[key] === e.key) {
+          sampler.triggerRelease(key)
+        }
+      }
+    }
+
+    const handleMouseUp = () => {
+      sampler.triggerRelease(refClicked.current)
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('keyup', handleKeyUp)
+    document.addEventListener('mouseup', handleMouseUp)
+  }, [sampler])
   const handleMouseDown = (note) => {
+    refClicked.current = note
     sampler.triggerAttack(note)
   }
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => handleKeyDown(e, keysPressed, setKeysPressed));
-    document.addEventListener("keyup", (e) => handleKeyUp(e, keysPressed, setKeysPressed));
-    return () => {
-      document.removeEventListener("keydown", (e) => handleKeyDown(e));
-    }
-  }, []);
-
-
   return (
-    <div className='piano-small'>
+    <div className='piano-small' >
       <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
-        <path id='c2' onKeyDown={() => handleKeyDown('C2')} onMouseDown={() => handleMouseDown('C2')} className='white-key piano-key' data-note='C2' d="M10.848.265v31.75H1.323a1.056 1.056 0 01-1.058-1.059V.265h10.583z" />
+        <path id='c2' onMouseDown={() => handleMouseDown('C2')} className='white-key piano-key' d="M10.848.265v31.75H1.323a1.056 1.056 0 01-1.058-1.059V.265h10.583z" />
         <path id='d2' onMouseDown={() => handleMouseDown('D2')} className='white-key piano-key' d="M10.848.265h10.583v31.75H10.848z" />
         <path id='e2' onMouseDown={() => handleMouseDown('E2')} className='white-key piano-key' d="M21.431.265h10.583v31.75H21.431z" />
         <path id='f2' onMouseDown={() => handleMouseDown('F2')} className='white-key piano-key' d="M32.015.265h10.583v31.75H32.015z" />
@@ -39,7 +62,7 @@ const Piano = ({ sampler }) => {
         <path id='a2' onMouseDown={() => handleMouseDown('A2')} className='white-key piano-key' d="M53.181.265h10.583v31.75H53.181z" />
         <path id='b2' onMouseDown={() => handleMouseDown('B2')} className='white-key piano-key' d="M63.765.265h10.583v31.75H63.765z" />
         <path id='c3' onMouseDown={() => handleMouseDown('C3')} className='white-key piano-key' d="M74.348.265v31.75h9.525c.586 0 1.058-.472 1.058-1.059V.265H74.348z" />
-        <path id='cs2' onMouseDown={() => handleMouseDown('C#2')} className='black-key piano-key' data-note='C#2' d="M15.081.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
+        <path id='cs2' onMouseDown={() => handleMouseDown('C#2')} className='black-key piano-key' d="M15.081.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
         <path id='ds2' onMouseDown={() => handleMouseDown('D#2')} className='black-key piano-key' d="M25.665.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
         <path id='fs2' onMouseDown={() => handleMouseDown('F#2')} className='black-key piano-key' d="M46.831.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
         <path id='gs2' onMouseDown={() => handleMouseDown('G#2')} className='black-key piano-key' d="M57.415.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z" />
@@ -49,24 +72,5 @@ const Piano = ({ sampler }) => {
   )
 }
 
-const handleKeyDown = (evt, keysPressed, setKeysPressed) => {
-  console.log('down', { keysPressed });
-  for (const key in translation) {
-    if (translation[key] === evt.key && !keysPressed.has(evt.key)) {
-      // sampler.triggerAttack(key)
-      const a = new Set([...keysPressed, evt.key])
-      console.log({ a });
-      setKeysPressed(prev => new Set([...prev, evt.key]))
-    }
-  }
-}
 
-const handleKeyUp = (evt, keysPressed, setKeysPressed) => {
-  console.log('up', { keysPressed });
-  for (const key in translation) {
-    if (translation[key] === evt.key) {
-      // sampler.triggerRelease(key)
-    }
-  }
-}
 export default Piano
