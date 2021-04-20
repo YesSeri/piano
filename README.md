@@ -28,6 +28,7 @@ This piano can be played with the keyboard or with the mouse.
     - [x] Android support
     - [ ] iPhone support
 - [x] Make piano size responsive
+- [ ] Make site in React instead
 - [ ] Buy a domain
 
 ## Getting Started

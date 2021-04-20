@@ -30,43 +30,34 @@ html {
 }
 .header {
     @include responsive-width;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
     &__bg {
         border-radius: 0 0 20px 20px;
         background: $mainColor;
     }
-    &__paneLeft {
-        text-align: left;
-        h2 {
-            margin: 0 0 5px 0;
-            font-size: 4em;
-            font-weight: 100;
-        }
-        p {
-            margin: 0;
-        }
-
+    display: flex;
+    flex-wrap: wrap;
+    &__pane {
         display: flex;
-        flex-wrap: wrap;
-        flex: 0 0 50%;
-        align-items: center;
-    }
-    &__paneRight {
-        flex: 0 0 50%;
-        svg {
-            width: 100%;
-            height: 100%;
-            flex: auto;
+        width: 50%;
+        &__text {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: left;
+            align-items: center;
+            h2 {
+                margin: 10px 10px;
+                font-size: 4em;
+            }
+            p {
+                margin: 10px 10px;
+            }
         }
-    }
-    @media screen and (max-width: 600px) {
-        display: block;
-        &__paneRight {
-            padding: 20px 0 10px 0;
-            width: 200px;
+        svg {
             margin: auto;
+            max-width: 300px;
+        }
+        @media screen and(max-width: 700px) {
+            width:100%;
         }
     }
 }
@@ -100,8 +91,8 @@ html {
 .black-key {
     @include piano-key(#000, #000, #444, #444, #333, #333);
 }
-.piano-div{
-    @include responsive-width
+.piano-small {
+    @include responsive-width;
 }
 
 .app-container {
