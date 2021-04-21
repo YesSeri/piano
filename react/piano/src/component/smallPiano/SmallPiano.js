@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import data from './data'
+import React, { useEffect, useState } from 'react'
 import pianoData from './data'
 const translation = {
   'C2': 'a',
@@ -17,7 +16,7 @@ const translation = {
   'A#2': 'u',
 }
 
-const Piano = ({ sampler }) => {
+const SmallPiano = ({ sampler }) => {
   const [clicked, setClicked] = useState('')
   const activeKeys = useKeyHandler(sampler)
 
@@ -33,7 +32,6 @@ const Piano = ({ sampler }) => {
     setClicked(note)
     sampler.triggerAttack(note)
   }
-  console.log(activeKeys);
   useEffect(() => {
     const handleMouseUp = () => {
       sampler.triggerRelease(clicked)
@@ -46,10 +44,12 @@ const Piano = ({ sampler }) => {
     // Here instead of in path because I mouse sometimes get released not over the clicked note.
     window.addEventListener('mouseup', handleMouseUp);
     // I need to add eventlistener here because I need to set it to passive, so I can prevent default.
-    document.getElementsByClassName('piano-small')[0].addEventListener('touchstart', handleTouchStart, { passive: false });
+    const piano = document.getElementsByClassName('piano-small')[0]
+    piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     return () => {
+      console.log(document.getElementsByClassName('piano-small')[0])
       window.removeEventListener('mouseup', handleMouseUp);
-      document.getElementsByClassName('piano-small')[0].removeEventListener('touchstart', handleTouchStart, { passive: false });
+      piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
     }
   }, [sampler, clicked])
 
@@ -98,4 +98,4 @@ const useKeyHandler = (sampler) => {
   return [...keys]
 }
 
-export default Piano
+export default SmallPiano
