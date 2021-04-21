@@ -57,12 +57,11 @@ const LargePiano = ({ sampler }) => {
   }
 
   return (
-    <div>LARGE PIANO</div>
-    // <div className='piano-large' >
-    //   <svg id='piano-svg-large' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
-    //     {pianoData.map(el => createPath(el[0], el[1], el[2], el[3]))}
-    //   </svg>
-    // </div>
+    <div className='piano-large' >
+      <svg id='piano-svg-large' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
+        {pianoData.map(el => createPath(el[0], el[1], el[2], el[3]))}
+      </svg>
+    </div>
   )
 }
 const useKeyHandler = (sampler) => {

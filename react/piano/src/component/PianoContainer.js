@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Sampler, Buffer } from 'tone'
 import SmallPiano from "./smallPiano/SmallPiano";
 import { c4, ds4, fs4, a4, c5 } from './audio/index'
+import LargePiano from './largePiano/LargePiano';
+import LargePianoTest from './largePiano/LargePianoTest';
 const c4b = new Buffer(c4)
 const ds4b = new Buffer(ds4)
 const fs4b = new Buffer(fs4)
@@ -28,7 +30,12 @@ const Container = ({ largePiano, children, ...props }) => {
 
   return (
     <div className="piano-container" {...props}>
-      {loaded ? <SmallPiano sampler={sampler} /> : null}
+      {loaded ?
+        largePiano ?
+          <LargePiano sampler={sampler} />
+          :
+          <SmallPiano sampler={sampler} />
+        : null}
     </div>
   )
 }
