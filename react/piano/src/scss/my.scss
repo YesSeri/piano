@@ -89,6 +89,11 @@ html {
         stroke: $active-stroke;
         fill: $active-fill;
     }
+    &.active{
+        transition: $fill-animation;
+        stroke: $active-stroke;
+        fill: $active-fill;
+    }
 }
 
 .white-key {
@@ -100,13 +105,15 @@ html {
 }
 .piano-small {
     @include responsive-width;
+    margin-top: 10px;
+    max-width:700px;
 }
 .overlaySmall {
     @include responsive-width;
+    margin-top: 10px;
     position: relative;
+    max-width:700px;
 
-    &__svg {
-    }
     &__overlay {
         position: absolute;
         width: 100%;

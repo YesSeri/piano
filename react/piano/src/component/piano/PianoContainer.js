@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Sampler, Buffer } from 'tone'
-import Piano from "./Piano";
+import Piano from "./Piano1";
 import { c4, ds4, fs4, a4, c5 } from '../audio/index'
 const c4b = new Buffer(c4)
 const ds4b = new Buffer(ds4)
