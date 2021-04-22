@@ -160,8 +160,37 @@ html {
         }
     }
 }
-.input-container{
-    margin:10px;
+.keybinding {
+    @include responsive-width;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    &__pair {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__key {
+            width: 30px;
+            height: 30px;
+            border: solid 1px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &__note {
+            width: 30px;
+            height: 30px;
+            border: solid 1px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+.input-container {
+    margin: 10px;
 }
 .app-container {
     margin: auto;

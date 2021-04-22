@@ -3,31 +3,30 @@ import React, { useState } from 'react'
 import Header from './component/Header.js'
 import Title from './component/Title.js'
 import Overlay from './component/Overlay.js'
+import Keybindings from './component/Keybindings'
 const PianoContainer = React.lazy(() => import('./component/PianoContainer'));
 
 function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [octaveHigher, setOctaveHigher] = useState(false);
   const [largePiano, setLargePiano] = useState(false)
-  const [largePianoText, setLargePianoText] = useState('Large Piano')
   const handleClick = () => {
     setIsClicked(true);
   }
   const Input = () => {
     const handlePianoChange = () => {
-      setLargePianoText(largePiano ? 'Large Piano' : 'Small Piano')
       setLargePiano(!largePiano)
     }
     const handleOctaveChange = (e) => {
       setOctaveHigher(e.target.checked)
     }
     return (
-    <div className="input-container">
-      <label htmlFor="largePiano">Larger piano</label>
-      <input onChange={handlePianoChange} type="checkbox" id="largePiano" checked={largePiano} />
-      <label htmlFor="octaveHigher">One octave higher</label>
-      <input onChange={handleOctaveChange} type="checkbox" id="octaveHigher" checked={octaveHigher} />
-    </div>)
+      <div className="input-container">
+        <label htmlFor="largePiano">Larger piano</label>
+        <input onChange={handlePianoChange} type="checkbox" id="largePiano" checked={largePiano} />
+        <label htmlFor="octaveHigher">One octave higher</label>
+        <input onChange={handleOctaveChange} type="checkbox" id="octaveHigher" checked={octaveHigher} />
+      </div>)
   }
   const MainContainer = () => (
     isClicked ?
@@ -44,6 +43,10 @@ function App() {
       <Header></Header>
       <Input />
       <MainContainer />
+      <Keybindings.Title>Keybindings</Keybindings.Title>
+      <Keybindings onClick={() => console.log('click')}>
+        <Keybindings.Pairs />
+      </Keybindings>
     </div>
   );
 }
