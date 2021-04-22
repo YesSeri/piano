@@ -14,34 +14,36 @@ function App() {
     setIsClicked(true);
   }
   const Input = () => {
-    const handlePianoClick = () => {
+    const handlePianoChange = () => {
       setLargePianoText(largePiano ? 'Large Piano' : 'Small Piano')
       setLargePiano(!largePiano)
     }
     const handleOctaveChange = (e) => {
       setOctaveHigher(e.target.checked)
     }
-    return (<>
-      <div>
-        <button onClick={handlePianoClick} id="largePiano">{largePianoText}</button>
-      </div>
+    return (
+    <div className="input-container">
+      <label htmlFor="largePiano">Larger piano</label>
+      <input onChange={handlePianoChange} type="checkbox" id="largePiano" checked={largePiano} />
       <label htmlFor="octaveHigher">One octave higher</label>
       <input onChange={handleOctaveChange} type="checkbox" id="octaveHigher" checked={octaveHigher} />
-    </>)
+    </div>)
   }
+  const MainContainer = () => (
+    isClicked ?
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <PianoContainer largePiano={largePiano} octaveHigher={octaveHigher} />
+      </React.Suspense>
+      :
+      <Overlay onClick={handleClick}>Click to load Piano</Overlay>
+  )
 
   return (
     <div className="app-container">
       <Title />
       <Header></Header>
-      {isClicked ?
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <PianoContainer largePiano={largePiano} octaveHigher={octaveHigher} />
-        </React.Suspense>
-        :
-        <Overlay onClick={handleClick}>Click to load Piano</Overlay>
-      }
       <Input />
+      <MainContainer />
     </div>
   );
 }
