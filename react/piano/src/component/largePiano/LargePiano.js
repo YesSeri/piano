@@ -1,88 +1,85 @@
 import React, { useEffect, useState } from 'react'
-import pianoData from './data'
+import pianoData, { largeKeys } from './data'
 const translation = {
-  'C2': 'a',
-  'D2': 's',
-  'E2': 'd',
-  'F2': 'f',
-  'G2': 'g',
-  'A2': 'h',
-  'B2': 'j',
-  'C3': 'k',
-  'C#2': 'w',
-  'D#2': 'e',
-  'F#2': 't',
-  'G#2': 'y',
-  'A#2': 'u',
+  'c': 'G1',
+  'v': 'A1',
+  'b': 'B1',
+  'q': 'C2',
+  'w': 'D2',
+  'e': 'E2',
+  'r': 'F2',
+  't': 'G2',
+  'y': 'A2',
+  'u': 'B2',
+  'i': 'C3',
+  'o': 'D3',
+  'f': 'G#1',
+  'g': 'A#1',
+  '2': 'C#2',
+  '3': 'D#2',
+  '5': 'F#2',
+  '6': 'G#2',
+  '7': 'A#2',
 }
 
 const LargePiano = ({ sampler }) => {
   const [clicked, setClicked] = useState('')
-  const activeKeys = useKeyHandler(sampler)
+  const activeKeys = useActiveNoteHandler(sampler)
 
   const createPath = (id, note, color, d) => {
-    return <path id={id} key={id}
-      onMouseDown={() => handleMouseDown(note)}
+    return <path
+      key={id}
+      data-note={note}
       onContextMenu={(e) => e.preventDefault()}
-      onTouchEnd={(e) => handleTouchEnd(note)}
-      className={`${color}-key piano-key ${activeKeys.includes(translation[note]) ? 'active' : ''}`} d={d}
+      className={`${color}-key piano-key ${activeKeys.includes(note) ? 'active' : ''}`} d={d}
     />
   }
-  const handleMouseDown = (note) => {
-    setClicked(note)
-    sampler.triggerAttack(note)
-  }
-  console.log(activeKeys);
+  // These two gets highlighted using pseudoclass instead of .active class.
   useEffect(() => {
     const handleMouseUp = () => {
       sampler.triggerRelease(clicked)
+
     }
-    const handleTouchStart = (e) => {
-      e.preventDefault()
-      const note = e.target.id.replace('s', '#').toUpperCase()
+    const handleMouseDown = (e) => {
+      const { note } = e.target.dataset
+      if(!note) return
+      setClicked(note)
       sampler.triggerAttack(note)
     }
+
     // Here instead of in path because I mouse sometimes get released not over the clicked note.
+    window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
-    // I need to add eventlistener here because I need to set it to passive, so I can prevent default.
-    document.getElementsByClassName('piano-large')[0].addEventListener('touchstart', handleTouchStart, { passive: false });
     return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
-      document.getElementsByClassName('piano-large')[0].removeEventListener('touchstart', handleTouchStart, { passive: false });
     }
   }, [sampler, clicked])
 
-  const handleTouchEnd = (note) => {
-    sampler.triggerRelease(note)
-  }
+
 
   return (
-    <div className='piano-large' >
-      <svg id='piano-svg-large' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
-        {pianoData.map(el => createPath(el[0], el[1], el[2], el[3]))}
+    <div id='piano-large' >
+      <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.529 32.279" preserveAspectRatio="none">
+        {largeKeys.map(({ id, note, color, d }) => createPath(id, note, color, d))}
       </svg>
     </div>
   )
 }
-const useKeyHandler = (sampler) => {
-  const [keys, setKeys] = useState(new Set())
+// This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
+const useActiveNoteHandler = (sampler) => {
+  const [notes, setNotes] = useState(new Set())
   useEffect(() => {
     const handleKeyDown = ({ key }) => {
-      if (keys.has(key)) return
-      setKeys(new Set([...keys, key]));
-      for (const note in translation) {
-        if (translation[note] === key) {
-          sampler.triggerAttack(note)
-        }
-      }
+      const note = translation[key]
+      if (notes.has(note) || !note) return
+      setNotes(new Set([...notes, note]));
+      sampler.triggerAttack(note)
     };
     const handleKeyUp = ({ key }) => {
-      setKeys(new Set([...keys].filter(k => k !== key)));
-      for (const note in translation) {
-        if (translation[note] === key) {
-          sampler.triggerRelease(note)
-        }
-      }
+      const note = translation[key]
+      setNotes(new Set([...notes].filter(k => k !== note)));
+      sampler.triggerRelease(note)
     };
 
     // In here so I can use dependency array so the closure never is stale.
@@ -93,8 +90,30 @@ const useKeyHandler = (sampler) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [sampler, keys]);
-  return [...keys]
+  }, [sampler, notes]);
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      e.preventDefault()
+      const { note } = e.target.dataset
+      setNotes(new Set([...notes, note]));
+      sampler.triggerAttack(note)
+    }
+
+    const handleTouchEnd = (e) => {
+      const { note } = e.target.dataset
+      setNotes(new Set([...notes].filter(k => k !== note)));
+      sampler.triggerRelease(note)
+    }
+    const piano = document.getElementById('piano-large')
+    // I need to add eventlistener here because I need to set it to passive, so I can prevent default.
+    piano.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
+      document.removeEventListener('touchend', handleTouchEnd);
+    }
+  }, [sampler, notes])
+  return [...notes]
 }
 
 export default LargePiano

@@ -103,10 +103,36 @@ html {
 .black-key {
     @include piano-key(#000, #000, #444, #444, #333, #333);
 }
-.piano-small {
+
+#piano-small {
     @include responsive-width;
     margin-top: 10px;
     max-width: 700px;
+}
+.fullscreen-enabled #piano-small {
+    & svg {
+        width: 100%;
+        height: 100%;
+    }
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+}
+#piano-large {
+    @include responsive-width;
+    margin-top: 10px;
+    max-width: 1200px;
+}
+.fullscreen-enabled #piano-large {
+    & svg {
+        width: 100%;
+        height: 100%;
+    }
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
 }
 .overlaySmall {
     @include responsive-width;
@@ -116,7 +142,7 @@ html {
     .white-key {
         fill: #3333;
     }
-    .black-key{
+    .black-key {
         fill: #111;
     }
 
