@@ -13,7 +13,6 @@ const a4b = new Buffer(a4)
 const c5b = new Buffer(c5)
 const ds5b = new Buffer(ds5)
 const Container = ({ largePiano, octaveHigher, children, ...props }) => {
-  console.log({ octaveHigher });
   const [loaded, setLoaded] = useState(false)
   const handle = useFullScreenHandle();
   const sampler = new Sampler({
