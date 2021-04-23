@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import pianoData, { smallKeys } from './data'
+import { smallKeys } from './data'
 const translation = {
   'q': 'C2',
   'w': 'D2',

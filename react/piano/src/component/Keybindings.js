@@ -1,57 +1,66 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 
 const bindings = [
-    ['c', 'G1'],
-    ['v', 'A1'],
-    ['b', 'B1'],
-    ['q', 'C2'],
-    ['w', 'D2'],
-    ['e', 'E2'],
-    ['r', 'F2'],
-    ['t', 'G2'],
-    ['y', 'A2'],
-    ['u', 'B2'],
-    ['i', 'C3'],
-    ['o', 'D3'],
-    ['f', 'G#1'],
-    ['g', 'A#1'],
-    ['2', 'C#2'],
-    ['3', 'D#2'],
-    ['5', 'F#2'],
-    ['6', 'G#2'],
-    ['7', 'A#2'],
+    ['c', 'G'],
+    ['f', 'G♯'],
+    ['v', 'A'],
+    ['g', 'A♯'],
+    ['b', 'B'],
+    ['q', 'C'],
+    ['2', 'C♯'],
+    ['w', 'D'],
+    ['3', 'D♯'],
+    ['e', 'E'],
+    ['r', 'F'],
+    ['5', 'F♯'],
+    ['t', 'G'],
+    ['6', 'G♯'],
+    ['y', 'A'],
+    ['7', 'A♯'],
+    ['u', 'B'],
+    ['i', 'C'],
+    ['o', 'D'],
+    ['', ''],
 ]
+const KeybindContext = React.createContext({ visible: false, setVisible: () => { } })
 
 const Keybindings = ({ children, ...props }) => {
+    const [visible, setVisible] = useState(true)
     return (
-        <div className="keybinding" {...props}>
-            {children}
-        </div>
+        <KeybindContext.Provider value={{ visible: visible, setVisible: setVisible }}>
+            <div {...props}>
+                {children}
+            </div>
+        </KeybindContext.Provider>
     )
 }
+Keybindings.Title = function KeybindingsTitle({ children, ...props }) {
+    return <h1 {...props}>{children}</h1>
+}
+Keybindings.Button = function KeybindingsButton({ children, ...props }) {
+    const { visible, setVisible } = useContext(KeybindContext)
 
-Keybindings.Title = ({ children, ...props }) => (
-    <h1 {...props}>{children}</h1>
-)
-Keybindings.Button = ({ children, state, setState, ...props }) => (
-    <button onClick={setState(!state)}></button>
-)
-Keybindings.Pairs = ({ children, ...props }) => {
-    const [visible, setVisible] = useState(false);
-
+    return <button onClick={() => { setVisible(!visible) }}>{children}</button>
+}
+Keybindings.Pairs = function KeybindingsPair({ children, ...props }) {
+    const { visible } = useContext(KeybindContext)
     return (
         <>
-            {bindings.map(b => (
-                <div key={b[0]} className="keybinding__pair">
-                    <div className="keybinding__pair__key">
-                        {b[0]}
+            <div className="keybinding" {...props}>
+                {visible ? bindings.map(b => (
+                    <div key={b[0]} className="keybinding__pair">
+                        <div className="keybinding__pair__key">
+                            {b[0]}
+                        </div>
+                        <div className="keybinding__pair__note">
+                            {b[1]}
+                        </div>
                     </div>
-                    <div className="keybinding__pair__note">
-                        {b[1]}
-                    </div>
-                </div>
-            ))}
-            <Keybindings.Button />
+                ))
+                    :
+                    null
+                }
+            </div>
         </>
     )
 }

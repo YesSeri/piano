@@ -45,6 +45,7 @@ function App() {
       <MainContainer />
       <Keybindings.Title>Keybindings</Keybindings.Title>
       <Keybindings onClick={() => console.log('click')}>
+        <Keybindings.Button>Show Keybindings</Keybindings.Button>
         <Keybindings.Pairs />
       </Keybindings>
     </div>

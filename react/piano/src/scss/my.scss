@@ -163,30 +163,25 @@ html {
 .keybinding {
     @include responsive-width;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    border-top: solid 1px black;
+    border-left: solid 1px black;
     &__pair {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-bottom: solid 1px black;
+        border-right: solid 1px black;
         &__key {
-            width: 30px;
-            height: 30px;
-            border: solid 1px black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &__note {
-            width: 30px;
-            height: 30px;
-            border: solid 1px black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     }
+    &__pair:last-child {
+        border: none;
+    }
+    @media screen and (max-width: 1200px) {
+    }
+    @media screen and (max-width: 900px) {
+        grid-template-columns: repeat(5, 1fr);
+    }
     @media screen and (max-width: 600px) {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 .input-container {
