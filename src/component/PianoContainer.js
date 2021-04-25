@@ -49,7 +49,7 @@ const Container = ({ largePiano, octaveHigher, children, ...props }) => {
       <FullScreen handle={handle}>
         <Piano />
       </FullScreen>
-      <button onClick={handleClick}>
+      <button id="fullscreen-btn" onClick={handleClick}>
         Enter fullscreen
       </button>
     </div>

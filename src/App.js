@@ -8,7 +8,7 @@ const PianoContainer = React.lazy(() => import('./component/PianoContainer'));
 
 function App() {
   const [isClicked, setIsClicked] = useState(false);
-  const [octaveHigher, setOctaveHigher] = useState(false);
+  // const [octaveHigher, setOctaveHigher] = useState(false);
   const [largePiano, setLargePiano] = useState(false)
   const handleClick = () => {
     setIsClicked(true);
@@ -17,9 +17,9 @@ function App() {
     const handlePianoChange = () => {
       setLargePiano(!largePiano)
     }
-    const handleOctaveChange = (e) => {
-      setOctaveHigher(e.target.checked)
-    }
+    // const handleOctaveChange = (e) => {
+    //   setOctaveHigher(e.target.checked)
+    // }
     return (
       <div className="input-container">
         <label htmlFor="largePiano">Larger piano</label>
@@ -31,7 +31,7 @@ function App() {
   const MainContainer = () => (
     isClicked ?
       <React.Suspense fallback={<div>Loading...</div>}>
-        <PianoContainer largePiano={largePiano} octaveHigher={octaveHigher} />
+        <PianoContainer largePiano={largePiano} />
       </React.Suspense>
       :
       <Overlay onClick={handleClick}>Click to load Piano</Overlay>
@@ -42,11 +42,11 @@ function App() {
       <Title />
       <Header></Header>
       <MainContainer />
-      <Input />
       <Keybindings>
         <Keybindings.Button>Show Keybindings</Keybindings.Button>
         <Keybindings.Pairs />
       </Keybindings>
+      <Input />
     </div>
   );
 }

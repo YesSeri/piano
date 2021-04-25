@@ -170,9 +170,9 @@ html {
     border-top: solid 1px black;
     border-left: solid 1px black;
     &__pair {
-        display:grid;
+        display: grid;
         align-items: center;
-        height:60px;
+        height: 60px;
         border-bottom: solid 1px black;
         border-right: solid 1px black;
     }
@@ -196,4 +196,8 @@ html {
 }
 .app-container {
     margin: auto;
+}
+
+#fullscreen-btn {
+    margin-bottom: 5px;
 }
