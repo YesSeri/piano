@@ -24,8 +24,8 @@ function App() {
       <div className="input-container">
         <label htmlFor="largePiano">Larger piano</label>
         <input onChange={handlePianoChange} type="checkbox" id="largePiano" checked={largePiano} />
-        <label htmlFor="octaveHigher">One octave higher</label>
-        <input onChange={handleOctaveChange} type="checkbox" id="octaveHigher" checked={octaveHigher} />
+        {/* <label htmlFor="octaveHigher">One octave higher</label>
+        <input onChange={handleOctaveChange} type="checkbox" id="octaveHigher" checked={octaveHigher} /> */}
       </div>)
   }
   const MainContainer = () => (
@@ -41,10 +41,9 @@ function App() {
     <div className="app-container">
       <Title />
       <Header></Header>
-      <Input />
       <MainContainer />
-      <Keybindings.Title>Keybindings</Keybindings.Title>
-      <Keybindings onClick={() => console.log('click')}>
+      <Input />
+      <Keybindings>
         <Keybindings.Button>Show Keybindings</Keybindings.Button>
         <Keybindings.Pairs />
       </Keybindings>

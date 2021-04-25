@@ -25,7 +25,7 @@ const bindings = [
 const KeybindContext = React.createContext({ visible: false, setVisible: () => { } })
 
 const Keybindings = ({ children, ...props }) => {
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     return (
         <KeybindContext.Provider value={{ visible: visible, setVisible: setVisible }}>
             <div {...props}>
@@ -46,8 +46,8 @@ Keybindings.Pairs = function KeybindingsPair({ children, ...props }) {
     const { visible } = useContext(KeybindContext)
     return (
         <>
-            <div className="keybinding" {...props}>
-                {visible ? bindings.map(b => (
+            <div className={`keybinding ${visible ? '' : 'hidden'}`} {...props}>
+                {bindings.map(b => (
                     <div key={b[0]} className="keybinding__pair">
                         <div className="keybinding__pair__key">
                             {b[0]}
@@ -57,8 +57,6 @@ Keybindings.Pairs = function KeybindingsPair({ children, ...props }) {
                         </div>
                     </div>
                 ))
-                    :
-                    null
                 }
             </div>
         </>
