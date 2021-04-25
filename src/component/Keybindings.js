@@ -39,8 +39,11 @@ Keybindings.Title = function KeybindingsTitle({ children, ...props }) {
 }
 Keybindings.Button = function KeybindingsButton({ children, ...props }) {
     const { visible, setVisible } = useContext(KeybindContext)
+    const handleClick = () => {
+        setVisible(!visible)
+    }
 
-    return <button onClick={() => { setVisible(!visible) }}>{children}</button>
+    return <button onClick={handleClick}>{children}</button>
 }
 Keybindings.Pairs = function KeybindingsPair({ children, ...props }) {
     const { visible } = useContext(KeybindContext)
