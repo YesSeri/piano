@@ -42,7 +42,7 @@ const LargePiano = ({ sampler }) => {
     }
     const handleMouseDown = (e) => {
       const { note } = e.target.dataset
-      if(!note) return
+      if (!note) return
       setClicked(note)
       sampler.triggerAttack(note)
     }
@@ -68,52 +68,55 @@ const LargePiano = ({ sampler }) => {
 }
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
 const useActiveNoteHandler = (sampler) => {
-  const [notes, setNotes] = useState(new Set())
+  const [, setNotes] = useState([])
+  const noteRef = React.useRef([])
   useEffect(() => {
-    const handleKeyDown = ({ key }) => {
+    const handleKeyDown = ({ key, repeat }) => {
       const note = translation[key]
-      if (notes.has(note) || !note) return
-      setNotes(new Set([...notes, note]));
+      if (!note || repeat || noteRef.current.includes(note)) return;
+      // I have to do it like this. If I use usestate here instead of ref it will remove and add the eventlisteners every time i click. This means if I release two keys at the same time the eventlistener for one of them might get removed by releasing the other key, and the website wont register the release of the key. I only use setNotes to trigger a rerender, it doesn't actually get used for anything else. 
+      noteRef.current = [...noteRef.current, note]
+      setNotes(noteRef.current)
       sampler.triggerAttack(note)
-    };
+    }
     const handleKeyUp = ({ key }) => {
       const note = translation[key]
-      setNotes(new Set([...notes].filter(k => k !== note)));
+      noteRef.current = noteRef.current.filter(k => k !== note)
+      setNotes(noteRef.current)
       sampler.triggerRelease(note)
-    };
-
-    // In here so I can use dependency array so the closure never is stale.
+    }
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [sampler, notes]);
+  }, [sampler])
   useEffect(() => {
     const handleTouchStart = (e) => {
       e.preventDefault()
       const { note } = e.target.dataset
-      setNotes(new Set([...notes, note]));
+      noteRef.current = [...noteRef.current, note]
+      setNotes(noteRef.current);
       sampler.triggerAttack(note)
     }
 
     const handleTouchEnd = (e) => {
       const { note } = e.target.dataset
-      setNotes(new Set([...notes].filter(k => k !== note)));
+      noteRef.current = noteRef.current.filter(k => k !== note)
+      setNotes(noteRef.current)
       sampler.triggerRelease(note)
     }
     const piano = document.getElementById('piano-large')
-    // I need to add eventlistener here because I need to set it to passive, so I can prevent default.
+    // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
     return () => {
       piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
       document.removeEventListener('touchend', handleTouchEnd);
     }
-  }, [sampler, notes])
-  return [...notes]
+  }, [sampler])
+  return noteRef.current
 }
 
 export default LargePiano
