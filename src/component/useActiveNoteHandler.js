@@ -45,7 +45,7 @@ const useActiveNoteHandler = (sampler, translation) => {
       setNotes(noteRef.current)
       sampler.triggerRelease(note)
     }
-    const piano = document.getElementById('piano-small')
+    const piano = document.getElementsByClassName('piano')[0]
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);

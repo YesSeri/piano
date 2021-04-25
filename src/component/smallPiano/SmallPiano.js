@@ -37,7 +37,7 @@ const SmallPiano = ({ sampler }) => {
 
 
   return (
-    <div id='piano-small' >
+    <div className='piano piano-small' >
       <svg id='piano-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.196 32.279" preserveAspectRatio="none">
         {smallKeys.map(({ id, note, color, d }) => createPath(id, note, color, d))}
       </svg>
