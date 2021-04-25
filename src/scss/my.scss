@@ -24,6 +24,7 @@ html {
     border-bottom: solid 1px black;
     padding: 10px;
     &__text {
+        font-size: 3.5em;
         color: #000;
         margin: 0px;
     }
@@ -50,7 +51,7 @@ html {
                 @media screen and(max-width: 700px) {
                     font-size: 2.6em;
                 }
-                font-size: 3.5em;
+                font-size: 3.2em;
             }
             p {
                 margin: 10px 10px;
@@ -153,24 +154,27 @@ html {
         align-items: center;
         justify-content: center;
         &__text {
-            padding: 10px;
-            background-color: #444;
+            padding: 15px 10px 10px 10px;
+            background-color: #222;
             color: white;
+            font-size: 2em;
             border-radius: 20px;
         }
     }
 }
 .keybinding {
     @include responsive-width;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     border-top: solid 1px black;
     border-left: solid 1px black;
     &__pair {
+        display:grid;
+        align-items: center;
+        height:60px;
         border-bottom: solid 1px black;
         border-right: solid 1px black;
-        &__key {
-        }
     }
     &__pair:last-child {
         border: none;
@@ -184,8 +188,11 @@ html {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+.hidden {
+    display: none;
+}
 .input-container {
-    margin: 10px;
+    margin: 0 0 7px 0;
 }
 .app-container {
     margin: auto;
