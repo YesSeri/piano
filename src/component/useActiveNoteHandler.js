@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
 const useActiveNoteHandler = (sampler, translation) => {
   const [, setNotes] = useState([])
   const noteRef = React.useRef([])
+  const touchRef = React.useRef([])
   useEffect(() => {
     const handleKeyDown = ({ key, repeat }) => {
       const note = translation[key]
@@ -26,34 +27,58 @@ const useActiveNoteHandler = (sampler, translation) => {
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, [sampler, translation])
+  function touchNoteInfo({ identifier }, note) {
+    return { note, identifier }
+  }
   useEffect(() => {
     const handleTouchStart = (e) => {
       e.preventDefault()
       const { note } = e.target.dataset
-      noteRef.current = [...noteRef.current, note]
-      setNotes(noteRef.current);
+      const touchInfo = touchNoteInfo(e.changedTouches[0], note)
+      touchRef.current = [...touchRef.current, touchInfo]
+      console.log(touchRef.current);
+      setNotes(touchRef.current);
       sampler.triggerAttack(note)
     }
 
     const handleTouchEnd = (e) => {
       // Prevent default stops the clicking of buttons, like keybinding and enter fullscreen. If noteRef is larger than 0 I am currently clicking piano buttons, and then I want to stop default.
-      if (noteRef.current.length > 0) {
+      if (touchRef.current.length > 0) {
         e.preventDefault()
       }
       const { note } = e.target.dataset
-      noteRef.current = noteRef.current.filter(k => k !== note)
-      setNotes(noteRef.current)
+      touchRef.current = touchRef.current.filter(k => k.note !== note)
+      setNotes(...touchRef.current)
       sampler.triggerRelease(note)
+    }
+    // Handlemove in a similar vein to this https://developer.mozilla.org/en-US/docs/Web/API/Touch_events under handleMove
+    const handleTouchMove = (e) => {
+      e.preventDefault();
+      const changedTouch = e.changedTouches[0]
+      const x = changedTouch.clientX
+      const y = changedTouch.clientY
+      const ds = document.elementFromPoint(x, y).dataset
+      const note = touchNoteInfo(changedTouch, ds.note)
+      const prevNote = touchRef.current.find(el => el.identifier === note.identifier)
+      console.log({ note, prevNote });
+      if (note.note !== prevNote.note) {
+        sampler.triggerAttack(note.note)
+        sampler.triggerRelease(prevNote.note)
+        touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
+        touchRef.current = [...touchRef.current, note]
+      }
     }
     const piano = document.getElementsByClassName('piano')[0]
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
+    piano.addEventListener('touchmove', handleTouchMove);
     return () => {
       piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
       document.removeEventListener('touchend', handleTouchEnd);
+      piano.removeEventListener('touchmove', handleTouchMove);
     }
   }, [sampler])
-  return noteRef.current
+  return [...touchRef.current.map(t => t.note), ...noteRef.current]
 }
 export default useActiveNoteHandler;
