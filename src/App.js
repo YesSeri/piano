@@ -1,6 +1,6 @@
 import './scss/my.scss'
 import React, { useState } from 'react'
-// import Header from './component/Header.js'
+import Header from './component/Header.js'
 import Title from './component/Title.js'
 import Overlay from './component/Overlay.js'
 import Keybindings from './component/Keybindings'
@@ -40,7 +40,7 @@ function App() {
   return (
     <div className="app-container">
       <Title />
-      {/* <Header></Header> */}
+      <Header></Header>
       <MainContainer />
       <Keybindings>
         <Keybindings.Button>Show Keybindings</Keybindings.Button>
