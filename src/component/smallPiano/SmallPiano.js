@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { smallKeys, translation } from './data';
 import useActiveNoteHandler from '../useActiveNoteHandler';
 import useMouseClicker from '../useMouseClicker';
 const SmallPiano = ({ sampler }) => {
-  const [clicked, released]  = useMouseClicker();
+  const [clicked, released] = useMouseClicker();
   const activeKeys = useActiveNoteHandler(sampler, translation)
   const createPath = (id, note, color, d) => {
     return <path

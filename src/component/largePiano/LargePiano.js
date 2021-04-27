@@ -1,50 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { largeKeys, translation } from './data'
 import useActiveNoteHandler from '../useActiveNoteHandler';
+import useMouseClicker from '../useMouseClicker';
 
 
 const LargePiano = ({ sampler }) => {
-  const [clicked, setClicked] = useState('')
+  const [clicked, released] = useMouseClicker();
   const activeKeys = useActiveNoteHandler(sampler, translation)
-
   const createPath = (id, note, color, d) => {
     return <path
       key={id}
       data-note={note}
       onContextMenu={(e) => e.preventDefault()}
-      className={`${color}-key piano-key ${activeKeys.includes(note) ? 'active' : ''}`} d={d}
+      className={`${color}-key piano-key ${activeKeys.includes(note) || clicked === note ? 'active' : ''}`} d={d}
     />
   }
-  // These two gets highlighted using pseudoclass instead of .active class.
+
   useEffect(() => {
-    const handleMouseUp = (e) => {
-      console.log(e);
-      sampler.triggerRelease(clicked)
-    }
-
-    const handleMouseMove = (e) => {
-      console.log(e);
-    }
-    const handleMouseDown = (e) => {
-      console.log(e);
-      const { note } = e.target.dataset
-      if (!note) return
-      setClicked(note)
-      sampler.triggerAttack(note)
-    }
-
-    // Here instead of in path because I mouse sometimes get released not over the clicked note.
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    }
+    if (clicked == null) return
+    sampler.triggerAttack(clicked)
   }, [sampler, clicked])
-
-
+  useEffect(() => {
+    if (released == null) return
+    sampler.triggerRelease(released)
+  }, [sampler, released])
 
   return (
     <div className='piano piano-large' >

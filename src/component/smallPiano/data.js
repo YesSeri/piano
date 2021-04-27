@@ -1,10 +1,19 @@
-class KeyInfo {
-    constructor(id, note, color, d) {
-        this.id = id;
-        this.note = note;
-        this.color = color;
-        this.d = d;
-    }
+import KeyInfo from '../../helper/KeyInfo'
+
+export const translation = {
+    'q': 'C2',
+    'w': 'D2',
+    'e': 'E2',
+    'r': 'F2',
+    't': 'G2',
+    'y': 'A2',
+    'u': 'B2',
+    'i': 'C3',
+    '2': 'C#2',
+    '3': 'D#2',
+    '5': 'F#2',
+    '6': 'G#2',
+    '7': 'A#2',
 }
 
 export const smallKeys = [
@@ -22,19 +31,3 @@ export const smallKeys = [
     new KeyInfo('gs2-small', 'G#2', 'black', "M57.415.265v16.8c0 .547-.472.988-1.059.988h-6.35c-.586 0-1.058-.44-1.058-.988V.265z"),
     new KeyInfo('as2-small', 'A#2', 'black', "M67.998.265v16.8c0 .547-.472.988-1.058.988h-6.35c-.587 0-1.059-.44-1.059-.988V.265z"),
 ]
-
-export const translation = {
-    'q': 'C2',
-    'w': 'D2',
-    'e': 'E2',
-    'r': 'F2',
-    't': 'G2',
-    'y': 'A2',
-    'u': 'B2',
-    'i': 'C3',
-    '2': 'C#2',
-    '3': 'D#2',
-    '5': 'F#2',
-    '6': 'G#2',
-    '7': 'A#2',
-}

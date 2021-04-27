@@ -22,7 +22,6 @@ export default function useMouseClicker(sampler) {
                 const { note } = e.target.dataset
                 const prevNote = clickedRef.current;
                 if(note !== prevNote){
-                    console.log({note, prevNote});
                     clickedRef.current = note;
                     releasedRef.current = prevNote;
                     setClicked(note)

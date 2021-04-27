@@ -1,32 +1,25 @@
-class KeyInfo {
-    constructor(id, note, color, d) {
-        this.id = id;
-        this.note = note;
-        this.color = color;
-        this.d = d;
-    }
-}
+import KeyInfo from '../../helper/KeyInfo'
 
 export const translation = {
-  'c': 'G1',
-  'v': 'A1',
-  'b': 'B1',
-  'q': 'C2',
-  'w': 'D2',
-  'e': 'E2',
-  'r': 'F2',
-  't': 'G2',
-  'y': 'A2',
-  'u': 'B2',
-  'i': 'C3',
-  'o': 'D3',
-  'f': 'G#1',
-  'g': 'A#1',
-  '2': 'C#2',
-  '3': 'D#2',
-  '5': 'F#2',
-  '6': 'G#2',
-  '7': 'A#2',
+    'c': 'G1',
+    'v': 'A1',
+    'b': 'B1',
+    'q': 'C2',
+    'w': 'D2',
+    'e': 'E2',
+    'r': 'F2',
+    't': 'G2',
+    'y': 'A2',
+    'u': 'B2',
+    'i': 'C3',
+    'o': 'D3',
+    'f': 'G#1',
+    'g': 'A#1',
+    '2': 'C#2',
+    '3': 'D#2',
+    '5': 'F#2',
+    '6': 'G#2',
+    '7': 'A#2',
 }
 const data = [
     ['g1', 'G1', 'white', "M10.848.265v31.75H1.323c-.794 0-1.058-.265-1.058-1.059V.265z"],

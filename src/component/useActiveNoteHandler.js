@@ -54,7 +54,6 @@ const useActiveNoteHandler = (sampler, translation) => {
         const dataset = getDataset(changedTouch)
         if (dataset === undefined) return;
         const note = touchNoteInfo(changedTouch, dataset.note)
-        console.log(note);
         touchRef.current = touchRef.current.filter(k => k.note !== note.note)
         setNotes(...touchRef.current)
         sampler.triggerRelease(note.note)
@@ -68,7 +67,6 @@ const useActiveNoteHandler = (sampler, translation) => {
       return dataset
     }
     const handleTouchMove = (e) => {
-      e.preventDefault();
       for (const changedTouch of e.changedTouches) {
 
         const dataset = getDataset(changedTouch)
@@ -76,7 +74,6 @@ const useActiveNoteHandler = (sampler, translation) => {
         const note = touchNoteInfo(changedTouch, dataset.note)
         const prevNote = touchRef.current.find(el => el.identifier === note.identifier) || { note: undefined, identifier: note.identifier };
         if (note.note !== prevNote.note) {
-          console.log('note', note, 'prev', prevNote);
           touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
           touchRef.current = [...touchRef.current, note]
           if (note.note != null) {
@@ -89,15 +86,21 @@ const useActiveNoteHandler = (sampler, translation) => {
         }
       }
     }
+
+    const removeScroll = (e) => {
+      e.preventDefault();
+    }
     const piano = document.getElementsByClassName('piano')[0]
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    piano.addEventListener('touchmove', removeScroll, { passive: false });
     return () => {
       piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('touchmove', handleTouchMove, { passive: false });
+      piano.addEventListener('touchmove', removeScroll, { passive: false });
     }
   }, [sampler])
   return [...touchRef.current.map(t => t.note), ...noteRef.current]
