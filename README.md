@@ -11,7 +11,7 @@ Works with touch, mouse or keyboard.
 
 To deploy this project run
 
-I use gh-pages to use this in production for now. An dev dependency called `gh-pages` helps me deploy
+I use gh-pages to use this in production for now. A dev dependency called `gh-pages` helps me deploy
 
 ```bash
   npm run deploy

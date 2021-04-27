@@ -50,15 +50,16 @@ const useActiveNoteHandler = (sampler, translation) => {
       if (touchRef.current.length > 0) {
         e.preventDefault()
       }
-      e.preventDefault();
-      const changedTouch = e.changedTouches[0]
-      const dataset = getDataset(changedTouch)
-      if (dataset === undefined) return;
-      const note = touchNoteInfo(changedTouch, dataset.note)
-      console.log(note);
-      touchRef.current = touchRef.current.filter(k => k.note !== note.note)
-      setNotes(...touchRef.current)
-      sampler.triggerRelease(note.note)
+      for (const changedTouch of e.changedTouches) {
+        const dataset = getDataset(changedTouch)
+        if (dataset === undefined) return;
+        const note = touchNoteInfo(changedTouch, dataset.note)
+        console.log(note);
+        touchRef.current = touchRef.current.filter(k => k.note !== note.note)
+        setNotes(...touchRef.current)
+        sampler.triggerRelease(note.note)
+
+      }
     }
     // Handlemove in a similar vein to this https://developer.mozilla.org/en-US/docs/Web/API/Touch_events under handleMove
     const getDataset = (changedTouch) => {
@@ -68,22 +69,24 @@ const useActiveNoteHandler = (sampler, translation) => {
     }
     const handleTouchMove = (e) => {
       e.preventDefault();
-      const changedTouch = e.changedTouches[0]
-      const dataset = getDataset(changedTouch)
-      if (dataset === undefined) return;
-      const note = touchNoteInfo(changedTouch, dataset.note)
-      const prevNote = touchRef.current.find(el => el.identifier === note.identifier) || { note: undefined, identifier: note.identifier };
-      if (note.note !== prevNote.note) {
-        console.log('note', note, 'prev', prevNote);
-        touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
-        touchRef.current = [...touchRef.current, note]
-        if (note.note != null) {
-          sampler.triggerAttack(note.note)
+      for (const changedTouch of e.changedTouches) {
+
+        const dataset = getDataset(changedTouch)
+        if (dataset === undefined) return;
+        const note = touchNoteInfo(changedTouch, dataset.note)
+        const prevNote = touchRef.current.find(el => el.identifier === note.identifier) || { note: undefined, identifier: note.identifier };
+        if (note.note !== prevNote.note) {
+          console.log('note', note, 'prev', prevNote);
+          touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
+          touchRef.current = [...touchRef.current, note]
+          if (note.note != null) {
+            sampler.triggerAttack(note.note)
+          }
+          if (prevNote.note != null) {
+            sampler.triggerRelease(prevNote.note)
+          }
+          setNotes(touchRef.current)
         }
-        if (prevNote.note != null) {
-          sampler.triggerRelease(prevNote.note)
-        }
-        setNotes(touchRef.current)
       }
     }
     const piano = document.getElementsByClassName('piano')[0]
