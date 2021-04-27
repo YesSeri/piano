@@ -36,7 +36,6 @@ const useActiveNoteHandler = (sampler, translation) => {
       const { note } = e.target.dataset
       const touchInfo = touchNoteInfo(e.changedTouches[0], note)
       touchRef.current = [...touchRef.current, touchInfo]
-      console.log(touchRef.current);
       setNotes(touchRef.current);
       sampler.triggerAttack(note)
     }
@@ -46,10 +45,18 @@ const useActiveNoteHandler = (sampler, translation) => {
       if (touchRef.current.length > 0) {
         e.preventDefault()
       }
-      const { note } = e.target.dataset
-      touchRef.current = touchRef.current.filter(k => k.note !== note)
-      setNotes(...touchRef.current)
-      sampler.triggerRelease(note)
+      const changedTouch = e.changedTouches[0]
+      const x = changedTouch.clientX
+      const y = changedTouch.clientY
+      try {
+        const ds = document.elementFromPoint(x, y).dataset
+        const note = touchNoteInfo(changedTouch, ds.note)
+        console.log(note);
+        touchRef.current = touchRef.current.filter(k => k.note !== note.note)
+        setNotes(...touchRef.current)
+        sampler.triggerRelease(note.note)
+      } catch (error) {
+      }
     }
     // Handlemove in a similar vein to this https://developer.mozilla.org/en-US/docs/Web/API/Touch_events under handleMove
     const handleTouchMove = (e) => {
@@ -60,12 +67,18 @@ const useActiveNoteHandler = (sampler, translation) => {
       const ds = document.elementFromPoint(x, y).dataset
       const note = touchNoteInfo(changedTouch, ds.note)
       const prevNote = touchRef.current.find(el => el.identifier === note.identifier)
-      console.log({ note, prevNote });
-      if (note.note !== prevNote.note) {
+      if (prevNote === undefined) return
+      if (note.note === undefined) {
+        console.log({ note, prevNote });
+        sampler.triggerRelease(prevNote.note)
+        touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
+        setNotes(touchRef.current)
+      } else if (note.note !== prevNote.note) {
         sampler.triggerAttack(note.note)
         sampler.triggerRelease(prevNote.note)
         touchRef.current = touchRef.current.filter(k => k.note !== prevNote.note)
         touchRef.current = [...touchRef.current, note]
+        setNotes(touchRef.current)
       }
     }
     const piano = document.getElementsByClassName('piano')[0]
