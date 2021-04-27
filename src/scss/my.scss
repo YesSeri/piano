@@ -85,11 +85,6 @@ html {
         }
     }
 
-    &:active {
-        transition: $fill-animation;
-        stroke: $active-stroke;
-        fill: $active-fill;
-    }
     &.active {
         transition: $fill-animation;
         stroke: $active-stroke;
