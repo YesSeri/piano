@@ -17,11 +17,16 @@ const LargePiano = ({ sampler }) => {
   }
   // These two gets highlighted using pseudoclass instead of .active class.
   useEffect(() => {
-    const handleMouseUp = () => {
+    const handleMouseUp = (e) => {
+      console.log(e);
       sampler.triggerRelease(clicked)
+    }
 
+    const handleMouseMove = (e) => {
+      console.log(e);
     }
     const handleMouseDown = (e) => {
+      console.log(e);
       const { note } = e.target.dataset
       if (!note) return
       setClicked(note)
@@ -30,9 +35,11 @@ const LargePiano = ({ sampler }) => {
 
     // Here instead of in path because I mouse sometimes get released not over the clicked note.
     window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     return () => {
       window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     }
   }, [sampler, clicked])
