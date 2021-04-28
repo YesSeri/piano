@@ -5,11 +5,9 @@ const Title = () => {
 
     return (<div className='title'>
         <h1 className='title__text'>
-            <a href="/">
-                <Link to='/'>
-                    Pianisto
-                </Link>
-            </a>
+            <Link to='/'>
+                Pianisto
+            </Link>
         </h1>
     </div>)
 }
