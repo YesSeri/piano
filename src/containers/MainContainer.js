@@ -9,7 +9,7 @@ const MainContainer = () => {
     // const [octaveHigher, setOctaveHigher] = useState(false);
     return (
         <div>
-            <Piano low="G3" high="G4"></Piano>
+            <Piano low="C3" high="G5"></Piano>
             {/* <LazyPianoContainer largePiano={largePiano} />
             <KeybindingsContainer />
             <InputContainer largePiano={largePiano} setLargePiano={setLargePiano} /> */}

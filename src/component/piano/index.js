@@ -11,22 +11,47 @@ const keyOrder = [
 ]
 
 const Piano = ({ low, high }) => {
-  const number = numberOfWhiteKeys(low, high)
-  console.log({ low, high, number });
-  const keys = createKeys(low, number)
+  const keys = createKeys(low, high)
+  const whiteKeys = createWhiteKeys()
+  const blackKeys = createBlackKeys()
+  console.log(blackKeys);
+  function createWhiteKeys() {
+    return keys.map((key, i) => {
+      if (i === 0) {
+        return <path key={key.note} className="white-key piano-key" d={`m 0 0 v 107 a 3 3 0 0 0 3 3 h 27 v -110 z`}></path>
+      } else if (i === keys.length - 1) {
+        return <path key={key.note} className="white-key piano-key" d={`m ${i * 30} 0 v 110 h 27 a 3 3 0 0 0 3 -3 v -107 z `}></path>
+      } else {
+        return <path key={key.note} className="white-key piano-key" d={`m ${i * 30} 0 v 110 h 30 v -110 z`}></path>
+      }
+    })
+  }
+  function createBlackKeys() {
+    return keys.map((key, i) => {
+      if (i === keys.length - 1) {
+        return null;
+      }
+      else if (key.hasNeighbour) {
+        return <path key={key.note.substr(0, 1) + '#' + key.note.substr(1)} className="black-key piano-key" d={`m ${18 + 30 * i} 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z`}></path>
+      }
+      else {
+        return null
+      }
+    })
+  }
   return (
-    <div>
+    <div style={{maxWidth: '500px'}}>
       A PIANO
-      <svg version="1.1" baseProfile="full" viewBox="-1 -1 132 52" xmlns="http://www.w3.org/2000/svg">
-        <path stroke='black' strokeWidth="0.2" fill='white' d="m 60 0 v 110 h 27 a 3 3 0 0 0 3 -3 v -107 z " />
-        <path stroke='black' strokeWidth="0.2" fill='black'
-          d="m 18 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z " />
+      <svg version="1.1" baseProfile="full" viewBox={`-1 -1 ${keys.length * 30 + 2} 112`} xmlns="http://www.w3.org/2000/svg">
+        {whiteKeys}
+        {blackKeys}
       </svg>
     </div>
   )
 }
 
-function createKeys(low, number) {
+function createKeys(low, high) {
+  const number = numberOfWhiteKeys(low, high)
   const blackRightNeighbour = {
     C: true,
     D: true,
@@ -45,8 +70,7 @@ function createKeys(low, number) {
     keys.push({ note: (keyOrder[idx] + (parseInt(lowNumber) + parseInt(i / 7))), hasNeighbour })
     idx = idx > 5 ? 0 : idx + 1
   }
-  console.log(keys);
-
+  return keys;
 }
 
 function numberOfWhiteKeys(low, high) {
