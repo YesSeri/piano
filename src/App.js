@@ -1,28 +1,49 @@
 import './scss/my.scss'
-import React, { useState } from 'react'
-import Header from './component/Header.js'
-import Title from './component/Title.js'
-import KeybindingsContainer from './containers/KeybindingsContainer'
-import InputContainer from './containers/InputContainer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import React from 'react'
+import Header from './component/Header'
+import Title from './component/Title'
+import About from './component/about'
+import Questions from './component/questions'
+import Contact from './component/contact'
+import Contribute from './component/contribute'
 import FooterContainer from './containers/FooterContainer'
-import LazyPianoContainer from './containers/LazyPianoContainer'
+import MainContainer from './containers/MainContainer'
+
 
 function App() {
-  // const [octaveHigher, setOctaveHigher] = useState(false);
-  const [largePiano, setLargePiano] = useState(false)
-
   return (
     <div className="app-container">
-      <div>
-        <Title />
-        <Header />
-        <LazyPianoContainer largePiano={largePiano} />
-        <KeybindingsContainer />
-        <InputContainer largePiano={largePiano} setLargePiano={setLargePiano} />
-      </div>
-      <div>
-        <FooterContainer />
-      </div>
+      <Router>
+        <div>
+          <Title />
+          <Header />
+          <Switch >
+            <Route path='/contact'>
+              <Contact />
+            </Route>
+            <Route path='/faq'>
+              <Questions />
+            </Route>
+            <Route path='/about'>
+              <About />
+            </Route>
+            <Route path='/contribute'>
+              <Contribute />
+            </Route>
+            <Route path='/'>
+              <MainContainer />
+            </Route>
+          </Switch>
+        </div>
+        <div>
+          <FooterContainer />
+        </div>
+      </Router>
     </div>
   );
 }

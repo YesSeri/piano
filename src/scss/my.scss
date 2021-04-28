@@ -28,12 +28,19 @@ html {
         color: #000;
         margin: 0px;
     }
+    a {
+        color: inherit; /* blue colors for links too */
+        text-decoration: inherit; /* no underline */
+    }
 }
 .header {
     @include responsive-width;
     &__bg {
         border-radius: 0 0 20px 20px;
         background: $mainColor;
+        @media screen and(max-width: 700px) {
+            border-radius: 0 0 10px 10px;
+        }
     }
     display: flex;
     flex-wrap: wrap;
@@ -61,11 +68,13 @@ html {
             }
         }
         svg {
+            padding: 5px 0;
             margin: auto;
             max-width: 300px;
         }
         @media screen and(max-width: 700px) {
             width: 100%;
+            border-radius: 0;
         }
     }
 }
@@ -104,7 +113,8 @@ html {
     @include responsive-width;
     max-width: 700px;
 }
-.fullscreen-enabled .piano-small {
+.fullscreen-enabled .piano-small,
+.fullscreen-enabled .piano-large {
     & svg {
         width: 100%;
         height: 100%;
@@ -117,16 +127,6 @@ html {
 .piano-large {
     @include responsive-width;
     max-width: 1200px;
-}
-.fullscreen-enabled .piano-large {
-    & svg {
-        width: 100%;
-        height: 100%;
-    }
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    margin: 0;
 }
 .overlaySmall {
     @include responsive-width;
@@ -208,7 +208,20 @@ html {
     &__pane {
         width: 50%;
         @media screen and (max-width: 600px) {
+            border-radius: 0;
             width: 100%;
+        }
+        color: #ffc017;
+        a {
+            color: #ffc017;
+            text-decoration: inherit;
+        }
+    }
+    &__bg {
+        background-color: #222;
+        border-radius: 20px 20px 0px 0;
+        @media screen and (max-width: 600px) {
+            border-radius: 0;
         }
     }
 }

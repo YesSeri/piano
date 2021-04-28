@@ -3,6 +3,9 @@ import React from 'react'
 const Footer = ({ children, ...restProps }) => (
     <div className="footer" {...restProps}>{children}</div>
 )
+Footer.Background = ({ children, ...restProps }) => (
+    <div className="footer__bg" {...restProps}>{children}</div>
+)
 
 Footer.Pane = ({ children, ...restProps }) =>
 (
