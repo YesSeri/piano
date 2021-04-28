@@ -191,8 +191,24 @@ html {
 }
 .app-container {
     margin: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #fullscreen-btn {
     margin-bottom: 5px;
+}
+
+.footer {
+    @include responsive-width;
+    display: flex;
+    flex-wrap: wrap;
+    &__pane {
+        width: 50%;
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
+    }
 }

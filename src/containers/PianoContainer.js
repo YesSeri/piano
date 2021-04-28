@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Sampler, Buffer } from 'tone'
-import SmallPiano from "./smallPiano/SmallPiano";
-import { g3, a3, c4, ds4, fs4, a4, c5, ds5 } from './audio/index'
-import LargePiano from './largePiano/LargePiano';
+import SmallPiano from "../component/smallPiano/SmallPiano";
+import { g3, a3, c4, ds4, fs4, a4, c5, ds5 } from '../assets/audio'
+import LargePiano from '../component/largePiano/LargePiano';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 const g3b = new Buffer(g3)
 const a3b = new Buffer(a3)

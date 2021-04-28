@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { smallKeys, translation } from './data';
-import useActiveNoteHandler from '../useActiveNoteHandler';
-import useMouseClicker from '../useMouseClicker';
+import useActiveNoteHandler from '../../helper/useActiveNoteHandler';
+import useMouseClicker from '../../helper/useMouseClicker';
 const SmallPiano = ({ sampler }) => {
   const [clicked, released] = useMouseClicker();
   const activeKeys = useActiveNoteHandler(sampler, translation)
