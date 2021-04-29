@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Sampler, Buffer } from 'tone'
 import SmallPiano from "../component/smallPiano/SmallPiano";
 import { g3, a3, c4, ds4, fs4, a4, c5, ds5 } from '../assets/audio'
-import LargePiano from '../component/largePiano/LargePiano';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import Piano from '../component/piano'
 const g3b = new Buffer(g3)
 const a3b = new Buffer(a3)
 const c4b = new Buffer(c4)
@@ -12,7 +12,7 @@ const fs4b = new Buffer(fs4)
 const a4b = new Buffer(a4)
 const c5b = new Buffer(c5)
 const ds5b = new Buffer(ds5)
-const Container = ({ largePiano, octaveHigher, children, ...props }) => {
+const Container = ({ high, low, children, ...props }) => {
   const [loaded, setLoaded] = useState(false)
   const handle = useFullScreenHandle();
   const sampler = new Sampler({
@@ -33,13 +33,6 @@ const Container = ({ largePiano, octaveHigher, children, ...props }) => {
     }
   }).toDestination();
 
-  const Piano = () => (loaded ?
-    largePiano ?
-      <LargePiano sampler={sampler} />
-      :
-      <SmallPiano sampler={sampler} />
-    : null
-  )
   const handleClick = () => {
     handle.enter()
   }
@@ -47,7 +40,9 @@ const Container = ({ largePiano, octaveHigher, children, ...props }) => {
   return (
     <div className="piano-container" {...props}>
       <FullScreen handle={handle}>
-        <Piano />
+        {loaded ?
+          <Piano sampler={sampler} low={low} high={high} />
+          : null}
       </FullScreen>
       <button id="fullscreen-btn" onClick={handleClick}>
         Enter fullscreen
