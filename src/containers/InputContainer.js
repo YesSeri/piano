@@ -12,9 +12,12 @@ const InputContainer = ({ setLow, setHigh }) => {
     return (
         <div className="input-container">
             <div>
-                <label htmlFor="low">Lowest Note</label>
+                <label htmlFor="low">Low</label>
                 <select onChange={handleLowChange} id="low" name="low">
-                    <option value="C2">C2</option>
+                    <option value="G1">G1</option>
+                    <option value="A1">A1</option>
+                    <option value="B1">B1</option>
+                    <option value="C2" selected>C2</option>
                     <option value="D2">D2</option>
                     <option value="E2">E2</option>
                     <option value="F2">F2</option>
@@ -25,7 +28,7 @@ const InputContainer = ({ setLow, setHigh }) => {
                 </select>
             </div>
             <div>
-                <label htmlFor="high">Highest Note</label>
+                <label htmlFor="high">High</label>
                 <select onChange={handleHighChange} id="high" name="high">
                     <option value="C3">C3</option>
                     <option value="D3">D3</option>
