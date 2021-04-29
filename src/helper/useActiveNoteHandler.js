@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import translation from './translation'
 
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
-const useActiveNoteHandler = (sampler, translation) => {
+const useActiveNoteHandler = (sampler) => {
   const [, setNotes] = useState([])
   const noteRef = React.useRef([])
   const touchRef = React.useRef([])
   useEffect(() => {
-    const handleKeyDown = ({ key, repeat }) => {
-      const note = translation[key]
+    const handleKeyDown = ({ code, repeat }) => {
+      const note = translation[code]
       if (!note || repeat || noteRef.current.includes(note)) return;
       // I have to do it like this. If I use usestate here instead of ref it will remove and add the eventlisteners every time i click. This means if I release two keys at the same time the eventlistener for one of them might get removed by releasing the other key, and the website wont register the release of the key. I only use setNotes to trigger a rerender, it doesn't actually get used for anything else. 
       noteRef.current = [...noteRef.current, note]
       setNotes(noteRef.current)
       sampler.triggerAttack(note)
     }
-    const handleKeyUp = ({ key }) => {
-      const note = translation[key]
+    const handleKeyUp = ({ code }) => {
+      const note = translation[code]
       noteRef.current = noteRef.current.filter(k => k !== note)
       setNotes(noteRef.current)
       sampler.triggerRelease(note)
@@ -26,7 +27,7 @@ const useActiveNoteHandler = (sampler, translation) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [sampler, translation])
+  }, [sampler])
   useEffect(() => {
     function touchNoteInfo({ identifier }, note) {
       return { note, identifier }

@@ -1,44 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const InputContainer = ({ setLow, setHigh }) => {
-    const handleLowChange = (e) => {
-        console.log(e.target.value);
-        setLow(e.target.value)
+const sliderToNoteTranslation = [
+    'G1',
+    'A1',
+    'B1',
+    'C2',
+    'D2',
+    'E2',
+    'F2',
+    'G2',
+    'A2',
+    'B2',
+    'C3',
+    'D3',
+    'E3',
+    'F3',
+    'G3',
+    'A3',
+    'B3',
+    'C4',
+    'D4',
+    'E4',
+]
+const InputContainer = ({ setLowSlider, setHighSlider }) => {
+    const [lowValue, setLowValue] = useState(3)
+    const [highValue, setHighValue] = useState(10)
+    function handleLowSliderChange({ target: { value } }) {
+        const diff = highValue - lowValue
+        const newDiff = highValue - value
+        if (diff <= 4 && newDiff < diff) return
+        setLowValue(parseInt(value))
+        setLowSlider(sliderToNoteTranslation[value])
     }
-    const handleHighChange = (e) => {
-        console.log(e.target.value);
-        setHigh(e.target.value)
+    function handleHighSliderChange({ target: { value } }) {
+        const diff = highValue - lowValue
+        const newDiff = value - lowValue
+        if (diff <= 4 && newDiff < diff) return
+        setHighValue(parseInt(value))
+        setHighSlider(sliderToNoteTranslation[value])
     }
     return (
         <div className="input-container">
             <div>
-                <label htmlFor="low">Low</label>
-                <select onChange={handleLowChange} id="low" name="low">
-                    <option value="G1">G1</option>
-                    <option value="A1">A1</option>
-                    <option value="B1">B1</option>
-                    <option value="C2" selected>C2</option>
-                    <option value="D2">D2</option>
-                    <option value="E2">E2</option>
-                    <option value="F2">F2</option>
-                    <option value="G2">G2</option>
-                    <option value="A2">A2</option>
-                    <option value="B2">B2</option>
-                    <option value="C3">C3</option>
-                </select>
-            </div>
-            <div>
-                <label htmlFor="high">High</label>
-                <select onChange={handleHighChange} id="high" name="high">
-                    <option value="C3">C3</option>
-                    <option value="D3">D3</option>
-                    <option value="E3">E3</option>
-                    <option value="F3">F3</option>
-                    <option value="G3">G3</option>
-                    <option value="A3">A3</option>
-                    <option value="B3">B3</option>
-                    <option value="C4">C4</option>
-                </select>
+                <div>
+                    <label htmlFor="lowSlider">Low</label>
+                    <input onChange={handleLowSliderChange} id="lowSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={lowValue} step="1" />
+                </div>
+                <div>
+                    <label htmlFor="highSlider">High</label>
+                    <input onChange={handleHighSliderChange} id="highSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={highValue} step="1" />
+                </div>
             </div>
         </div>)
 }

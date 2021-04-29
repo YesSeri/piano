@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Sampler, Buffer } from 'tone'
-import SmallPiano from "../component/smallPiano/SmallPiano";
 import { g3, a3, c4, ds4, fs4, a4, c5, ds5 } from '../assets/audio'
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Piano from '../component/piano'
