@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/piano/static/css/main.cc207176.chunk.css",
-    "main.js": "/piano/static/js/main.f19976c1.chunk.js",
-    "main.js.map": "/piano/static/js/main.f19976c1.chunk.js.map",
-    "runtime-main.js": "/piano/static/js/runtime-main.c09a6b5f.js",
-    "runtime-main.js.map": "/piano/static/js/runtime-main.c09a6b5f.js.map",
-    "static/js/2.9635c946.chunk.js": "/piano/static/js/2.9635c946.chunk.js",
-    "static/js/2.9635c946.chunk.js.map": "/piano/static/js/2.9635c946.chunk.js.map",
-    "static/js/3.f767d31f.chunk.js": "/piano/static/js/3.f767d31f.chunk.js",
-    "static/js/3.f767d31f.chunk.js.map": "/piano/static/js/3.f767d31f.chunk.js.map",
-    "static/js/4.3036ca32.chunk.js": "/piano/static/js/4.3036ca32.chunk.js",
-    "static/js/4.3036ca32.chunk.js.map": "/piano/static/js/4.3036ca32.chunk.js.map",
+    "main.css": "/piano/static/css/main.8e7c8952.chunk.css",
+    "main.js": "/piano/static/js/main.85225ca1.chunk.js",
+    "main.js.map": "/piano/static/js/main.85225ca1.chunk.js.map",
+    "runtime-main.js": "/piano/static/js/runtime-main.28d67ca8.js",
+    "runtime-main.js.map": "/piano/static/js/runtime-main.28d67ca8.js.map",
+    "static/js/2.64c082ff.chunk.js": "/piano/static/js/2.64c082ff.chunk.js",
+    "static/js/2.64c082ff.chunk.js.map": "/piano/static/js/2.64c082ff.chunk.js.map",
+    "static/js/3.d01aa1aa.chunk.js": "/piano/static/js/3.d01aa1aa.chunk.js",
+    "static/js/3.d01aa1aa.chunk.js.map": "/piano/static/js/3.d01aa1aa.chunk.js.map",
+    "static/js/4.a2b4f8a7.chunk.js": "/piano/static/js/4.a2b4f8a7.chunk.js",
+    "static/js/4.a2b4f8a7.chunk.js.map": "/piano/static/js/4.a2b4f8a7.chunk.js.map",
     "index.html": "/piano/index.html",
-    "static/css/main.cc207176.chunk.css.map": "/piano/static/css/main.cc207176.chunk.css.map",
-    "static/js/2.9635c946.chunk.js.LICENSE.txt": "/piano/static/js/2.9635c946.chunk.js.LICENSE.txt",
-    "static/js/3.f767d31f.chunk.js.LICENSE.txt": "/piano/static/js/3.f767d31f.chunk.js.LICENSE.txt",
+    "static/css/main.8e7c8952.chunk.css.map": "/piano/static/css/main.8e7c8952.chunk.css.map",
+    "static/js/2.64c082ff.chunk.js.LICENSE.txt": "/piano/static/js/2.64c082ff.chunk.js.LICENSE.txt",
+    "static/js/3.d01aa1aa.chunk.js.LICENSE.txt": "/piano/static/js/3.d01aa1aa.chunk.js.LICENSE.txt",
     "static/media/1.g3.8f81a3b9.ogg": "/piano/static/media/1.g3.8f81a3b9.ogg",
     "static/media/12.fs4.d9071cbe.ogg": "/piano/static/media/12.fs4.d9071cbe.ogg",
     "static/media/15.a4.1f51ad50.ogg": "/piano/static/media/15.a4.1f51ad50.ogg",
@@ -23,12 +23,12 @@
     "static/media/3.a3.9c12f360.ogg": "/piano/static/media/3.a3.9c12f360.ogg",
     "static/media/6.c4.2377fed6.ogg": "/piano/static/media/6.c4.2377fed6.ogg",
     "static/media/9.ds4.fc86c751.ogg": "/piano/static/media/9.ds4.fc86c751.ogg",
-    "static/media/grand-piano.633674dd.svg": "/piano/static/media/grand-piano.633674dd.svg"
+    "static/media/grand-piano.e0d6fac0.svg": "/piano/static/media/grand-piano.e0d6fac0.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c09a6b5f.js",
-    "static/js/2.9635c946.chunk.js",
-    "static/css/main.cc207176.chunk.css",
-    "static/js/main.f19976c1.chunk.js"
+    "static/js/runtime-main.28d67ca8.js",
+    "static/js/2.64c082ff.chunk.js",
+    "static/css/main.8e7c8952.chunk.css",
+    "static/js/main.85225ca1.chunk.js"
   ]
 }
