@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import Piano from '../component/piano'
-import createSampler from '../helper/createSampler'
+import Piano from '.'
+import createSampler from '../../helper/createSampler'
 
 const Container = ({ high, low, children, ...props }) => {
   const [loaded, setLoaded] = useState(false)

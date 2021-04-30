@@ -124,7 +124,7 @@ html {
     @include responsive-width;
     max-height: 400px;
 }
-.overlaySmall {
+.overlay {
     @include responsive-width;
     margin-top: 10px;
     position: relative;
