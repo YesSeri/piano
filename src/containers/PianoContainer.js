@@ -6,22 +6,24 @@ import createSampler from '../helper/createSampler'
 const Container = ({ high, low, children, ...props }) => {
   const [loaded, setLoaded] = useState(false)
   const handle = useFullScreenHandle();
-  console.log('fn run')
-  const sampler = createSampler(() => setLoaded(true)); 
+  const sampler = createSampler(() => setLoaded(true));
+
   const handleClick = () => {
     handle.enter()
   }
 
   return (
     <div className="piano-container" {...props}>
-      <FullScreen handle={handle}>
-        {loaded ?
-          <Piano sampler={sampler} low={low} high={high} />
-          : null}
-      </FullScreen>
-      <button id="fullscreen-btn" onClick={handleClick}>
-        Enter fullscreen
-      </button>
+      {loaded ?
+        <>
+          <FullScreen handle={handle}>
+            <Piano sampler={sampler} low={low} high={high} />
+          </FullScreen>
+          <button id="fullscreen-btn" onClick={handleClick}>
+            Enter fullscreen
+          </button>
+        </>
+        : null}
     </div>
   )
 }
