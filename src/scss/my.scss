@@ -121,10 +121,11 @@ html {
     margin: 0;
 }
 
-@mixin piano() {
+@mixin piano {
     @include responsive-width;
+    max-height: 450px;
 }
-.piano{
+.piano {
     @include piano;
 }
 .overlay {
