@@ -13,7 +13,7 @@ const LazyPianoContainer = ({high, low}) => {
                 <PianoContainer high={high} low={low}/>
             </React.Suspense>
             :
-            <Overlay onClick={handleClick}>Click to load Piano</Overlay>
+            <Overlay high={high} low={low} onClick={handleClick}>Click to load Piano</Overlay>
     )
 }
 
