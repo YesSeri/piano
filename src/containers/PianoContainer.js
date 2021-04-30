@@ -11,7 +11,6 @@ const fs4b = new Buffer(fs4)
 const a4b = new Buffer(a4)
 const c5b = new Buffer(c5)
 const ds5b = new Buffer(ds5)
-
 const fs5b = new Buffer(fs5)
 const a5b = new Buffer(a5)
 const c6b = new Buffer(c6)
