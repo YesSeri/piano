@@ -13,18 +13,24 @@ const Container = ({ high, low, children, ...props }) => {
   }
 
   return (
-    <div className="piano-container" {...props}>
+    <>
+      <div className="piano-container" {...props}>
+        {loaded ?
+          <>
+            <FullScreen handle={handle}>
+              <Piano sampler={sampler} low={low} high={high} />
+            </FullScreen>
+          </>
+          : null}
+      </div>
       {loaded ?
-        <>
-          <FullScreen handle={handle}>
-            <Piano sampler={sampler} low={low} high={high} />
-          </FullScreen>
-          <button id="fullscreen-btn" onClick={handleClick}>
-            Enter fullscreen
-          </button>
-        </>
-        : null}
-    </div>
+        <button id="fullscreen-btn" onClick={handleClick}>
+          Enter fullscreen
+      </button>
+        :
+        null
+      }
+    </>
   )
 }
 

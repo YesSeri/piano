@@ -120,15 +120,16 @@ html {
     max-height: none;
     margin: 0;
 }
-.piano {
+
+@mixin piano() {
     @include responsive-width;
-    max-height: 400px;
+}
+.piano{
+    @include piano;
 }
 .overlay {
-    @include responsive-width;
-    margin-top: 10px;
+    @include piano;
     position: relative;
-    max-width: 700px;
     .white-key {
         fill: #3333;
     }

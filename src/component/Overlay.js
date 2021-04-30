@@ -49,10 +49,10 @@ const Overlay = ({ low, high, children, ...props }) => {
     }
     return (
         <div className='overlay' {...props} >
-            <svg version="1.1" baseProfile="full" id='overlay__svg' className="piano" viewBox={`-1 -1 ${whiteKeyInfo.length * 30 + 2} 112`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                {createWhiteKeys()}
-                {createBlackKeys()}
-            </svg>
+                <svg version="1.1" baseProfile="full" id='overlay__svg' viewBox={`-1 -1 ${whiteKeyInfo.length * 30 + 2} 112`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                    {createWhiteKeys()}
+                    {createBlackKeys()}
+                </svg>
             <div className='overlay__overlay'>
                 <div className='overlay__overlay__text'>
                     {children}
