@@ -53,7 +53,6 @@ const Piano = ({ sampler, low, high }) => {
       }
       else if (key.hasNeighbour) {
         return createKeyPath(id, note, 'black', `m ${18 + 30 * i} 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z`)
-
       }
       else {
         return null

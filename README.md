@@ -25,6 +25,7 @@ I use gh-pages to use this in production for now. A dev dependency called `gh-pa
 - [ ] Make an about page
 
 - [ ] Improve css for keybindings table
+  - Probably better to remove keybindings table and just added a button that displays keybinding and note on the piano keys.
 
 - [ ] Write unit tests
 

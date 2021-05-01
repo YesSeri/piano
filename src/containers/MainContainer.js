@@ -13,13 +13,13 @@ const MainContainer = () => {
     }
     return (
         <div>
-            <KeybindingsContainer />
             <InputContainer setLowSlider={setLowSlider} setHighSlider={setHighSlider} />
             {isClicked ?
                 <PianoContainer low={lowSlider} high={highSlider} />
                 :
                 <Overlay low={lowSlider} high={highSlider} onClick={handleClick}>Click to load Piano</Overlay>
             }
+            <KeybindingsContainer />
         </div>
     )
 }
