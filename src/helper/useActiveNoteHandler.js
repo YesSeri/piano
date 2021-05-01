@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import translation from './translation'
+import getTranslation from './getTranslation'
 
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
-const useActiveNoteHandler = (sampler) => {
+const useActiveNoteHandler = (sampler, low, high) => {
   const [, setNotes] = useState([])
   const noteRef = React.useRef([])
   const touchRef = React.useRef([])
+  const translation = getTranslation(high, low)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // This is to disable the quickfind on firefox
       if (e.code === 'Slash') {
         e.preventDefault();
       }
-      const note = translation[e.code]
+      const keyNotePair = translation.find(el => el.keycode === e.code)
+      if (keyNotePair === undefined) return
+      const note = keyNotePair.note;
       if (!note || e.repeat || noteRef.current.includes(note)) return;
       // I have to do it like this. If I use usestate here instead of ref it will remove and add the eventlisteners every time i click. This means if I release two keys at the same time the eventlistener for one of them might get removed by releasing the other key, and the website wont register the release of the key. I only use setNotes to trigger a rerender, it doesn't actually get used for anything else. 
       noteRef.current = [...noteRef.current, note]
       setNotes(noteRef.current)
       sampler.triggerAttack(note)
     }
-    const handleKeyUp = ({ code }) => {
-      const note = translation[code]
+    const handleKeyUp = (e) => {
+      const keyNotePair = translation.find(el => el.keycode === e.code)
+      if (keyNotePair === undefined) return
+      const note = keyNotePair.note;
       noteRef.current = noteRef.current.filter(k => k !== note)
       setNotes(noteRef.current)
       sampler.triggerRelease(note)
@@ -31,7 +36,7 @@ const useActiveNoteHandler = (sampler) => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [sampler])
+  }, [sampler, translation])
   useEffect(() => {
     function touchNoteInfo({ identifier }, note) {
       return { note, identifier }
