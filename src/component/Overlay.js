@@ -4,7 +4,8 @@ import createKeyInfo from '../helper/createKeyInfo';
 
 
 
-const Overlay = ({ low, high, children, ...props }) => {
+const Overlay = ({ low, high, disableText, children, ...props }) => {
+    console.log(disableText);
     const whiteKeyInfo = createKeyInfo(low, high)
     // The path is created here, if it is the first or last white key the left respectively the right corner should be rounded.
 
@@ -47,14 +48,17 @@ const Overlay = ({ low, high, children, ...props }) => {
             }
         })
     }
+    const showText = disableText ? { display: 'none' } : { display: 'flex' }
     return (
         <div className='overlay' {...props} >
-                <svg version="1.1" baseProfile="full" id='overlay__svg' viewBox={`-1 -1 ${whiteKeyInfo.length * 30 + 2} 112`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                    {createWhiteKeys()}
-                    {createBlackKeys()}
-                </svg>
-            <div className='overlay__overlay'>
-                <div className='overlay__overlay__text'>
+            <svg version="1.1" baseProfile="full" className='piano' viewBox={`-1 -1 ${whiteKeyInfo.length * 30 + 2} 112`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                {createWhiteKeys()}
+                {createBlackKeys()}
+            </svg>
+            <div className='overlay__cover'
+                style={showText}
+            >
+                <div className='overlay__cover__text'>
                     {children}
                 </div>
             </div>

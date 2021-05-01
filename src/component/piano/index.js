@@ -6,12 +6,11 @@ import createKeyInfo from '../../helper/createKeyInfo';
 
 
 
-const Piano = ({ sampler, low, high }) => {
+const Piano = ({ sampler, low, high, loaded }) => {
   const [clicked, released] = useMouseClicker();
   const activeKeys = useActiveNoteHandler(sampler)
   const whiteKeyInfo = createKeyInfo(low, high)
   // The path is created here, if it is the first or last white key the left respectively the right corner should be rounded.
-
 
   useEffect(() => {
     if (clicked == null) return
