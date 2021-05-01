@@ -19,8 +19,8 @@ const translation = {
     'KeyI': 'C4',
     'KeyO': 'D4',
     'KeyP': 'E4',
-    'BracketLeft': 'E4',
-    'BracketRight': 'E4',
+    'BracketLeft': 'F4',
+    'BracketRight': 'G4',
     'KeyS': 'G#1',
     'KeyD': 'A#1',
     'KeyG': 'C#2',
@@ -35,5 +35,6 @@ const translation = {
     'Digit7': 'A#3',
     'Digit9': 'C#4',
     'Digit0': 'D#4',
+    'Equal': 'F#4',
 }
 export default translation;

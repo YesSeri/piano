@@ -21,6 +21,8 @@ const sliderToNoteTranslation = [
     'C4',
     'D4',
     'E4',
+    'F4',
+    'G4',
 ]
 const InputContainer = ({ setLowSlider, setHighSlider }) => {
     const [lowValue, setLowValue] = useState(3)
