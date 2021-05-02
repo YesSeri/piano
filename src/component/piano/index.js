@@ -46,22 +46,22 @@ const Piano = ({ sampler, low, high, showKeyNames }) => {
       />
       {
         showKeyNames ?
-          createText(noteTranslation, showKeyNames, x, color)
+          createText(noteTranslation, x, color)
           :
           null
       }
     </g>
   }
-  function createText(noteTranslation, showKeyNames, x, color) {
+  function createText(noteTranslation, x, color) {
     return (
       color === 'white' ?
         <>
-          <text x={x + 11} y='90' className="svg-white-note-text">{noteTranslation.note}</text>
+          <text x={x + 13} y='90' className="svg-white-note-text">{noteTranslation.note.slice(0,1)}</text>
           <text x={x + 13} y='100' className="svg-white-translation-text">{noteTranslation.key}</text>
         </>
         :
         <>
-          <text x={x + 5} y='50' className='svg-black-note-text'>{noteTranslation.note}</text>
+          <text x={x + 7} y='50' className='svg-black-note-text'>{noteTranslation.note.slice(0,2)}</text>
           <text x={x + 9} y='60' className='svg-black-translation-text'>{noteTranslation.key}</text>
         </>
     )
