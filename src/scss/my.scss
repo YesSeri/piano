@@ -184,7 +184,10 @@ html {
                 font-size: 1.3em;
             }
         }
-    }
+        &__text:hover {
+            background-color: #111;
+        }
+    }   
 }
 .keybinding {
     @include responsive-width;
@@ -212,13 +215,38 @@ html {
 .hidden {
     display: none;
 }
-.input-container {
-    margin: 0 0 7px 0;
+.inputs {
+    @include responsive-width;
+    &__sliders {
+        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        @media screen and (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+        &__slider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width:100%;
+            padding: 0 8px;
+        }
+    }
+    label{
+        font-size: 1.1em;
+    }
     input {
-        width: 250px;
+        width: 80%;
         height: 48px;
+        @media screen and (max-width: 900px) {
+            width:100%;
+        }
+    }
+    &__show-info-btn{
+        margin: 0 0 9px 0;
     }
 }
+
 .app-container {
     margin: auto;
     height: 100vh;
@@ -248,7 +276,7 @@ html {
         }
     }
     &__bg {
-        background-color: #222;
+        background-color: #111;
         border-radius: 20px 20px 0px 0;
         @media screen and (max-width: 600px) {
             border-radius: 0;
@@ -288,13 +316,13 @@ html {
 }
 
 button {
-    border: none;
-    background-color: #222;
+    background-color: #333;
     color: white;
     font-size: 1.2em;
     font-family: inherit;
     cursor: pointer;
     padding: 0.1em 0.3em;
+    text-align: center;
 
     border: solid 2px #666;
     border-radius: 5px;
@@ -303,6 +331,12 @@ button {
     }
     &:hover {
         border: solid 2px #999;
-        background-color: #191919;
+        background-color: #111;
+    }
+    &:active {
+
+
+        border: solid 2px #ccc;
+        background-color: #000;
     }
 }
