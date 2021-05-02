@@ -59,19 +59,19 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
         }
     }
     return (
-        <div className="input-container">
-            <div>
-                <div className="input-container__low-slider">
+        <div className="inputs">
+            <div className="inputs__sliders">
+                <div className="inputs__sliders__slider">
                     <label htmlFor="lowSlider">Low</label>
                     <input onChange={handleLowSliderChange} id="lowSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={lowValue} step="1" />
                 </div>
-                <div className="input-container__high-slider">
+                <div className="inputs__sliders__slider">
                     <label htmlFor="highSlider">High</label>
                     <input onChange={handleHighSliderChange} id="highSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={highValue} step="1" />
                 </div>
-                <div className="input-container__show-info-button">
-                    <button onClick={() => setShowKeyNames(!showKeyNames)}>Show Info</button>
-                </div>
+            </div>
+            <div className="inputs__show-info-btn">
+                <button onClick={() => setShowKeyNames(!showKeyNames)}>Show Piano Info</button>
             </div>
         </div>)
 }
