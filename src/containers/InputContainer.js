@@ -28,28 +28,28 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
     const [lowValue, setLowValue] = useState(localStorage.getItem('lowSliderValue') || 3)
     const [highValue, setHighValue] = useState(localStorage.getItem('highSliderValue') || 10)
     React.useEffect(() => {
-        console.log('useeffect');
         setLowSlider(sliderToNoteTranslation[lowValue])
         setHighSlider(sliderToNoteTranslation[highValue])
         return () => {
         }
     }, [highValue, lowValue, setHighSlider, setLowSlider])
     function handleLowSliderChange({ target: { value } }) {
-        if (isValid(highValue, value)) {
-            localStorage.setItem('lowSliderValue', value)
-            setLowValue(parseInt(value))
-            setLowSlider(sliderToNoteTranslation[value])
+        if (isValidRange(highValue, value)) {
+            setValues(setLowSlider, setLowValue, 'lowSliderValue', value)
         }
 
     }
     function handleHighSliderChange({ target: { value } }) {
-        if (isValid(value, lowValue)) {
-            localStorage.setItem('highSliderValue', value)
-            setHighValue(parseInt(value))
-            setHighSlider(sliderToNoteTranslation[value])
+        if (isValidRange(value, lowValue)) {
+            setValues(setHighSlider, setHighValue, 'highSliderValue', value)
         }
     }
-    function isValid(newHighValue, newLowValue) {
+    function setValues(setSlider, setValue, localStorageKey, value) {
+        localStorage.setItem(localStorageKey, value)
+        setValue(parseInt(value))
+        setSlider(sliderToNoteTranslation[value])
+    }
+    function isValidRange(newHighValue, newLowValue) {
         const diff = highValue - lowValue
         const newDiff = newHighValue - newLowValue
         if (diff <= 4 && newDiff < diff) {
@@ -61,15 +61,15 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
     return (
         <div className="input-container">
             <div>
-                <div>
+                <div className="input-container__low-slider">
                     <label htmlFor="lowSlider">Low</label>
                     <input onChange={handleLowSliderChange} id="lowSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={lowValue} step="1" />
                 </div>
-                <div>
+                <div className="input-container__high-slider">
                     <label htmlFor="highSlider">High</label>
                     <input onChange={handleHighSliderChange} id="highSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={highValue} step="1" />
                 </div>
-                <div>
+                <div className="input-container__show-info-button">
                     <button onClick={() => setShowKeyNames(!showKeyNames)}>Show Info</button>
                 </div>
             </div>

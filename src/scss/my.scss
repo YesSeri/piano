@@ -214,6 +214,10 @@ html {
 }
 .input-container {
     margin: 0 0 7px 0;
+    input {
+        width: 250px;
+        height: 48px;
+    }
 }
 .app-container {
     margin: auto;
