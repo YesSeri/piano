@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import KeybindingsContainer from './KeybindingsContainer'
 import InputContainer from './InputContainer'
-import PianoContainer from '../component/piano/PianoContainer'
+import FullscreenPiano from '../component/piano/FullscreenPiano'
 import Overlay from '../component/Overlay'
 
 const MainContainer = () => {
@@ -16,7 +15,7 @@ const MainContainer = () => {
         <div>
             <InputContainer setLowSlider={setLowSlider} setHighSlider={setHighSlider} setShowKeyNames={setShowKeyNames} showKeyNames={showKeyNames} />
             {isClicked ?
-                <PianoContainer low={lowSlider} high={highSlider} showKeyNames={showKeyNames} />
+                <FullscreenPiano low={lowSlider} high={highSlider} showKeyNames={showKeyNames} />
                 :
                 <Overlay low={lowSlider} high={highSlider} onClick={handleClick}>Click to load Piano</Overlay>
             }

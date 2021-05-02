@@ -3,7 +3,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Piano from '.'
 import createSampler from '../../helper/createSampler'
 
-const Container = ({ high, low, showKeyNames, children, ...props }) => {
+const FullscreenPiano = ({ high, low, showKeyNames, children, ...props }) => {
   const [loaded, setLoaded] = useState(false)
   const handle = useFullScreenHandle();
   const sampler = createSampler(() => setLoaded(true));
@@ -31,4 +31,4 @@ const Container = ({ high, low, showKeyNames, children, ...props }) => {
   )
 }
 
-export default Container
+export default FullscreenPiano

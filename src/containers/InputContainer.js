@@ -25,21 +25,38 @@ const sliderToNoteTranslation = [
     'G4',
 ]
 const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyNames }) => {
-    const [lowValue, setLowValue] = useState(3)
-    const [highValue, setHighValue] = useState(10)
+    const [lowValue, setLowValue] = useState(localStorage.getItem('lowSliderValue') || 3)
+    const [highValue, setHighValue] = useState(localStorage.getItem('highSliderValue') || 10)
+    React.useEffect(() => {
+        console.log('useeffect');
+        setLowSlider(sliderToNoteTranslation[lowValue])
+        setHighSlider(sliderToNoteTranslation[highValue])
+        return () => {
+        }
+    }, [highValue, lowValue, setHighSlider, setLowSlider])
     function handleLowSliderChange({ target: { value } }) {
-        const diff = highValue - lowValue
-        const newDiff = highValue - value
-        if (diff <= 4 && newDiff < diff) return
-        setLowValue(parseInt(value))
-        setLowSlider(sliderToNoteTranslation[value])
+        if (isValid(highValue, value)) {
+            localStorage.setItem('lowSliderValue', value)
+            setLowValue(parseInt(value))
+            setLowSlider(sliderToNoteTranslation[value])
+        }
+
     }
     function handleHighSliderChange({ target: { value } }) {
+        if (isValid(value, lowValue)) {
+            localStorage.setItem('highSliderValue', value)
+            setHighValue(parseInt(value))
+            setHighSlider(sliderToNoteTranslation[value])
+        }
+    }
+    function isValid(newHighValue, newLowValue) {
         const diff = highValue - lowValue
-        const newDiff = value - lowValue
-        if (diff <= 4 && newDiff < diff) return
-        setHighValue(parseInt(value))
-        setHighSlider(sliderToNoteTranslation[value])
+        const newDiff = newHighValue - newLowValue
+        if (diff <= 4 && newDiff < diff) {
+            return false;
+        } else {
+            return true;
+        }
     }
     return (
         <div className="input-container">
