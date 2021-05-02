@@ -1,5 +1,4 @@
 $mainColor: rgba(255, 192, 23, 1);
-$minHeight: 40vh;
 @mixin responsive-width {
     margin: auto;
     width: 70%;
@@ -118,15 +117,10 @@ html {
     max-height: 600px;
 }
 
+.piano {
+    @include piano;
+}
 .piano-container {
-    // min-height: $minHeight;
-    .fullscreen{
-        // min-height: $minHeight;
-        svg{
-        // min-height: $minHeight;
-
-        }
-    }
     .fullscreen-enabled .piano {
         & svg {
             width: 100%;
@@ -137,9 +131,6 @@ html {
         max-width: none;
         max-height: none;
         margin: 0;
-    }
-    .piano {
-        @include piano;
     }
     text {
         user-select: none;
@@ -162,7 +153,6 @@ html {
 }
 
 .overlay {
-    @include piano;
     position: relative;
     .white-key {
         fill: #d6d6d6;
