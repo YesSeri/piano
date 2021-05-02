@@ -24,7 +24,7 @@ const sliderToNoteTranslation = [
     'F4',
     'G4',
 ]
-const InputContainer = ({ setLowSlider, setHighSlider }) => {
+const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyNames }) => {
     const [lowValue, setLowValue] = useState(3)
     const [highValue, setHighValue] = useState(10)
     function handleLowSliderChange({ target: { value } }) {
@@ -51,6 +51,9 @@ const InputContainer = ({ setLowSlider, setHighSlider }) => {
                 <div>
                     <label htmlFor="highSlider">High</label>
                     <input onChange={handleHighSliderChange} id="highSlider" type="range" min="0" max={sliderToNoteTranslation.length - 1} value={highValue} step="1" />
+                </div>
+                <div>
+                    <button onClick={() => setShowKeyNames(!showKeyNames)}>Show Info</button>
                 </div>
             </div>
         </div>)
