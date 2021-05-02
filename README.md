@@ -1,11 +1,8 @@
-
 # Pianisto
 
 This is an online piano for playing piano in the browser. 
 Works with touch, mouse or keyboard.
 [Page](https://yesseri.github.io/piano)
-
-
 
 ## Deployment
 
@@ -16,7 +13,6 @@ I use gh-pages to use this in production for now. A dev dependency called `gh-pa
 ```bash
   npm run deploy
 ```
-
   
 ## Roadmap
 
@@ -24,25 +20,20 @@ I use gh-pages to use this in production for now. A dev dependency called `gh-pa
 
 - [ ] Make an about page
 
-- [ ] Improve css for keybindings table
+- [x] Improve css for keybindings table
   - Probably better to remove keybindings table and just added a button that displays keybinding and note on the piano keys.
 
 - [ ] Write unit tests
 
 ## Tech Stack
 
-**Client:** React, SCSS, [Tone.js](https://tonejs.github.io/)
+**Client:** React,SCSS, [Tone.js](https://tonejs.github.io/)
 
   
 ## Contributing
 
 Contributions are always welcome!
-
-
-
   
 ## Authors
 
 - [@yesseri](https://www.github.com/yesseri)
-
-  
