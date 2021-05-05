@@ -1,4 +1,5 @@
 import './scss/my.scss'
+import GlobalStyle from './globalStyle'
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +19,7 @@ import MainContainer from './containers/MainContainer'
 function App() {
   return (
     <div className="app-container">
+      <GlobalStyle />
       <Router>
         <div>
           <Title />

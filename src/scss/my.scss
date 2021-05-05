@@ -15,13 +15,6 @@ $mainColor: rgba(255, 192, 23, 1);
 * {
     box-sizing: border-box;
 }
-body,
-html {
-    height: 100%;
-    margin: auto;
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
 .title {
     background: $mainColor;
     border-bottom: solid 1px black;
@@ -220,11 +213,7 @@ html {
     &__sliders {
         justify-content: center;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        @media screen and (max-width: 900px) {
-            grid-template-columns: 1fr;
-            padding: 0 1em;
-        }
+        grid-template-columns: 1fr;
         &__slider {
             display: flex;
             align-items: center;
@@ -232,10 +221,7 @@ html {
             width:100%;
         }
     }
-    label{
-        font-size: 1.1em;
-    }
-    input {
+    #highSlider, #lowSlider {
         width: 80%;
         height: 48px;
         @media screen and (max-width: 900px) {
