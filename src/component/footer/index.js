@@ -1,32 +1,29 @@
 import React from 'react'
+import { Pane, Container, Title, Link, Background } from './styles/footer'
 
 const Footer = ({ children, ...restProps }) => (
-    <div className="footer" {...restProps}>{children}</div>
+    <Container {...restProps}>{children}</Container>
 )
 Footer.Background = ({ children, ...restProps }) => (
-    <div className="footer__bg" {...restProps}>{children}</div>
+    <Background {...restProps}>{children}</Background>
 )
 
 Footer.Pane = ({ children, ...restProps }) =>
 (
-    <div className="footer__pane" {...restProps}>
+    <Pane {...restProps}>
         {children}
-    </div>
+    </Pane>
 )
 Footer.Title = ({ children, ...restProps }) =>
 (
-    <div className="footer__pane__title" {...restProps}>
-        <h2>
-            {children}
-        </h2>
-    </div>
+    <Title {...restProps}>
+        {children}
+    </Title>
 )
-Footer.Item = ({ children, ...restProps }) =>
+Footer.Link = ({ children, ...restProps }) =>
 (
-    <div className="footer__pane__item" {...restProps}>
-        <p>
-            {children}
-        </p>
-    </div>
+    <Link {...restProps}>
+        {children}
+    </Link>
 )
 export default Footer;

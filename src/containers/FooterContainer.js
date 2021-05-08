@@ -1,7 +1,4 @@
 import React from 'react'
-import {
-    Link
-} from "react-router-dom";
 import Footer from '../component/footer'
 
 const FooterContainer = () => {
@@ -12,31 +9,23 @@ const FooterContainer = () => {
                     <Footer.Title>
                         Company
                 </Footer.Title>
-                    <Footer.Item>
-                        <Link to='/about'>
-                            About Us
-                    </Link>
-                    </Footer.Item>
-                    <Footer.Item>
-                        <Link to='/contribute'>
-                            Contribute
-                    </Link>
-                    </Footer.Item>
+                    <Footer.Link to='/about'>
+                        About Us
+                    </Footer.Link>
+                    <Footer.Link to='/contribute'>
+                        Contribute
+                    </Footer.Link>
                 </Footer.Pane>
                 <Footer.Pane>
-                    <Footer.Title>
+                <Footer.Title>
                         Questions & Ideas
                 </Footer.Title>
-                    <Footer.Item>
-                        <Link to='/faq'>
-                            FAQ
-                    </Link>
-                    </Footer.Item>
-                    <Footer.Item>
-                        <Link to='/contact'>
-                            Contact
-                    </Link>
-                    </Footer.Item>
+                    <Footer.Link to='/faq'>
+                        FAQ
+                    </Footer.Link>
+                    <Footer.Link to='/contact'>
+                        Contact
+                    </Footer.Link>
                 </Footer.Pane>
             </Footer>
         </Footer.Background>
