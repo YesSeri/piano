@@ -6,7 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import React from 'react'
-import Header from './component/Header'
+import Header from './component/Header/Header'
+import Header2 from './containers/HeaderContainer'
 import Title from './component/Title'
 import About from './component/about'
 import Questions from './component/questions'
@@ -24,6 +25,7 @@ function App() {
         <div>
           <Title />
           <Header />
+          <Header2 />
           <Switch >
             <Route path='/contact'>
               <Contact />

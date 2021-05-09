@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as GrandPiano } from '../assets/grand-piano.svg'
+import { ReactComponent as GrandPiano } from '../../assets/grand-piano.svg'
 
 const Header = () => {
     return (

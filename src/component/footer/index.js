@@ -1,4 +1,3 @@
-import React from 'react'
 import { Pane, Container, Title, Link, Background } from './styles/footer'
 
 const Footer = ({ children, ...restProps }) => (
