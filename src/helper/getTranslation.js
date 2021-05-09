@@ -47,7 +47,7 @@ const translation = [
     new KeyNotePair('BracketRight', 'G4', ']'),
 ]
 
-export default function getTranslation(high, low) {
+export default function getTranslation(low, high) {
     let lowIdx;
     for (let i = 0; i < translation.length; i++) {
         if (translation[i].note === low) {

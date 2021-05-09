@@ -6,7 +6,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
   const [, setNotes] = useState([])
   const noteRef = React.useRef([])
   const touchRef = React.useRef([])
-  const translation = getTranslation(high, low)
+  const translation = getTranslation(low, high)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // This is to disable the quickfind on firefox

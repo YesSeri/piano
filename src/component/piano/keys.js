@@ -7,6 +7,11 @@ const Piano = ({ children, ...restProps }) => (
     {children}
   </Container>
 )
+Piano.Svg = ({ width, children, ...restProps }) => (
+  <svg version="1.1" viewBox={`-1 -1 ${width + 2} 112`} {...restProps} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    {children}
+  </svg>
+)
 Piano.WhiteKey = ({ children, ...restProps }) => (
   // <path
   //     id={id}

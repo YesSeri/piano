@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Piano from '.'
-import createSampler from '../../helper/createSampler'
-import { Button } from '@mantine/core';
+import FullPiano from './FullPiano'
+import { createSampler } from '../../helper'
 
 const FullscreenPiano = ({ options, setLoading, children, ...props }) => {
   const handle = useFullScreenHandle();
@@ -18,10 +18,11 @@ const FullscreenPiano = ({ options, setLoading, children, ...props }) => {
         <FullScreen handle={handle}>
           <Piano sampler={sampler} options={options} />
         </FullScreen>
+        <FullPiano options={options}></FullPiano>
       </div>
-      <Button color='yellow' onClick={handleClick}>
+      <button onClick={handleClick}>
         Enter fullscreen
-      </Button>
+      </button>
     </>
   )
 }

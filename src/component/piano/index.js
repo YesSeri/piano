@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react'
-import useActiveNoteHandler from '../../helper/useActiveNoteHandler';
-import useMouseClicker from '../../helper/useMouseClicker';
-import createKeyInfo from '../../helper/createKeyInfo';
-import getTranslation from '../../helper/getTranslation'
+import { useActiveNoteHandler, useMouseClicker, createKeyInfo, getTranslation } from '../../helper';
 
 const Piano = ({ sampler, options: { low, high, showKeyNames } }) => {
   const [clicked, released] = useMouseClicker();
   const activeKeys = useActiveNoteHandler(sampler, low, high)
   const whiteKeyInfo = createKeyInfo(low, high)
-  const translation = getTranslation(high, low);
+  const translation = getTranslation(low, high);
   // The path is created here, if it is the first or last white key the left respectively the right corner should be rounded.
 
   useEffect(() => {
