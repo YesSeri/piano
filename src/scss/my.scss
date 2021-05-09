@@ -29,51 +29,6 @@ $mainColor: rgba(255, 192, 23, 1);
         text-decoration: inherit; /* no underline */
     }
 }
-.header {
-    @include responsive-width;
-    &__bg {
-        border-radius: 0 0 20px 20px;
-        background: $mainColor;
-        @media screen and(max-width: 700px) {
-            border-radius: 0 0 10px 10px;
-        }
-    }
-    display: flex;
-    flex-wrap: wrap;
-    &__pane {
-        display: flex;
-        width: 50%;
-        &__text {
-            display: flex;
-            flex-wrap: wrap;
-            text-align: left;
-            align-items: center;
-            h2 {
-                margin: 10px 10px;
-
-                @media screen and(max-width: 700px) {
-                    font-size: 2.6em;
-                }
-                font-size: 3.2em;
-            }
-            p {
-                margin: 10px 10px;
-                @media screen and(max-width: 700px) {
-                    font-size: 0.8em;
-                }
-            }
-        }
-        svg {
-            padding: 5px 0;
-            margin: auto;
-            max-width: 300px;
-        }
-        @media screen and(max-width: 700px) {
-            width: 100%;
-            border-radius: 0;
-        }
-    }
-}
 
 @mixin piano-key($stroke, $fill, $active-stroke, $active-fill, $hover-stroke, $hover-fill) {
     $fill-animation: fill 100ms linear;
