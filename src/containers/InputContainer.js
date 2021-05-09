@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Inputs from "../component/inputs";
 
-import { Modal, Checkbox, Hr } from '@mantine/core';
+import { Modal } from '@mantine/core';
 const sliderToNoteTranslation = [
     'G1',
     'A1',
@@ -31,7 +31,7 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
     const [highValue, setHighValue] = useState(localStorage.getItem('highSliderValue') || 10)
     const [opened, setOpened] = useState(false);
     const [checked, setChecked] = useState(false);
-    React.useEffect(() => {
+    useEffect(() => {
         setLowSlider(sliderToNoteTranslation[lowValue])
         setHighSlider(sliderToNoteTranslation[highValue])
         return () => {
@@ -58,7 +58,7 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
         const newDiff = newHighValue - newLowValue
         if (diff <= 4 && newDiff < diff) {
             return false;
-       } else {
+        } else {
             return true;
         }
     }

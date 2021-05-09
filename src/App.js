@@ -1,6 +1,6 @@
 import './scss/my.scss'
 import GlobalStyle from './globalStyle'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import React from 'react'
 import Header from './containers/HeaderContainer'
-import Title from './component/Title'
+import Title from './containers/TitleContainer'
 import About from './component/about'
 import Questions from './component/questions'
 import Contact from './component/contact'
@@ -29,14 +29,22 @@ const theme = {
     @media screen and (max-width: 600px) {
         width: 100%;
     }`,
-  
+
 }
+
+const Container = styled.div`
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
 
 function App() {
   return (
-    <div className="app-container">
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <GlobalStyle />
         <Router>
           <div>
             <Title />
@@ -59,12 +67,10 @@ function App() {
               </Route>
             </Switch>
           </div>
-          <div>
-            <FooterContainer />
-          </div>
+          <FooterContainer />
         </Router>
-      </ThemeProvider>
-    </div>
+      </Container>
+    </ThemeProvider>
   );
 }
 

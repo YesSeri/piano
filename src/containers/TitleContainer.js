@@ -1,15 +1,12 @@
-import {
-    Link
-} from "react-router-dom";
-const Title = () => {
-
-    return (<div className='title'>
-        <h1 className='title__text'>
-            <Link to='/'>
+import Title from "../component/Title/index";
+const TitleContainer = () => {
+    return (
+        <Title>
+            <Title.Text to='/'>
                 Pianisto
-            </Link>
-        </h1>
-    </div>)
+            </Title.Text>
+        </Title>
+    )
 }
 
-export default Title
+export default TitleContainer

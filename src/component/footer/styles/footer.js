@@ -34,7 +34,7 @@ const Title = styled.h2`
 `;
 
 const Link = styled(ReactRouterLink)`
-    margin-bottom:15px;
+    margin-bottom:20px;
     width:100%;
     color: #ffc017;
     text-decoration: inherit;
