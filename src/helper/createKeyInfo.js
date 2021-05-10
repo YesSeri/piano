@@ -26,7 +26,8 @@ export default function createKeyInfo(low, high) {
     if (idx === 0 && i > 0) {
       lowNumber++
     }
-    const hasNeighbour = blackRightNeighbour[keyOrder[idx]]
+    // The right most key on the visible keyboard never has a black neighbouring key
+    const hasNeighbour = i === number - 1 ? false : blackRightNeighbour[keyOrder[idx]]
     whiteKeyInfo.push({ note: (keyOrder[idx] + lowNumber), hasNeighbour })
     idx = idx > 5 ? 0 : idx + 1
   }

@@ -12,7 +12,6 @@ export default function useMouseClicker(sampler) {
 
         const handleMouseMove = (e) => {
             if (clicked !== null) {
-                console.log('move')
                 if (e.target.dataset === undefined) return
                 const { note } = e.target.dataset
                 const prevNote = clicked;
@@ -50,5 +49,5 @@ export default function useMouseClicker(sampler) {
         sampler.triggerRelease(released)
     }, [sampler, released])
 
-    return [clicked, released]
+    return clicked
 }

@@ -80,24 +80,24 @@ $mainColor: rgba(255, 192, 23, 1);
         max-height: none;
         margin: 0;
     }
-    text {
-        user-select: none;
-        pointer-events: none;
-        font-family: monospace;
-        font-size: 0.6em;
-        &.svg-white-note-text {
-            fill: black;
-        }
-        &.svg-white-translation-text {
-            fill: black;
-        }
-        &.svg-black-note-text {
-            fill: white;
-        }
-        &.svg-black-translation-text {
-            fill: white;
-        }
-    }
+    // text {
+    //     user-select: none;
+    //     pointer-events: none;
+    //     font-family: monospace;
+    //     font-size: 0.6em;
+    //     &.svg-white-note-text {
+    //         fill: black;
+    //     }
+    //     &.svg-white-translation-text {
+    //         fill: black;
+    //     }
+    //     &.svg-black-note-text {
+    //         fill: white;
+    //     }
+    //     &.svg-black-translation-text {
+    //         fill: white;
+    //     }
+    // }
 }
 
 .overlay {

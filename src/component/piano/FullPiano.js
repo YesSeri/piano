@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Piano from './keys'
+import Piano from '.'
 import { useActiveNoteHandler, useMouseClicker, createKeyInfo, getTranslation } from '../../helper';
 
 const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps }) => {
@@ -8,7 +8,7 @@ const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps
   // Gives all touched or keyboard pressed keys.
   const activeKeys = useActiveNoteHandler(sampler, low, high)
   // Name of all mouse clicked notes.
-  const [clicked] = useMouseClicker(sampler);
+  const clicked = useMouseClicker(sampler);
   // This array contains the names of all clicked, touched and keyboard pressed notes.
   const allActive = [clicked, ...activeKeys]
 
@@ -23,6 +23,7 @@ const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps
             className={allActive.includes(key.note) ? 'active' : null}
           />
         ))}
+
         {blackKeys.map((key) => (
           <Piano.BlackKey
             data-note={key.note}
@@ -31,24 +32,45 @@ const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps
             className={allActive.includes(key.note) ? 'active' : null}
           />
         ))}
-
+        {showKeyNames &&
+          <g>
+            {whiteKeys.map((key) => (
+              // showKeyNames &&
+              <Piano.WhiteText
+                x={key.x + 10}
+                y="90"
+                key={key.note}
+              >
+                {key.note.slice(0, -1)}
+              </Piano.WhiteText>
+            ))}
+            {blackKeys.map((key) => (
+              // showKeyNames &&
+              <Piano.BlackText
+                x={key.x + 2}
+                y="60"
+                key={key.note}
+              >
+                {key.note.slice(0, -1)}
+              </Piano.BlackText>
+            ))}
+          </g>
+        }
       </Piano.Svg>
-      {showKeyNames && <div>SHOWING TEXT</div>}
     </Piano>
   )
 }
 function createWhiteKeys(low, high) {
+  // Get some basic info from createKeyInfo here, with a bit complicated functions, and then pretty up the data here.
   const whiteKeyInfo = createKeyInfo(low, high)
   return whiteKeyInfo.map((key, i) => {
-    // const id = key.note.toLowerCase()
     const x = i * 30
     if (i === 0) {
-      return { hasNeighbour: key.hasNeighbour, note: key.note, color: 'white', d: `m 0 0 v 107 a 3 3 0 0 0 3 3 h 27 v -110 z`, x }
-      // Last key never has a neighbour.
+      return { hasNeighbour: key.hasNeighbour, note: key.note, d: `m 0 0 v 107 a 3 3 0 0 0 3 3 h 27 v -110 z`, x }
     } else if (i === whiteKeyInfo.length - 1) {
-      return { hasNeighbour: false, note: key.note, color: 'white', d: `m ${x} 0 v 110 h 27 a 3 3 0 0 0 3 -3 v -107 z `, x }
+      return { hasNeighbour: key.hasNeighbour, note: key.note, d: `m ${x} 0 v 110 h 27 a 3 3 0 0 0 3 -3 v -107 z `, x }
     } else {
-      return { hasNeighbour: key.hasNeighbour, note: key.note, color: 'white', d: `m ${x} 0 v 110 h 30 v -110 z`, x }
+      return { hasNeighbour: key.hasNeighbour, note: key.note, d: `m ${x} 0 v 110 h 30 v -110 z`, x }
     }
   })
 }
@@ -58,7 +80,7 @@ function createBlackKeys(whiteKeys, low, high) {
     const note = key.note.substr(0, 1) + '#' + key.note.substr(1)
     const x = 18 + 30 * i
     if (key.hasNeighbour) {
-      return { note, color: 'white', d: `m ${x} 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z`, x }
+      return { note, d: `m ${x} 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z`, x }
       // return createKeyPath(id, note, 'black', `m ${x} 0 v 63 a 2 2 0 0 0 2 2 h 18 a 2 2 0 0 0 2 -2 v -63 z`, x)
     }
     else {

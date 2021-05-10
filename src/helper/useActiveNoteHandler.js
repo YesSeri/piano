@@ -100,7 +100,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
     const removeScroll = (e) => {
       e.preventDefault();
     }
-    const piano = document.getElementsByClassName('piano')[0]
+    const piano = document.getElementsByClassName('pianoContainer')[0]
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
