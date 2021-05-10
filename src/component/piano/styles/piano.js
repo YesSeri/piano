@@ -3,11 +3,9 @@ import styled from "styled-components/macro";
 const Frame = styled.div`
 `;
 const Container = styled.div`
+    // This is tricky. I want full screen when in fullscreen mode. I want responsivness otherwise. It also needs to have a max height when not in fullscreen mode.
     margin: auto;
-    width: 90%;
-    @media screen and (max-width: 1200px) {
-        width: 100%;
-    }
+    width: ${({ isFullscreen }) => isFullscreen ? '100%' : '80%'};
 `;
 const WhiteKey = styled.path`
     fill: white;

@@ -2,7 +2,7 @@ import React from 'react'
 import Piano from '.'
 import { useActiveNoteHandler, useMouseClicker, createKeyInfo } from '../../helper';
 
-const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps }) => {
+const FullPiano = ({ options: { low, high, showKeyNames, isFullscreen }, sampler, ...restProps }) => {
   const whiteKeys = createWhiteKeys(low, high);
   const blackKeys = createBlackKeys(whiteKeys, low, high);
   // Gives all touched or keyboard pressed keys.
@@ -13,7 +13,7 @@ const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps
   const allActive = [clicked, ...activeKeys]
 
   return (
-    <Piano {...restProps}>
+    <Piano isFullscreen={isFullscreen} {...restProps}>
       <Piano.Svg width={whiteKeys.length * 30}>
         {whiteKeys.map((key) => (
           <Piano.WhiteKey
