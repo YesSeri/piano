@@ -16,9 +16,9 @@ const FullscreenPiano = ({ options, setLoading, children, ...props }) => {
     <>
       <div className="piano-container" {...props}>
         <FullScreen handle={handle}>
-          <Piano sampler={sampler} options={options} />
+          {/* <Piano sampler={sampler} options={options} /> */}
+          <FullPiano sampler={sampler} options={options}></FullPiano>
         </FullScreen>
-        <FullPiano options={options}></FullPiano>
       </div>
       <button onClick={handleClick}>
         Enter fullscreen

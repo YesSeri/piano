@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 export default function useMouseClicker(sampler) {
-    const [, setClicked] = useState(null)
-    const [, setReleased] = useState(null)
-    const clickedRef = React.useRef(null)
-    const releasedRef = React.useRef(null)
-    const mousePressedRef = React.useRef(false)
+    const [clicked, setClicked] = useState(null)
+    const [released, setReleased] = useState(null)
     useEffect(() => {
         const handleMouseUp = (e) => {
-            mousePressedRef.current = false;
-            if(e.target.dataset === undefined) return
+            if (e.target.dataset === undefined) return
             const { note } = e.target.dataset
-            clickedRef.current = null;
-            releasedRef.current = note;
             setReleased(note)
             setClicked(null)
         }
 
         const handleMouseMove = (e) => {
-            if (mousePressedRef.current === true) {
-                if(e.target.dataset === undefined) return
+            if (clicked !== null) {
+                console.log('move')
+                if (e.target.dataset === undefined) return
                 const { note } = e.target.dataset
-                const prevNote = clickedRef.current;
-                if(note !== prevNote){
-                    clickedRef.current = note;
-                    releasedRef.current = prevNote;
+                const prevNote = clicked;
+                if (note !== prevNote) {
                     setClicked(note)
                     setReleased(prevNote)
                 }
             }
         }
         const handleMouseDown = (e) => {
-            mousePressedRef.current = true;
             const { note } = e.target.dataset
             if (!note) return
-            clickedRef.current = note;
-            releasedRef.current = null;
             setClicked(note)
             setReleased(null)
         }
@@ -48,6 +38,17 @@ export default function useMouseClicker(sampler) {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         }
-    }, [sampler])
-    return [clickedRef.current, releasedRef.current]
+    }, [sampler, clicked])
+
+    // Here the sound gets played
+    useEffect(() => {
+        if (clicked == null) return
+        sampler.triggerAttack(clicked)
+    }, [sampler, clicked])
+    useEffect(() => {
+        if (released == null) return
+        sampler.triggerRelease(released)
+    }, [sampler, released])
+
+    return [clicked, released]
 }

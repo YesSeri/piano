@@ -17,7 +17,7 @@ const BlackKey = styled.path`
     stroke: black;
     stroke-width: 0.25;
     &.active{
-        fill: #222;
+        fill: red;
         stroke: #222;
     }
 `;

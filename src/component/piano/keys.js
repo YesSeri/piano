@@ -3,7 +3,7 @@ import { Container, WhiteKey, BlackKey, WhiteText, BlackText } from './styles/pi
 
 
 const Piano = ({ children, ...restProps }) => (
-  <Container {...restProps}>
+  <Container className="piano" {...restProps}>
     {children}
   </Container>
 )
@@ -13,25 +13,11 @@ Piano.Svg = ({ width, children, ...restProps }) => (
   </svg>
 )
 Piano.WhiteKey = ({ children, ...restProps }) => (
-  // <path
-  //     id={id}
-  //     data-note={note}
-  //     className={`${color}-key piano-key ${activeKeys.includes(note) || clicked === note ? 'active' : ''}`}
-  //     d={d}
-  //     onContextMenu={(e) => e.preventDefault()}
-  //   />
   <WhiteKey {...restProps}>
     {children}
   </WhiteKey>
 )
 Piano.BlackKey = ({ children, ...restProps }) => (
-  // <path
-  //     id={id}
-  //     data-note={note}
-  //     className={`${color}-key piano-key ${activeKeys.includes(note) || clicked === note ? 'active' : ''}`}
-  //     d={d}
-  //     onContextMenu={(e) => e.preventDefault()}
-  //   />
   <BlackKey {...restProps}>
     {children}
   </BlackKey>
