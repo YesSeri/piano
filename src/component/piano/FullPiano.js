@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Piano from '.'
-import { useActiveNoteHandler, useMouseClicker, createKeyInfo, getTranslation } from '../../helper';
+import { useActiveNoteHandler, useMouseClicker, createKeyInfo } from '../../helper';
 
 const FullPiano = ({ options: { low, high, showKeyNames }, sampler, ...restProps }) => {
   const whiteKeys = createWhiteKeys(low, high);

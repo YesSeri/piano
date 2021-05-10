@@ -3,7 +3,11 @@ import styled from "styled-components/macro";
 const Frame = styled.div`
 `;
 const Container = styled.div`
-    ${({ theme }) => theme.responsiveWidth}
+    margin: auto;
+    width: 90%;
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
 `;
 const WhiteKey = styled.path`
     fill: white;
