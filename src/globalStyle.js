@@ -17,13 +17,14 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     font-size: 1.2em;
     font-family: inherit;
-    cursor: pointer;
+    border: solid 2px #666;
+    border-radius: 5px;
     padding: 0.1em 0.3em;
     text-align: center;
     min-width: 150px;
+    user-select: none; 
+    cursor: pointer;
 
-    border: solid 2px #666;
-    border-radius: 5px;
     @media screen and (-ms-high-contrast: active) {
         border: 2px solid currentcolor;
     }

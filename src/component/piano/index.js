@@ -3,10 +3,10 @@ import { Container, WhiteKey, BlackKey, WhiteText, BlackText } from './styles/pi
 
 
 const Piano = ({isFullscreen, children, ...restProps }) => (
-  <Container isFullscreen={isFullscreen} className="pianoContainer" {...restProps}>{children}</Container>
+  <Container isFullscreen={isFullscreen}  {...restProps}>{children}</Container>
 )
 Piano.Svg = ({ width, children, ...restProps }) => (
-  <svg version="1.1" viewBox={`-1 -1 ${width + 2} 112`} {...restProps} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <svg version="1.1" viewBox={`-1 -1 ${width + 2} 112`} id="pianoSvg" {...restProps} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     {children}
   </svg>
 )

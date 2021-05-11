@@ -52,7 +52,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
       const touchInfo = touchNoteInfo(e.changedTouches[0], note)
       touchRef.current = [...touchRef.current, touchInfo]
       setNotes(touchRef.current);
-      if(note == null) return
+      if (note == null) return
       sampler.triggerAttack(note)
     }
 
@@ -78,6 +78,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
       return dataset
     }
     const handleTouchMove = (e) => {
+      e.preventDefault();
       for (const changedTouch of e.changedTouches) {
 
         const dataset = getDataset(changedTouch)
@@ -98,20 +99,15 @@ const useActiveNoteHandler = (sampler, low, high) => {
       }
     }
 
-    const removeScroll = (e) => {
-      e.preventDefault();
-    }
-    const piano = document.getElementsByClassName('pianoContainer')[0]
+    const piano = document.getElementById('pianoSvg');
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
     piano.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    piano.addEventListener('touchmove', removeScroll, { passive: false });
     return () => {
       piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('touchmove', handleTouchMove, { passive: false });
-      piano.addEventListener('touchmove', removeScroll, { passive: false });
     }
   }, [sampler])
   return [...touchRef.current.map(t => t.note), ...noteRef.current]
