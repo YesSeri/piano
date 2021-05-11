@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import InputContainer from './InputContainer'
-import FullscreenPiano from '../component/piano/FullscreenPiano'
 import { LoadingOverlay } from '@mantine/core';
 import styled from 'styled-components/macro'
 import Overlay from '../component/Overlay'
+const FullscreenPiano = React.lazy(() => import('../component/piano/FullscreenPiano'));
 
 const Container = styled.div`
     position: relative;
@@ -20,16 +20,18 @@ const MainContainer = () => {
             {!clicked ? <Overlay setClicked={setClicked} >Click to load Piano</Overlay>
                 :
                 <>
-                    <LoadingOverlay visible={loading} transitionDuration={500} />
-                    <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings }} setLoading={setLoading} />
-                    <InputContainer
-                        setLowSlider={setLowSlider}
-                        setHighSlider={setHighSlider}
-                        showNotenames={showNotenames}
-                        setShowNotenames={setShowNotenames}
-                        showKeybindings={showKeybindings}
-                        setShowKeybindings={setShowKeybindings}
-                    />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LoadingOverlay visible={loading} transitionDuration={500} />
+                        <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings }} setLoading={setLoading} />
+                        <InputContainer
+                            setLowSlider={setLowSlider}
+                            setHighSlider={setHighSlider}
+                            showNotenames={showNotenames}
+                            setShowNotenames={setShowNotenames}
+                            showKeybindings={showKeybindings}
+                            setShowKeybindings={setShowKeybindings}
+                        />
+                    </Suspense>
                 </>
             }
         </Container>

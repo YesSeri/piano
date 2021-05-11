@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 const Container = styled.div`
-    height: 100%;
-    background-color: #aea4;
+    height: 90vh;
+    max-height:300px;
+    background-color: #000;
     width: 100%;
     display:flex;
     justify-content:center;
@@ -11,7 +12,6 @@ const Container = styled.div`
 const Text = styled.span`
     background: black;
     color:white;
-    margin-bottom:90px;
 `
 const Overlay = ({ setClicked, children, ...restProps }) => {
     const handleClick = () => {
