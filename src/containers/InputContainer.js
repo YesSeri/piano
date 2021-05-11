@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Inputs from "../component/inputs";
 import getTranslation from '../helper/getTranslation'
 import { Modal } from '@mantine/core';
+import styled from 'styled-components'
 
 const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
 
@@ -52,6 +53,7 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
                 opened={opened}
                 onClose={() => setOpened(false)}
                 title="Piano Settings"
+                size="lg"
             >
                 <Inputs>
                     <Inputs.Divider />
@@ -70,8 +72,12 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
                     </Inputs.Container>
                 </Inputs>
             </Modal>
-            <button onClick={() => setOpened(true)}>Settings</button>
+            <Button onClick={() => setOpened(true)}>Settings</Button>
         </div>)
 }
+
+const Button = styled.button`
+    margin-top: 5px;
+`
 
 export default InputContainer

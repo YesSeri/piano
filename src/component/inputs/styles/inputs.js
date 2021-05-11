@@ -5,6 +5,7 @@ const Frame = styled.div`
 `;
 const Container = styled.div`
     display:flex;
+    align-items: center;
 `;
 const Label = styled.label`
     flex: 1 0 0;
@@ -13,6 +14,7 @@ const Checkbox = styled(MantineCheckbox)`
     display:flex;
     justify-content:center;
     flex: 1 0 0;
+    margin: 0 0 0 7px;
 `;
 const Divider = styled.div`
     border-top: solid 1px black;
@@ -22,6 +24,7 @@ const Divider = styled.div`
     padding-bottom: 10px;
 `;
 const Slider = styled.input`
-    flex: 3 0 0;
+    flex: 4 0 0;
+    height: 48px;
 `;
 export { Frame, Container, Divider, Checkbox, Label, Slider }
