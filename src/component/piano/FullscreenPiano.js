@@ -7,6 +7,7 @@ const FullscreenPiano = ({ options, setLoading, ...restProps }) => {
   const handle = useFullScreenHandle();
   const sampler = createSampler(() => setLoading(false));
 
+
   const handleClick = () => {
     handle.enter()
   }

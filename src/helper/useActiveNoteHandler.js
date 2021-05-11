@@ -52,6 +52,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
       const touchInfo = touchNoteInfo(e.changedTouches[0], note)
       touchRef.current = [...touchRef.current, touchInfo]
       setNotes(touchRef.current);
+      if(note == null) return
       sampler.triggerAttack(note)
     }
 

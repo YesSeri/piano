@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Inputs from "../component/inputs";
 import getTranslation from '../helper/getTranslation'
 import { Modal } from '@mantine/core';
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
 
