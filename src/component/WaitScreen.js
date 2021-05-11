@@ -1,17 +1,22 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 const Container = styled.div`
-    height: 90vh;
-    max-height:300px;
-    background-color: #111;
-    width: 100%;
     display:flex;
     justify-content:center;
     align-items: center;
-    border-radius: 10px 10px 10px 10px;
+    height: 90vh;
+    max-height:300px;
+    width:80%; 
+    background-color: #111;
+    border-radius: 0 0 10px 10px;
+    margin:auto;
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+        border-radius: 10px 10px 10px 10px;
+    }
     @media screen and (max-width: 600px) {
         border: solid 1px white;
-        border-radius: 10px 10px 0 0;
+        max-height:100px;
     }
 `
 const Text = styled.span`
