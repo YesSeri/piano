@@ -3,7 +3,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullPiano from './FullPiano'
 import { createSampler } from '../../helper'
 
-const FullscreenPiano = ({ options, setLoading, children, ...props }) => {
+const FullscreenPiano = ({ options, setLoading, ...restProps }) => {
   const handle = useFullScreenHandle();
   const sampler = createSampler(() => setLoading(false));
 
@@ -12,16 +12,14 @@ const FullscreenPiano = ({ options, setLoading, children, ...props }) => {
   }
 
   return (
-    <>
-      <div className="piano-container" {...props}>
-        <FullScreen handle={handle}>
-          <FullPiano sampler={sampler} options={{ ...options, isFullscreen: handle.active }}></FullPiano>
-        </FullScreen>
-      </div>
+    <div {...restProps}>
+      <FullScreen handle={handle}>
+        <FullPiano sampler={sampler} options={{ ...options, isFullscreen: handle.active }} />
+      </FullScreen>
       <button onClick={handleClick}>
         Enter fullscreen
       </button>
-    </>
+    </div>
   )
 }
 

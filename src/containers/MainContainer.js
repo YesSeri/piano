@@ -14,11 +14,9 @@ const MainContainer = () => {
     const [showNotenames, setShowNotenames] = useState(false);
     const [showKeybindings, setShowKeybindings] = useState(false);
     return (
-        <div>
-            <Container>
-                <LoadingOverlay visible={loading} transitionDuration={500} />
-                <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings }} setLoading={setLoading} />
-            </Container>
+        <Container>
+            <LoadingOverlay visible={loading} transitionDuration={500} />
+            <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings }} setLoading={setLoading} />
             <InputContainer
                 setLowSlider={setLowSlider}
                 setHighSlider={setHighSlider}
@@ -27,7 +25,7 @@ const MainContainer = () => {
                 showKeybindings={showKeybindings}
                 setShowKeybindings={setShowKeybindings}
             />
-        </div>
+        </Container>
     )
 }
 
