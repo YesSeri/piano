@@ -5,7 +5,19 @@ const Frame = styled.div`
 const Container = styled.div`
     // This is tricky. I want full screen when in fullscreen mode. I want responsivness otherwise. It also needs to have a max height when not in fullscreen mode.
     margin: auto;
-    width: ${({ isFullscreen }) => isFullscreen ? '100%' : '80%'};
+    resize: ${({ isFullscreen }) => isFullscreen ? 'none' : 'both'};
+    overflow: hidden;
+    width:80%; 
+    height:100%;
+    // If fullscreen then I want to have max width and height with important to override eventual resizing of the div by resize handle. Resize css property gets inlined and needs to be overridden somehow. It was either like this or removing it through Javascript. 
+    ${({ isFullscreen }) => (isFullscreen && 'width:100% !important; height: 100% !important;')}
+    svg{
+        width: 100%;
+        height: 100%;
+    }
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+    }
 `;
 const WhiteKey = styled.path`
     fill: white;
@@ -26,7 +38,7 @@ const BlackKey = styled.path`
 `;
 const Text = styled.text`
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 0.9em;
     user-select: none;
     pointer-events: none; 
 `

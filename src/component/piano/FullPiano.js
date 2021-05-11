@@ -1,10 +1,11 @@
 import React from 'react'
 import Piano from '.'
-import { useActiveNoteHandler, useMouseClicker, createKeyInfo } from '../../helper';
+import { useActiveNoteHandler, useMouseClicker, createKeyInfo, getTranslation } from '../../helper';
 
-const FullPiano = ({ options: { low, high, showKeyNames, isFullscreen }, sampler, ...restProps }) => {
+const FullPiano = ({ options: { low, high, showNotenames, showKeybindings, isFullscreen }, sampler, ...restProps }) => {
   const whiteKeys = createWhiteKeys(low, high);
   const blackKeys = createBlackKeys(whiteKeys, low, high);
+  const translation = getTranslation(low, high)
   // Gives all touched or keyboard pressed keys.
   const activeKeys = useActiveNoteHandler(sampler, low, high)
   // Name of all mouse clicked notes.
@@ -32,13 +33,14 @@ const FullPiano = ({ options: { low, high, showKeyNames, isFullscreen }, sampler
             className={allActive.includes(key.note) ? 'active' : null}
           />
         ))}
-        {showKeyNames &&
+        {/* This shows the names of the note */}
+        {showNotenames &&
           <g>
             {whiteKeys.map((key) => (
               // showKeyNames &&
               <Piano.WhiteText
-                x={key.x + 10}
-                y="90"
+                x={key.x + 12}
+                y="105"
                 key={key.note}
               >
                 {key.note.slice(0, -1)}
@@ -47,7 +49,7 @@ const FullPiano = ({ options: { low, high, showKeyNames, isFullscreen }, sampler
             {blackKeys.map((key) => (
               // showKeyNames &&
               <Piano.BlackText
-                x={key.x + 2}
+                x={key.x + 3}
                 y="60"
                 key={key.note}
               >
@@ -56,6 +58,30 @@ const FullPiano = ({ options: { low, high, showKeyNames, isFullscreen }, sampler
             ))}
           </g>
         }
+        {/* This shows the names of the keybinding */}
+        {showKeybindings &&
+          <g>
+            {whiteKeys.map((key) => {
+              const pair = translation.find((el) => key.note === el.note)
+              return <Piano.WhiteText
+                x={key.x + 12}
+                y="90"
+                key={key.note}
+              >
+                {pair.key}
+              </Piano.WhiteText>
+            })}
+            {blackKeys.map((key) => {
+              const pair = translation.find((el) => key.note === el.note)
+              return <Piano.BlackText
+                x={key.x + 7}
+                y="45"
+                key={key.note}
+              >
+                {pair.key}
+              </Piano.BlackText>
+            })}
+          </g>}
       </Piano.Svg>
     </Piano>
   )

@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { Hr, Checkbox as MantineCheckbox } from '@mantine/core';
+import { Checkbox as MantineCheckbox } from '@mantine/core';
 
 const Frame = styled.div`
 `;
@@ -14,8 +14,12 @@ const Checkbox = styled(MantineCheckbox)`
     justify-content:center;
     flex: 1 0 0;
 `;
-const Divider = styled(Hr)`
-    margin: 0.4em 0;
+const Divider = styled.div`
+    border-top: solid 1px black;
+    height: 1px;
+    width:100%;
+    margin-top: 5px;
+    padding-bottom: 10px;
 `;
 const Slider = styled.input`
     flex: 3 0 0;

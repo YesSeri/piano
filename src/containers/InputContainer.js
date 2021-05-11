@@ -1,39 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Inputs from "../component/inputs";
-
+import getTranslation from '../helper/getTranslation'
 import { Modal } from '@mantine/core';
-const sliderToNoteTranslation = [
-    'G1',
-    'A1',
-    'B1',
-    'C2',
-    'D2',
-    'E2',
-    'F2',
-    'G2',
-    'A2',
-    'B2',
-    'C3',
-    'D3',
-    'E3',
-    'F3',
-    'G3',
-    'A3',
-    'B3',
-    'C4',
-    'D4',
-    'E4',
-    'F4',
-    'G4',
-]
-const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyNames }) => {
+
+const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
+
+const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings }) => {
     const [lowValue, setLowValue] = useState(localStorage.getItem('lowSliderValue') || 3)
     const [highValue, setHighValue] = useState(localStorage.getItem('highSliderValue') || 10)
     const [opened, setOpened] = useState(false);
-    const [checked, setChecked] = useState(false);
     useEffect(() => {
-        setLowSlider(sliderToNoteTranslation[lowValue])
-        setHighSlider(sliderToNoteTranslation[highValue])
+        setLowSlider(translation[lowValue])
+        setHighSlider(translation[highValue])
         return () => {
         }
     }, [highValue, lowValue, setHighSlider, setLowSlider])
@@ -51,7 +29,7 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
     function setValues(setSlider, setValue, localStorageKey, value) {
         localStorage.setItem(localStorageKey, value)
         setValue(parseInt(value))
-        setSlider(sliderToNoteTranslation[value])
+        setSlider(translation[value])
     }
     function isValidRange(newHighValue, newLowValue) {
         const diff = highValue - lowValue
@@ -62,6 +40,12 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
             return true;
         }
     }
+    function handleKeybinding(e) {
+        setShowKeybindings(!showKeybindings)
+    }
+    function handleNotename(e) {
+        setShowNotenames(!showNotenames)
+    }
     return (
         <div className="inputs">
             <Modal
@@ -70,20 +54,23 @@ const InputContainer = ({ setLowSlider, setHighSlider, setShowKeyNames, showKeyN
                 title="Piano Settings"
             >
                 <Inputs>
+                    <Inputs.Divider />
                     <Inputs.Container>
                         <Inputs.Label>Low</Inputs.Label>
-                        <Inputs.Slider onChange={handleLowSliderChange} type="range" min="0" max={sliderToNoteTranslation.length - 1} value={lowValue} step="1" />
+                        <Inputs.Slider onChange={handleLowSliderChange} type="range" min="0" max={translation.length - 1} value={lowValue} step="1" />
                     </Inputs.Container>
                     <Inputs.Container>
                         <Inputs.Label>High</Inputs.Label>
-                        <Inputs.Slider onChange={handleHighSliderChange} type="range" min="0" max={sliderToNoteTranslation.length - 1} value={highValue} step="1" />
+                        <Inputs.Slider onChange={handleHighSliderChange} type="range" min="0" max={translation.length - 1} value={highValue} step="1" />
                     </Inputs.Container>
-                    <Inputs.Divider variant="solid" />
-                    <Inputs.Checkbox label="Show Keybindings" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
+                    <Inputs.Divider />
+                    <Inputs.Container>
+                        <Inputs.Checkbox label="Show Keybindings" checked={showKeybindings} onChange={handleKeybinding} />
+                        <Inputs.Checkbox label="Show Note Names" checked={showNotenames} onChange={handleNotename} />
+                    </Inputs.Container>
                 </Inputs>
             </Modal>
             <button onClick={() => setOpened(true)}>Settings</button>
-            <button onClick={() => setShowKeyNames(!showKeyNames)}>Show Values</button>
         </div>)
 }
 

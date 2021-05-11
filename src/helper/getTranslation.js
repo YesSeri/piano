@@ -1,8 +1,8 @@
 class KeyNotePair {
     constructor(keycode, note, key) {
         this.keycode = keycode;
-        this.key = key;
         this.note = note;
+        this.key = key;
     }
 }
 
@@ -58,3 +58,4 @@ export default function getTranslation(low, high) {
         }
     }
 }
+export { translation };
