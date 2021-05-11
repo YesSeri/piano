@@ -2,7 +2,7 @@ import React, { Suspense, useState } from 'react'
 import InputContainer from './InputContainer'
 import { LoadingOverlay } from '@mantine/core';
 import styled from 'styled-components/macro'
-import Overlay from '../component/Overlay'
+import WaitScreen from '../component/WaitScreen'
 const FullscreenPiano = React.lazy(() => import('../component/piano/FullscreenPiano'));
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const MainContainer = () => {
     const [clicked, setClicked] = useState(false);
     return (
         <Container>
-            {!clicked ? <Overlay setClicked={setClicked} >Click to load Piano</Overlay>
+            {!clicked ? <WaitScreen setClicked={setClicked} >Click to load Piano</WaitScreen>
                 :
                 <>
                     <Suspense fallback={<div>Loading...</div>}>
