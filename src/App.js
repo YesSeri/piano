@@ -1,4 +1,3 @@
-import './scss/my.scss'
 import GlobalStyle from './globalStyle'
 import styled, { ThemeProvider } from 'styled-components'
 import {
