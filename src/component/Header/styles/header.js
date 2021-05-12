@@ -10,6 +10,7 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
+    user-select: none; 
     ${({ theme }) => theme.responsiveWidth}
     display: flex;
     flex-wrap: wrap;

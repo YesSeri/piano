@@ -4,7 +4,6 @@ export default function useMouseClicker(sampler) {
     const [released, setReleased] = useState(null)
     useEffect(() => {
         const handleMouseUp = (e) => {
-            if (e.target.dataset === undefined) return
             const { note } = e.target.dataset
             setReleased(note)
             setClicked(null)
@@ -12,7 +11,6 @@ export default function useMouseClicker(sampler) {
 
         const handleMouseMove = (e) => {
             if (clicked !== null) {
-                if (e.target.dataset === undefined) return
                 const { note } = e.target.dataset
                 const prevNote = clicked;
                 if (note !== prevNote) {
@@ -23,7 +21,6 @@ export default function useMouseClicker(sampler) {
         }
         const handleMouseDown = (e) => {
             const { note } = e.target.dataset
-            if (!note) return
             setClicked(note)
             setReleased(null)
         }
@@ -48,6 +45,5 @@ export default function useMouseClicker(sampler) {
         if (released == null) return
         sampler.triggerRelease(released)
     }, [sampler, released])
-
     return clicked
 }
