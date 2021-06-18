@@ -10,7 +10,7 @@ export default function useMouseClicker(sampler) {
         }
 
         const handleMouseMove = (e) => {
-            if (clicked !== null) {
+            if (clicked !== null && e.target.dataset !== undefined) {
                 const { note } = e.target.dataset
                 const prevNote = clicked;
                 if (note !== prevNote) {
