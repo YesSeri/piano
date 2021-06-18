@@ -78,7 +78,7 @@ const useActiveNoteHandler = (sampler, low, high) => {
       return dataset
     }
     const handleTouchMove = (e) => {
-      e.preventDefault();
+      // e.preventDefault();
       for (const changedTouch of e.changedTouches) {
         const dataset = getDataset(changedTouch)
         if (dataset === undefined) return;
