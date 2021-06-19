@@ -17,7 +17,7 @@ const MainContainer = () => {
     const [clicked, setClicked] = useState(false);
     return (
         <Container>
-            {!clicked ? <WaitScreen setClicked={setClicked} >Click to load Piano</WaitScreen>
+            {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
                 :
                 <>
                     <Suspense fallback={<div>Loading...</div>}>

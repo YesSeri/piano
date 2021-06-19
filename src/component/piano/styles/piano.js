@@ -14,6 +14,8 @@ const Container = styled.div`
     svg{
         width: 100%;
         height: 100%;
+        max-height: min(50vw, 900px); 
+        ${({ isFullscreen }) => (isFullscreen && 'max-height:100% !important;')}
     }
     @media screen and (max-width: 1200px) {
         width: 100%;
