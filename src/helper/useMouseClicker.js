@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-export default function useMouseClicker(sampler) {
+export default function useMouseClicker(sampler, loading) {
     const [clicked, setClicked] = useState(null)
     const [released, setReleased] = useState(null)
     useEffect(() => {
@@ -26,15 +26,17 @@ export default function useMouseClicker(sampler) {
         }
 
         // Here instead of in path because I mouse sometimes get released not over the clicked note.
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
+        if (!loading) {
+            window.addEventListener('mousedown', handleMouseDown);
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
         return () => {
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         }
-    }, [sampler, clicked])
+    }, [sampler, clicked, loading])
 
     // Here the sound gets played
     useEffect(() => {

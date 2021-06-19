@@ -9,7 +9,7 @@ const FullPiano = ({ options: { low, high, showNotenames, showKeybindings, isFul
   // Gives all touched or keyboard pressed keys.
   const activeKeys = useActiveNoteHandler(sampler, low, high, loading)
   // Name of all mouse clicked notes.
-  const clicked = useMouseClicker(sampler);
+  const clicked = useMouseClicker(sampler, loading);
   // This array contains the names of all clicked, touched and keyboard pressed notes.
   const allActive = [clicked, ...activeKeys]
 
