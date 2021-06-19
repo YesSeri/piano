@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 
 const Container = styled.div`
+    padding-top: 10px;
     display:flex;
     justify-content:center;
     font-family: monospace;
@@ -9,7 +10,6 @@ const Container = styled.div`
 const Text = styled.div`
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     border:solid 1px black;
     border-radius: 10px;
     font-size: 3em;
@@ -17,17 +17,17 @@ const Text = styled.div`
 `
 const Char = styled.div`
     flex: 1 1 0;
+    height: 120px;
     display: flex;
     justify-content:center;
     align-items:center;
-    background-color:#222;
 `
 const BlackChar = styled(Char)`
-    color: #111;
-    background-color:#eee;
+    color: ${({theme}) => theme.yellow};
+    background-color:#000;
 `
 const WhiteChar = styled(Char)`
-    color: #eee;
-    background-color:#111;
+    color: #fff;
+    background-color:#222;
 `
 export { Container, Text, BlackChar, WhiteChar }

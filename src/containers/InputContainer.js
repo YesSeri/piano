@@ -48,7 +48,7 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
         setShowNotenames(!showNotenames)
     }
     return (
-        <div className="inputs">
+        <div>
             <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}

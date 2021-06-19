@@ -7,7 +7,7 @@ const Title = ({ children, ...restProps }) => (
 
 Title.Text = ({ to, children, ...restProps }) =>
 (
-  <Text className='title__text' {...restProps}>
+  <Text {...restProps}>
     <Link to={to}>
       {children}
     </Link>
