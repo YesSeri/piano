@@ -2,12 +2,12 @@ import React from 'react'
 import Piano from '.'
 import { useActiveNoteHandler, useMouseClicker, createKeyInfo, getTranslation } from '../../helper';
 
-const FullPiano = ({ options: { low, high, showNotenames, showKeybindings, isFullscreen }, sampler, ...restProps }) => {
+const FullPiano = ({ options: { low, high, showNotenames, showKeybindings, isFullscreen, loading }, sampler, ...restProps }) => {
   const whiteKeys = createWhiteKeys(low, high);
   const blackKeys = createBlackKeys(whiteKeys, low, high);
   const translation = getTranslation(low, high)
   // Gives all touched or keyboard pressed keys.
-  const activeKeys = useActiveNoteHandler(sampler, low, high)
+  const activeKeys = useActiveNoteHandler(sampler, low, high, loading)
   // Name of all mouse clicked notes.
   const clicked = useMouseClicker(sampler);
   // This array contains the names of all clicked, touched and keyboard pressed notes.

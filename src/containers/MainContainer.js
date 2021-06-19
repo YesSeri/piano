@@ -20,9 +20,9 @@ const MainContainer = () => {
             {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
                 :
                 <>
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <LoadingOverlay visible={loading} transitionDuration={500} />
-                        <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings }} setLoading={setLoading} />
+                    <Suspense fallback={'loading'}>
+                        <LoadingOverlay visible={loading} transitionDuration={1000} />
+                        <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
                         <InputContainer
                             setLowSlider={setLowSlider}
                             setHighSlider={setHighSlider}

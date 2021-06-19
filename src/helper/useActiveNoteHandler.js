@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getTranslation } from '.'
 
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
-const useActiveNoteHandler = (sampler, low, high) => {
+const useActiveNoteHandler = (sampler, low, high, loading) => {
   const [, setNotes] = useState([])
   const noteRef = React.useRef([])
   const touchRef = React.useRef([])
@@ -30,13 +30,15 @@ const useActiveNoteHandler = (sampler, low, high) => {
       setNotes(noteRef.current)
       sampler.triggerRelease(note)
     }
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    if (!loading) {
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('keyup', handleKeyUp);
+    }
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [sampler, translation])
+  }, [sampler, translation, loading])
   useEffect(() => {
     function touchNoteInfo({ identifier }, note) {
       return { note, identifier }
@@ -78,7 +80,6 @@ const useActiveNoteHandler = (sampler, low, high) => {
       return dataset
     }
     const handleTouchMove = (e) => {
-      // e.preventDefault();
       for (const changedTouch of e.changedTouches) {
         const dataset = getDataset(changedTouch)
         if (dataset === undefined) return;
@@ -100,15 +101,17 @@ const useActiveNoteHandler = (sampler, low, high) => {
 
     const piano = document.getElementById('pianoSvg');
     // I need to add eventlistener here, instead of inline in element, because I need to set it to passive, so I can prevent default.
-    piano.addEventListener('touchstart', handleTouchStart, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd);
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    if (!loading) {
+      piano.addEventListener('touchstart', handleTouchStart, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    }
     return () => {
       piano.removeEventListener('touchstart', handleTouchStart, { passive: false });
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('touchmove', handleTouchMove, { passive: false });
     }
-  }, [sampler])
+  }, [sampler, loading])
   return [...touchRef.current.map(t => t.note), ...noteRef.current]
 }
 export default useActiveNoteHandler;
