@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/piano/static/js/main.a03dc26b.chunk.js",
-    "main.js.map": "/piano/static/js/main.a03dc26b.chunk.js.map",
+    "main.js": "/piano/static/js/main.78732fc4.chunk.js",
+    "main.js.map": "/piano/static/js/main.78732fc4.chunk.js.map",
     "runtime-main.js": "/piano/static/js/runtime-main.bb83f425.js",
     "runtime-main.js.map": "/piano/static/js/runtime-main.bb83f425.js.map",
     "static/js/2.bfcbc016.chunk.js": "/piano/static/js/2.bfcbc016.chunk.js",
@@ -32,6 +32,6 @@
   "entrypoints": [
     "static/js/runtime-main.bb83f425.js",
     "static/js/2.bfcbc016.chunk.js",
-    "static/js/main.a03dc26b.chunk.js"
+    "static/js/main.78732fc4.chunk.js"
   ]
 }
