@@ -3,30 +3,27 @@ import { Checkbox as MantineCheckbox } from '@mantine/core';
 
 const Frame = styled.div`
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding-top:10px;
     ${({ theme }) => theme.responsiveWidth}
-    @media screen and (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    @media screen and (max-width: 600px) {
         grid-template-columns: 1fr;
     }
 `;
 const Container = styled.div`
     display:grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
+    padding:10px;
     @media screen and (max-width: 1200px) {
-        grid-template-columns: 1fr 1fr;
     }
     /* @media screen and (max-width: 900px) {
     } */
     @media screen and (max-width: 600px) {
-        grid-template-columns: 1fr;
     } 
 
 `;
-const SliderContainer = styled(Container)`
-    grid-template-columns: 1fr 4fr;
-`;
+const Dropdown = styled.select`
+`
+const Option = styled.option`
+`
 const Label = styled.label`
     display: flex;
     justify-content: center;
@@ -40,13 +37,7 @@ const Divider = styled.div`
     padding-bottom: 10px;
 `;
 const Checkbox = styled(MantineCheckbox)`
-    @media screen and (max-width: 1200px) {
-        padding-top:10px;
-    }
-    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 `;
-const Slider = styled.input`
-    flex: 4 0 0;
-    height: 48px;
-`;
-export { Frame, Container, Divider, Checkbox, Label, Slider, SliderContainer }
+export { Frame, Container, Divider, Checkbox, Label, Dropdown, Option }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Inputs from "../component/inputs";
 import getTranslation from '../helper/getTranslation'
 import styled from 'styled-components/macro'
@@ -8,8 +8,8 @@ const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !
 const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings }) => {
     const lowStorage = parseInt(localStorage.getItem('lowSliderValue'))
     const highStorage = parseInt(localStorage.getItem('highSliderValue'))
-    const [lowValue, setLowValue] = useState(lowStorage > 0 && lowStorage < translation.length - 1 && lowStorage < highStorage ? lowStorage : 3)
-    const [highValue, setHighValue] = useState(highStorage > 0 && highStorage < translation.length - 1 && highStorage > lowStorage ? highStorage : 10)
+    const [lowValue, setLowValue] = useState((lowStorage > 0 && lowStorage < translation.length - 1 && lowStorage < highStorage) || !lowStorage ? lowStorage : 3)
+    const [highValue, setHighValue] = useState((highStorage > 0 && highStorage < translation.length - 1 && highStorage > lowStorage) || !highStorage ? highStorage : 10)
     const [open, setOpen] = useState(false);
     function setValues(setSlider, setValue, localStorageKey, value) {
         localStorage.setItem(localStorageKey, value)
@@ -18,11 +18,11 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
         }
         setSlider(translation[value])
     }
-    function handleLowSliderMouseUp(e) {
+    function handleLowChange(e) {
         const value = parseInt(e.target.value)
         setValues(setLowSlider, setLowValue, 'lowSliderValue', value)
     }
-    function handleHighSliderMouseUp(e) {
+    function handleHighChange(e) {
         const value = parseInt(e.target.value)
         setValues(setHighSlider, setHighValue, 'highSliderValue', value)
     }
@@ -32,26 +32,22 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
     function handleNotename(e) {
         setShowNotenames(!showNotenames)
     }
-    const InputForm = () => (<Inputs>
-        <Inputs.SliderContainer>
-            <Inputs.Label>Low</Inputs.Label>
-            {/* <Inputs.Slider onChange={handleLowSliderChange} type="range" min="0" max={translation.length - 1} value={lowValue} step="1" /> */}
-            <Inputs.Slider
-                onMouseUp={handleLowSliderMouseUp}
-                type="range" min="0" max={highValue - 5} defaultValue={lowValue} step="1" />
-        </Inputs.SliderContainer>
-        <Inputs.SliderContainer>
-            <Inputs.Label>High</Inputs.Label>
-            {/* <Inputs.Slider onChange={handleHighSliderChange} type="range" min="0" max={translation.length - 1} value={highValue} step="1" /> */}
-            <Inputs.Slider
-                onMouseUp={handleHighSliderMouseUp}
-                type="range" min={lowValue + 5} max={translation.length - 1} defaultValue={highValue} step="1" />
-        </Inputs.SliderContainer>
-        <Inputs.Container>
-            <Inputs.Checkbox label="Show Keybindings" checked={showKeybindings} onChange={handleKeybinding} />
-            <Inputs.Checkbox label="Show Note Names" checked={showNotenames} onChange={handleNotename} />
-        </Inputs.Container>
-    </Inputs>)
+    console.log(translation)
+    const InputForm = () => (
+        <Inputs>
+            <Inputs.Container>
+                <Inputs.Checkbox label="Show Keybindings" checked={showKeybindings} onChange={handleKeybinding} />
+                <Inputs.Checkbox label="Show Note Names" checked={showNotenames} onChange={handleNotename} />
+            </Inputs.Container>
+            <Inputs.Container>
+                <Inputs.Label for={"low"}>Lowest Note</Inputs.Label>
+                <Inputs.Dropdown options={translation} id={'low'} onChange={handleLowChange} value={lowValue} />
+            </Inputs.Container>
+            <Inputs.Container>
+                <Inputs.Label for={"high"}>Highest Note</Inputs.Label>
+                <Inputs.Dropdown options={translation} id={'high'} onChange={handleHighChange} value={highValue} />
+            </Inputs.Container>
+        </Inputs>)
 
     return (
         <div>

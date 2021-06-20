@@ -1,5 +1,5 @@
 import React from 'react'
-import { Frame, Container, Divider, Checkbox, Label, Slider, SliderContainer } from './styles/inputs'
+import { Frame, Container, Divider, Checkbox, Label, Dropdown, Option } from './styles/inputs'
 
 
 const Inputs = ({ children, ...restProps }) => {
@@ -18,14 +18,17 @@ Inputs.Checkbox = ({ ...restProps }) => {
         <Checkbox {...restProps} />
     )
 }
-Inputs.Slider = ({ children, ...restProps }) => {
+
+Inputs.Dropdown = ({ options, ...restProps }) => {
     return (
-        <Slider {...restProps}>{children}</Slider>
-    )
-}
-Inputs.SliderContainer = ({ children, ...restProps }) => {
-    return (
-        <SliderContainer {...restProps}>{children}</SliderContainer>
+        <Dropdown {...restProps}>
+            {options.map((option, idx) => {
+                return (<Option value={idx}>
+                    {option}
+                </Option>)
+            })}
+
+        </Dropdown>
     )
 }
 Inputs.Container = ({ children, ...restProps }) => {
