@@ -6,60 +6,25 @@ import styled from 'styled-components/macro'
 const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
 
 const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings }) => {
-    // const [lowValue, setLowValue] = useState(localStorage.getItem('lowSliderValue') || 3)
-    // const [highValue, setHighValue] = useState(localStorage.getItem('highSliderValue') || 10)
-    const [lowValue, setLowValue] = useState(3)
-    const [highValue, setHighValue] = useState(10)
-    const [opened, setOpened] = useState(true);
-    // useEffect(() => {
-    //     setLowSlider(translation[lowValue])
-    //     setHighSlider(translation[highValue])
-    //     return () => {
-    //     }
-    // }, [highValue, lowValue, setHighSlider, setLowSlider])
-    // function handleLowSliderChange({ target: { value } }) {
-    //     if (isValidRange(highValue, value)) {
-    //         setValues(setLowSlider, setLowValue, 'lowSliderValue', value)
-    //     }
-    // }
-    // function handleHighSliderChange({ target: { value } }) {
-    //     if (isValidRange(value, lowValue)) {
-    //         setValues(setHighSlider, setHighValue, 'highSliderValue', value)
-    //     }
-    // }
+    const lowStorage = parseInt(localStorage.getItem('lowSliderValue'))
+    const highStorage = parseInt(localStorage.getItem('highSliderValue'))
+    const [lowValue, setLowValue] = useState(lowStorage > 0 && lowStorage < translation.length - 1 && lowStorage < highStorage ? lowStorage : 3)
+    const [highValue, setHighValue] = useState(highStorage > 0 && highStorage < translation.length - 1 && highStorage > lowStorage ? highStorage : 10)
+    const [open, setOpen] = useState(false);
     function setValues(setSlider, setValue, localStorageKey, value) {
         localStorage.setItem(localStorageKey, value)
-        if(setValue != null){
+        if (setValue != null) {
             setValue(parseInt(value))
         }
-        console.log({value}, translation[value])
         setSlider(translation[value])
     }
-    // function isValidRange(newHighValue, newLowValue) {
-    //     const diff = highValue - lowValue
-    //     const newDiff = newHighValue - newLowValue
-    //     if (diff <= 4 && newDiff < diff) {
-    //         return false;
-    //     } else {
-    //         return true;
-    //     }
-    // }
     function handleLowSliderMouseUp(e) {
-        setLowValue(e.target.value)
+        const value = parseInt(e.target.value)
+        setValues(setLowSlider, setLowValue, 'lowSliderValue', value)
     }
     function handleHighSliderMouseUp(e) {
-        setHighValue(e.target.value)
-    }
-    function handleLowSliderChange(e) {
-        const { value } = e.target;
-        console.log(value)
-        // if(value >= highValue - 3){
-            // setLowValue(highValue - 4);
-        // }
-        setValues(setLowSlider, null, 'lowSliderValue', value)
-    }
-    function handleHighSliderChange(e) {
-        console.log(e.target.value)
+        const value = parseInt(e.target.value)
+        setValues(setHighSlider, setHighValue, 'highSliderValue', value)
     }
     function handleKeybinding(e) {
         setShowKeybindings(!showKeybindings)
@@ -73,16 +38,14 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
             {/* <Inputs.Slider onChange={handleLowSliderChange} type="range" min="0" max={translation.length - 1} value={lowValue} step="1" /> */}
             <Inputs.Slider
                 onMouseUp={handleLowSliderMouseUp}
-                onChange={handleLowSliderChange}
-                type="range" min="0" max={translation.length - 1} defaultValue={lowValue} step="1" />
+                type="range" min="0" max={highValue - 5} defaultValue={lowValue} step="1" />
         </Inputs.SliderContainer>
         <Inputs.SliderContainer>
             <Inputs.Label>High</Inputs.Label>
             {/* <Inputs.Slider onChange={handleHighSliderChange} type="range" min="0" max={translation.length - 1} value={highValue} step="1" /> */}
             <Inputs.Slider
                 onMouseUp={handleHighSliderMouseUp}
-                onChange={handleHighSliderChange}
-                type="range" min="0" max={translation.length - 1} defaultValue={highValue} step="1" />
+                type="range" min={lowValue + 5} max={translation.length - 1} defaultValue={highValue} step="1" />
         </Inputs.SliderContainer>
         <Inputs.Container>
             <Inputs.Checkbox label="Show Keybindings" checked={showKeybindings} onChange={handleKeybinding} />
@@ -92,8 +55,8 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
 
     return (
         <div>
-            <Button onClick={() => setOpened(!opened)}>Settings</Button>
-            {opened ?
+            <Button onClick={() => setOpen(!open)}>Settings</Button>
+            {open ?
                 <InputForm />
                 :
                 null
