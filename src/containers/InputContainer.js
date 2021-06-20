@@ -50,15 +50,11 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
         </Inputs>)
 
     return (
-        <div>
-            {open ?
-                <InputForm />
-                :
-                null
-            }
+        <>
+            {open && <InputForm />}
             {children}
             <Button onClick={() => setOpen(!open)}>Settings</Button>
-        </div>)
+        </>)
 }
 
 const Button = styled.button`
