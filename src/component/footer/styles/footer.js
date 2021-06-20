@@ -31,10 +31,11 @@ const Pane = styled.div`
 
 const Title = styled.h2`
     width:100%;
+    margin-top: 0.5em;
 `;
 
 const Link = styled(ReactRouterLink)`
-    margin-bottom:20px;
+    margin-bottom: 1.5em;
     width:100%;
     color: #ffc017;
     text-decoration: inherit;

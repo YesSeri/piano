@@ -1,5 +1,5 @@
 import React from 'react'
-import { Frame, Container, Divider, Checkbox, Label, Slider } from './styles/inputs'
+import { Frame, Container, Divider, Checkbox, Label, Slider, SliderContainer } from './styles/inputs'
 
 
 const Inputs = ({ children, ...restProps }) => {
@@ -21,6 +21,11 @@ Inputs.Checkbox = ({ ...restProps }) => {
 Inputs.Slider = ({ children, ...restProps }) => {
     return (
         <Slider {...restProps}>{children}</Slider>
+    )
+}
+Inputs.SliderContainer = ({ children, ...restProps }) => {
+    return (
+        <SliderContainer {...restProps}>{children}</SliderContainer>
     )
 }
 Inputs.Container = ({ children, ...restProps }) => {

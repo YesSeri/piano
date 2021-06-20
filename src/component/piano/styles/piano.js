@@ -14,7 +14,7 @@ const Container = styled.div`
     svg{
         width: 100%;
         height: 100%;
-        max-height: min(50vw, 900px); 
+        max-height: min(50vw, 600px); 
         ${({ isFullscreen }) => (isFullscreen && 'max-height:100% !important;')}
     }
     @media screen and (max-width: 1200px) {
@@ -51,20 +51,3 @@ const BlackText = styled(Text)`
     fill:white;
 `;
 export { Frame, Container, WhiteKey, WhiteText, BlackKey, BlackText }
-// text {
-    //     user-select: none;
-    //     pointer-events: none;
-    //     font-family: monospace;
-    //     font-size: 0.6em;
-    //     &.svg-white-note-text {
-    //         fill: black;
-    //     }
-    //     &.svg-white-translation-text {
-    //         fill: black;
-    //     }
-    //     &.svg-black-note-text {
-    //         fill: white;
-    //     }
-    //     &.svg-black-translation-text {
-    //         fill: white;
-    //     }

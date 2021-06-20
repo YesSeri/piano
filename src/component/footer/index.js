@@ -7,20 +7,17 @@ Footer.Background = ({ children, ...restProps }) => (
     <Background {...restProps}>{children}</Background>
 )
 
-Footer.Pane = ({ children, ...restProps }) =>
-(
+Footer.Pane = ({ children, ...restProps }) => (
     <Pane {...restProps}>
         {children}
     </Pane>
 )
-Footer.Title = ({ children, ...restProps }) =>
-(
+Footer.Title = ({ children, ...restProps }) => (
     <Title {...restProps}>
         {children}
     </Title>
 )
-Footer.Link = ({ children, ...restProps }) =>
-(
+Footer.Link = ({ children, ...restProps }) => (
     <Link {...restProps}>
         {children}
     </Link>
