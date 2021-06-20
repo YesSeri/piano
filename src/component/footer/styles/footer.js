@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-    background-color: #111;
+    background-color: ${({ theme }) => theme.darkGrey} ;
     border-radius: 20px 20px 0px 0;
     @media screen and (max-width: 600px) {
         border-radius: 0;
@@ -25,7 +25,7 @@ const Pane = styled.div`
         border-radius: 0;
         width: 100%;
     }
-    color: #ffc017;
+    color: ${({ theme }) => theme.yellow} ;
 
 `;
 
@@ -37,7 +37,7 @@ const Title = styled.h2`
 const Link = styled(ReactRouterLink)`
     margin-bottom: 1.5em;
     width:100%;
-    color: #ffc017;
+    color: ${({ theme }) => theme.yellow} ;
     text-decoration: inherit;
 `;
 

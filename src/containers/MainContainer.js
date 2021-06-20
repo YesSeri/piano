@@ -32,6 +32,10 @@ const Spinner = styled.div`
 const Container = styled.div`
     position: relative;
 `
+
+const Button = styled.button`
+    margin-top: 5px;
+`
 const MainContainer = () => {
   const [lowSlider, setLowSlider] = useState('C2')
   const [highSlider, setHighSlider] = useState('C3')
@@ -39,24 +43,28 @@ const MainContainer = () => {
   const [showNotenames, setShowNotenames] = useState(false);
   const [showKeybindings, setShowKeybindings] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [open, setOpen] = useState(false);
+
   return (
     <Container>
-      <InputContainer
-        setLowSlider={setLowSlider}
-        setHighSlider={setHighSlider}
-        showNotenames={showNotenames}
-        setShowNotenames={setShowNotenames}
-        showKeybindings={showKeybindings}
-        setShowKeybindings={setShowKeybindings}
-      >
-        {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
-          :
-          <Suspense fallback={<Spinner />}>
-            <LoadingOverlay visible={loading} transitionDuration={500} />
-            <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
-          </Suspense>
-        }
-      </InputContainer>
+      {open &&
+        <InputContainer
+          setLowSlider={setLowSlider}
+          setHighSlider={setHighSlider}
+          showNotenames={showNotenames}
+          setShowNotenames={setShowNotenames}
+          showKeybindings={showKeybindings}
+          setShowKeybindings={setShowKeybindings}
+        />
+      }
+      {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
+        :
+        <Suspense fallback={<Spinner />}>
+          <LoadingOverlay visible={loading} transitionDuration={500} />
+          <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
+        </Suspense>
+      }
+      <Button onClick={() => setOpen(!open)}>Settings</Button>
     </Container>
   )
 }

@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   button {
-    background-color: #333;
+    background-color: ${({ theme }) => theme.lightGrey} ;
     color: white;
     font-size: 1.2em;
     font-family: inherit;
@@ -25,16 +25,13 @@ const GlobalStyle = createGlobalStyle`
     user-select: none; 
     cursor: pointer;
 
-    @media screen and (-ms-high-contrast: active) {
-        border: 2px solid currentcolor;
-    }
     &:hover {
         border: solid 2px #999;
-        background-color: #111;
+        background-color: ${({ theme }) => theme.darkGrey} ;
     }
     &:active {
         border: solid 2px #ccc;
-        background-color: #000;
+        background-color: ${({ theme }) => theme.black} ;
     }
   }
 `

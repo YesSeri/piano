@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const Text = styled.div`
     font-size: 3.5em;
-    color: #000;
+    color: ${({ theme }) => theme.black} ;
     margin: 0px;
     font-weight: 700;
 `;

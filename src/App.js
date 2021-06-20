@@ -16,7 +16,12 @@ import FooterContainer from './containers/FooterContainer'
 import MainContainer from './containers/MainContainer'
 
 const theme = {
-  yellow: 'rgba(255, 192, 23, 1)',
+  yellow: '#ffc017',
+  darkGrey: '#111',
+  midGrey: '#222',
+  lightGrey: '#333',
+  black: '#000',
+  white: '#fff',
   responsiveWidth: `margin: auto;
     width: 70%;
     @media screen and (max-width: 1200px) {

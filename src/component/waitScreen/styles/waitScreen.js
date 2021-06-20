@@ -24,10 +24,10 @@ const Char = styled.div`
 `
 const BlackChar = styled(Char)`
     color: ${({theme}) => theme.yellow};
-    background-color:#000;
+    background-color: ${({theme}) => theme.black};
 `
 const WhiteChar = styled(Char)`
-    color: #fff;
-    background-color:#222;
+    color: ${({theme}) => theme.white};
+    background-color: ${({theme}) => theme.midGrey};
 `
 export { Container, Text, BlackChar, WhiteChar }
