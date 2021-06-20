@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 
 const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
 
-const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings }) => {
+const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings, children }) => {
     const lowStorage = parseInt(localStorage.getItem('lowSliderValue'))
     const highStorage = parseInt(localStorage.getItem('highSliderValue'))
     const [lowValue, setLowValue] = useState((lowStorage > 0 && lowStorage < translation.length - 1 && lowStorage < highStorage) || !lowStorage ? lowStorage : 3)
@@ -51,12 +51,13 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
 
     return (
         <div>
-            <Button onClick={() => setOpen(!open)}>Settings</Button>
             {open ?
                 <InputForm />
                 :
                 null
             }
+            {children}
+            <Button onClick={() => setOpen(!open)}>Settings</Button>
         </div>)
 }
 

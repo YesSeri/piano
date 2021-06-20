@@ -41,22 +41,22 @@ const MainContainer = () => {
   const [clicked, setClicked] = useState(false);
   return (
     <Container>
-     <InputContainer
+      <InputContainer
         setLowSlider={setLowSlider}
         setHighSlider={setHighSlider}
         showNotenames={showNotenames}
         setShowNotenames={setShowNotenames}
         showKeybindings={showKeybindings}
         setShowKeybindings={setShowKeybindings}
-      />
-      {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
-        :
-        <Suspense fallback={<Spinner />}>
-          <LoadingOverlay visible={loading} transitionDuration={500} />
-          <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
-        </Suspense>
-      }
-
+      >
+        {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
+          :
+          <Suspense fallback={<Spinner />}>
+            <LoadingOverlay visible={loading} transitionDuration={500} />
+            <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
+          </Suspense>
+        }
+      </InputContainer>
     </Container>
   )
 }
