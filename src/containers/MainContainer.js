@@ -47,16 +47,16 @@ const MainContainer = () => {
 
   return (
     <Container>
-      {open &&
-        <InputContainer
-          setLowSlider={setLowSlider}
-          setHighSlider={setHighSlider}
-          showNotenames={showNotenames}
-          setShowNotenames={setShowNotenames}
-          showKeybindings={showKeybindings}
-          setShowKeybindings={setShowKeybindings}
-        />
-      }
+      <InputContainer
+        setLowSlider={setLowSlider}
+        setHighSlider={setHighSlider}
+        showNotenames={showNotenames}
+        setShowNotenames={setShowNotenames}
+        showKeybindings={showKeybindings}
+        setShowKeybindings={setShowKeybindings}
+        // Use open so the component always exists, because if not it will default to the lowSlider and highSlider values and not get set to the saved value in lowValue highValue in InputContainer
+        open={open}
+      />
       {!clicked ? <WaitScreen setClicked={setClicked}>Click to load Piano</WaitScreen>
         :
         <Suspense fallback={<Spinner />}>

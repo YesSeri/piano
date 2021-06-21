@@ -3,7 +3,7 @@ import Inputs from "../component/inputs";
 import getTranslation from '../helper/getTranslation'
 const translation = getTranslation('G1', 'G4').map(el => el.note).filter(el => !el.includes('#')); // This gets the complete note list of notes ordered by pitch height, which I use for turning a number value into a note.
 
-const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings, children }) => {
+const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNotenames, showKeybindings, setShowKeybindings, children, ...restProps }) => {
     const lowStorage = parseInt(localStorage.getItem('lowSliderValue'))
     const highStorage = parseInt(localStorage.getItem('highSliderValue'))
     const [lowValue, setLowValue] = useState((lowStorage > 0 && lowStorage < translation.length - 1 && lowStorage < highStorage) || !lowStorage ? lowStorage : 3)
@@ -28,7 +28,8 @@ const InputContainer = ({ setLowSlider, setHighSlider, showNotenames, setShowNot
     }
 
     return (
-        <Inputs>
+        <Inputs {...restProps}>
+            {children}
             <Inputs.Container>
                 <Inputs.Label for={"low"}>Lowest Note</Inputs.Label>
                 <Inputs.Dropdown options={translation} id={'low'} onChange={handleLowChange} value={lowValue} />

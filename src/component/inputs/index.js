@@ -3,6 +3,7 @@ import { Frame, Container, Divider, Checkbox, Label, Dropdown, Option } from './
 
 
 const Inputs = ({ children, ...restProps }) => {
+    console.log(restProps)
     return (
         <Frame {...restProps}>{children}</Frame>
     )

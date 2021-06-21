@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import { Checkbox as MantineCheckbox } from '@mantine/core';
 
 const Frame = styled.div`
-    display:grid;
+    display: ${props => props.open ? 'grid' : 'none'};
     ${({ theme }) => theme.responsiveWidth}
     grid-template-columns: 1fr 1fr 1fr;
     @media screen and (max-width: 600px) {
