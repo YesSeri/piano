@@ -3,7 +3,6 @@ import { Frame, Container, Divider, Checkbox, Label, Dropdown, Option } from './
 
 
 const Inputs = ({ children, ...restProps }) => {
-    console.log(restProps)
     return (
         <Frame {...restProps}>{children}</Frame>
     )
@@ -23,11 +22,10 @@ Inputs.Checkbox = ({ ...restProps }) => {
 Inputs.Dropdown = ({ options, ...restProps }) => {
     return (
         <Dropdown {...restProps}>
-            {options.map((option, idx) => {
-                return (<Option value={idx}>
-                    {option}
-                </Option>)
-            })}
+            {options.map((option, idx) => (<Option key={option} value={idx}>
+                {option}
+            </Option>)
+            )}
 
         </Dropdown>
     )
