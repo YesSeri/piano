@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../component/Header'
+import Header from '../component/header'
 import { ReactComponent as GrandPiano } from '../assets/grand-piano.svg'
 
 const HeaderContainer = () => {

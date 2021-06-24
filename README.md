@@ -17,6 +17,7 @@ I use gh-pages to use this in production for now. A dev dependency called `gh-pa
 ## Roadmap
 
 - [ ] Test for safari browser support
+  - ToneJS library doesn't seem to support safari. Create an issue.
 
 - [ ] Make an about page
 
@@ -27,7 +28,7 @@ I use gh-pages to use this in production for now. A dev dependency called `gh-pa
 
 ## Tech Stack
 
-**Client:** React,SCSS, [Tone.js](https://tonejs.github.io/)
+**Client:** React, [Styled Components](https://styled-components.com/), [Tone.js](https://tonejs.github.io/)
 
   
 ## Contributing

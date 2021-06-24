@@ -1,4 +1,4 @@
-import Title from "../component/Title/index";
+import Title from "../component/title";
 const TitleContainer = () => {
     return (
         <Title>
