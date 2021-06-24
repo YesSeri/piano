@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react'
 import InputContainer from './InputContainer'
 import { LoadingOverlay } from '@mantine/core';
-import WaitScreen from '../component/WaitScreen/index'
+import WaitScreen from '../component/waitScreen'
 import styled, { keyframes } from "styled-components/macro";
 const FullscreenPiano = React.lazy(() => import('../component/piano/FullscreenPiano'));
 
