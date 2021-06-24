@@ -1,6 +1,6 @@
 {
   "name": "pianisto",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "dependencies": {
     "@mantine/core": "^1.0.3",

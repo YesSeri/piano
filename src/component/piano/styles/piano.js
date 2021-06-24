@@ -26,7 +26,11 @@ const WhiteKey = styled.path`
     stroke: black;
     stroke-width: 0.25;
     &.active{
-        fill: #ccc;
+        fill: #999;
+    }
+
+    &:not(.active){
+        transition: fill 0.2s;
     }
 `;
 const BlackKey = styled.path`
@@ -36,6 +40,9 @@ const BlackKey = styled.path`
     &.active{
         fill: #333;
         stroke: #333;
+    }
+    &:not(.active){
+        transition: fill 0.2s;
     }
 `;
 const Text = styled.text`
