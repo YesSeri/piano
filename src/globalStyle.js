@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     border: solid 2px #666;
     border-radius: 5px;
-    padding: 0.25em 0.3em 0 0.3em ;
+    padding: 0 0.3em 2px 0.3em;
     text-align: center;
     min-width: 150px;
     user-select: none; 
