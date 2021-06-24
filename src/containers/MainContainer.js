@@ -3,6 +3,7 @@ import InputContainer from './InputContainer'
 import { LoadingOverlay } from '@mantine/core';
 import WaitScreen from '../component/waitScreen'
 import styled, { keyframes } from "styled-components/macro";
+import { Button } from '../sharedStyles'
 const FullscreenPiano = React.lazy(() => import('../component/piano/FullscreenPiano'));
 
 const rotate360 = keyframes`
@@ -33,9 +34,6 @@ const Container = styled.div`
     position: relative;
 `
 
-const Button = styled.button`
-    margin-top: 5px;
-`
 const MainContainer = () => {
   const [lowSlider, setLowSlider] = useState('C2')
   const [highSlider, setHighSlider] = useState('C3')
@@ -64,7 +62,7 @@ const MainContainer = () => {
           <FullscreenPiano options={{ low: lowSlider, high: highSlider, showNotenames, showKeybindings, loading }} setLoading={setLoading} />
         </Suspense>
       }
-      <Button onClick={() => setOpen(!open)}>Settings</Button>
+      <Button style={{margin: '5px 0'}} onClick={() => setOpen(!open)}>Settings</Button>
     </Container>
   )
 }
