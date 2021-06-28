@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTranslation } from '.'
+import getTranslation  from './getTranslation'
 
 // This returns the pressed notes so the class active can get added to pressed keys. It also plays the notes.
 const useActiveNoteHandler = (sampler, low, high, loading) => {

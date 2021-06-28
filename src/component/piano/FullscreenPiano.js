@@ -1,7 +1,7 @@
 import React from 'react'
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullPiano from './FullPiano'
-import { createSampler } from '../../helper'
+import createSampler from '../../helper/createSampler'
 import { Button } from '../../sharedStyles'
 
 const FullscreenPiano = ({ options, setLoading, ...restProps }) => {

@@ -19,26 +19,5 @@ const Button = styled.button`
   &:active {
       background-color: ${({ theme }) => theme.black} ;
   } 
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.lightGrey} ;
-  color: white;
-  font-size: 1.2em;
-  font-family: inherit;
-  border: solid 2px #666;
-  border-radius: 5px;
-  text-align: center;
-  user-select: none; 
-  cursor: pointer;
-
-  &:hover {
-      border: solid 2px #999;
-      background-color: ${({ theme }) => theme.darkGrey} ;
-  }
-  &:active {
-      border: solid 2px #ccc;
-      background-color: ${({ theme }) => theme.black} ;
-  } */
 `
 export { Button };
